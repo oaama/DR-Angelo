@@ -44,9 +44,9 @@ export default async function Home({
       <section className="relative w-full border-b min-h-[400px] md:min-h-[500px] flex items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-[-1]">
           <Image
-            src="https://placehold.co/1920x1080.png"
-            alt="خلفية طبية"
-            data-ai-hint="doctor medical"
+            src="https://placehold.co/1600x900.png"
+            alt="خلفية طبية لفريق من الأطباء"
+            data-ai-hint="doctors team"
             fill
             className="object-cover object-center animate-hero-zoom"
             priority
