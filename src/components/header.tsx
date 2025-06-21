@@ -21,7 +21,7 @@ const currentUser = {
   email: 'sara.ali@example.com',
   userType: 'patient' as const,
   gender: 'أنثى' as const,
-  avatar: 'https://placehold.co/200x200/png'
+  avatar: 'https://placehold.co/200x200.png'
 };
 const isLoggedIn = !!currentUser;
 
