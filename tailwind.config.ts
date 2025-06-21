@@ -12,9 +12,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", ...fontFamily.sans],
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        sans: ["var(--font-tajawal)", ...fontFamily.sans],
+        body: ['Tajawal', 'sans-serif'],
+        headline: ['Tajawal', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

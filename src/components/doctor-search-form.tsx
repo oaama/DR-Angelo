@@ -33,13 +33,13 @@ export function DoctorSearchForm({
 
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     
-    if (specialty) current.set("specialty", specialty);
+    if (specialty && specialty !== 'all') current.set("specialty", specialty);
     else current.delete("specialty");
     
-    if (city) current.set("city", city);
+    if (city && city !== 'all') current.set("city", city);
     else current.delete("city");
 
-    if (gender) current.set("gender", gender);
+    if (gender && gender !== 'all') current.set("gender", gender);
     else current.delete("gender");
     
     const search = current.toString();
@@ -57,10 +57,10 @@ export function DoctorSearchForm({
         >
           <Select name="specialty" defaultValue={searchParams.get('specialty') || 'all'}>
             <SelectTrigger>
-              <SelectValue placeholder="All Specialties" />
+              <SelectValue placeholder="كل التخصصات" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Specialties</SelectItem>
+              <SelectItem value="all">كل التخصصات</SelectItem>
               {specialties.map((specialty) => (
                 <SelectItem key={specialty} value={specialty}>
                   {specialty}
@@ -70,10 +70,10 @@ export function DoctorSearchForm({
           </Select>
           <Select name="city" defaultValue={searchParams.get('city') || 'all'}>
             <SelectTrigger>
-              <SelectValue placeholder="All Cities" />
+              <SelectValue placeholder="كل المحافظات" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Cities</SelectItem>
+              <SelectItem value="all">كل المحافظات</SelectItem>
               {cities.map((city) => (
                 <SelectItem key={city} value={city}>
                   {city}
@@ -83,16 +83,16 @@ export function DoctorSearchForm({
           </Select>
           <Select name="gender" defaultValue={searchParams.get('gender') || 'all'}>
             <SelectTrigger>
-              <SelectValue placeholder="Any Gender" />
+              <SelectValue placeholder="أي جنس" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Any Gender</SelectItem>
-              <SelectItem value="Male">Male</SelectItem>
-              <SelectItem value="Female">Female</SelectItem>
+              <SelectItem value="all">أي جنس</SelectItem>
+              <SelectItem value="ذكر">ذكر</SelectItem>
+              <SelectItem value="أنثى">أنثى</SelectItem>
             </SelectContent>
           </Select>
           <Button type="submit" className="w-full">
-            Search Doctors
+            ابحث عن أطباء
           </Button>
         </form>
       </CardContent>

@@ -19,25 +19,25 @@ export default function SignupPage() {
           <div className="flex justify-center mb-4">
               <StethoscopeIcon className="w-10 h-10 text-primary"/>
           </div>
-          <CardTitle className="text-2xl font-headline">Sign Up for MediFind</CardTitle>
+          <CardTitle className="text-2xl font-headline">إنشاء حساب في طبيبك</CardTitle>
           <CardDescription>
-            Enter your information to create an account
+            أدخل معلوماتك لإنشاء حساب
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="first-name">First name</Label>
-                <Input id="first-name" placeholder="Max" required />
+                <Label htmlFor="first-name">الاسم الأول</Label>
+                <Input id="first-name" placeholder="أحمد" required />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="last-name">Last name</Label>
-                <Input id="last-name" placeholder="Robinson" required />
+                <Label htmlFor="last-name">الاسم الأخير</Label>
+                <Input id="last-name" placeholder="محمود" required />
               </div>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">البريد الإلكتروني</Label>
               <Input
                 id="email"
                 type="email"
@@ -46,20 +46,20 @@ export default function SignupPage() {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">كلمة المرور</Label>
               <Input id="password" type="password" />
             </div>
             <Button type="submit" className="w-full">
-              Create an account
+              إنشاء حساب
             </Button>
             <Button variant="outline" className="w-full">
-              Sign up with Google
+              إنشاء حساب باستخدام جوجل
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
-            Already have an account?{" "}
+            لديك حساب بالفعل؟{" "}
             <Link href="/login" className="underline">
-              Log in
+              تسجيل الدخول
             </Link>
           </div>
         </CardContent>

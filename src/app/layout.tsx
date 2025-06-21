@@ -1,16 +1,16 @@
 import type {Metadata} from 'next';
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Tajawal } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const tajawal = Tajawal({ subsets: ['arabic'], weight: ['400', '700'], variable: '--font-tajawal' });
 
 export const metadata: Metadata = {
-  title: 'MediFind',
-  description: 'Find the right doctor for your needs.',
+  title: 'طبيبك',
+  description: 'ابحث عن الطبيب المناسب لاحتياجاتك.',
 };
 
 export default function RootLayout({
@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn('font-body antialiased', inter.variable)}>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
+      <body className={cn('font-body antialiased', tajawal.variable)}>
         <div className="relative flex min-h-dvh flex-col bg-background">
           <Header />
           <main className="flex-1">{children}</main>

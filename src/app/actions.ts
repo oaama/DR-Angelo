@@ -6,7 +6,7 @@ import type { Doctor } from '@/lib/types';
 import { z } from 'zod';
 
 const schema = z.object({
-  description: z.string().min(10, { message: 'Description must be at least 10 characters long.' }),
+  description: z.string().min(10, { message: 'يجب أن يكون الوصف 10 أحرف على الأقل.' }),
 });
 
 export async function recommendDoctorAction(
@@ -21,7 +21,7 @@ export async function recommendDoctorAction(
   if (!validatedFields.success) {
     return {
       doctors: null,
-      message: validatedFields.error.flatten().fieldErrors.description?.[0] || 'Invalid input.',
+      message: validatedFields.error.flatten().fieldErrors.description?.[0] || 'إدخال غير صالح.',
     };
   }
   
@@ -32,7 +32,7 @@ export async function recommendDoctorAction(
     const recommendedNames = result.recommendedDoctors;
 
     if (!recommendedNames || recommendedNames.length === 0) {
-      return { doctors: [], message: 'AI could not recommend a doctor. Please try rephrasing your issue.' };
+      return { doctors: [], message: 'لم يتمكن الذكاء الاصطناعي من ترشيح طبيب. يرجى محاولة إعادة صياغة مشكلتك.' };
     }
 
     const recommendedDoctors = doctors.filter(doctor => 
@@ -40,12 +40,12 @@ export async function recommendDoctorAction(
     );
 
     if (recommendedDoctors.length === 0) {
-        return { doctors: [], message: 'Could not find a matching doctor in our database based on the AI recommendation.' };
+        return { doctors: [], message: 'تعذر العثور على طبيب مطابق في قاعدة بياناتنا بناءً على توصية الذكاء الاصطناعي.' };
     }
 
     return { doctors: recommendedDoctors, message: null };
   } catch (error) {
     console.error('AI Doctor Match Error:', error);
-    return { doctors: null, message: 'An unexpected error occurred with our AI service. Please try again later.' };
+    return { doctors: null, message: 'حدث خطأ غير متوقع في خدمة الذكاء الاصطناعي. يرجى المحاولة مرة أخرى في وقت لاحق.' };
   }
 }

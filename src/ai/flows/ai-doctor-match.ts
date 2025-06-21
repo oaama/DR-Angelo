@@ -14,14 +14,14 @@ import {z} from 'genkit';
 const AIDoctorMatchInputSchema = z.object({
   medicalIssueDescription: z
     .string()
-    .describe('A description of the patient medical issue.'),
+    .describe('وصف للمشكلة الطبية للمريض.'),
 });
 export type AIDoctorMatchInput = z.infer<typeof AIDoctorMatchInputSchema>;
 
 const AIDoctorMatchOutputSchema = z.object({
   recommendedDoctors: z
     .array(z.string())
-    .describe('A list of recommended doctors based on the patient description.'),
+    .describe('قائمة بأسماء الأطباء الموصى بهم بناءً على وصف المريض.'),
 });
 export type AIDoctorMatchOutput = z.infer<typeof AIDoctorMatchOutputSchema>;
 
@@ -33,11 +33,11 @@ const prompt = ai.definePrompt({
   name: 'aiDoctorMatchPrompt',
   input: {schema: AIDoctorMatchInputSchema},
   output: {schema: AIDoctorMatchOutputSchema},
-  prompt: `You are an AI assistant designed to recommend doctors based on a patient's description of their medical issue.  The output should be a list of doctors which should be as short as possible, with at most 3 doctors recommended.
+  prompt: `أنت مساعد ذكاء اصطناعي مصمم لترشيح الأطباء بناءً على وصف المريض لمشكلته الطبية. يجب أن يكون الناتج قائمة بأسماء الأطباء، وتكون قصيرة قدر الإمكان، بحد أقصى 3 أطباء. يجب أن تكون أسماء الأطباء هي أسماء عربية مصرية.
 
-Patient Description: {{{medicalIssueDescription}}}
+وصف حالة المريض: {{{medicalIssueDescription}}}
 
-Recommended Doctors:`,
+الأطباء المرشحون:`,
 });
 
 const aiDoctorMatchFlow = ai.defineFlow(

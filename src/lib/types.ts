@@ -1,7 +1,7 @@
 export interface Doctor {
   id: string;
   name: string;
-  gender: 'Male' | 'Female';
+  gender: 'ذكر' | 'أنثى';
   specialty: string;
   city: string;
   rating: number;

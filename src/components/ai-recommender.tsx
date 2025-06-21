@@ -22,8 +22,8 @@ function SubmitButton() {
     const { pending } = useFormStatus();
     return (
         <Button type="submit" className="w-full" disabled={pending}>
-            {pending ? <Spinner className="mr-2" /> : <Lightbulb className="mr-2 h-4 w-4" />}
-            {pending ? "Analyzing..." : "Get Recommendation"}
+            {pending ? <Spinner className="me-2" /> : <Lightbulb className="me-2 h-4 w-4" />}
+            {pending ? "جاري التحليل..." : "احصل على ترشيح"}
         </Button>
     )
 }
@@ -37,7 +37,7 @@ export function AIRecommender() {
         if (state.message) {
             toast({
                 variant: 'destructive',
-                title: 'Error',
+                title: 'خطأ',
                 description: state.message,
             });
         }
@@ -55,17 +55,17 @@ export function AIRecommender() {
             <CardHeader>
                 <CardTitle className="flex items-center gap-2 font-headline">
                     <Lightbulb className="h-6 w-6 text-primary" />
-                    AI Doctor Match
+                    ترشيح الطبيب بالذكاء الاصطناعي
                 </CardTitle>
                 <CardDescription>
-                    Describe your medical issue, and our AI will recommend a specialist for you.
+                    صف مشكلتك الطبية، وسيقوم الذكاء الاصطناعي بترشيح أخصائي لك.
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <form action={handleFormAction} ref={formRef} className="space-y-4">
                     <Textarea
                         name="description"
-                        placeholder="e.g., 'I have a persistent cough and chest pain...'"
+                        placeholder="مثال: 'أعاني من سعال مستمر وألم في الصدر...'"
                         rows={4}
                         required
                         minLength={10}
@@ -75,7 +75,7 @@ export function AIRecommender() {
 
                 {state.doctors && (
                     <div className="mt-6 space-y-4">
-                        <h3 className="font-bold text-lg">Our Recommendations:</h3>
+                        <h3 className="font-bold text-lg">ترشيحاتنا:</h3>
                         {state.doctors.length > 0 ? (
                            <div className="space-y-4">
                              {state.doctors.map(doctor => (
@@ -85,9 +85,9 @@ export function AIRecommender() {
                         ) : (
                             <Alert variant="default" className="bg-primary/10">
                                 <AlertCircle className="h-4 w-4" />
-                                <AlertTitle>No Matches Found</AlertTitle>
+                                <AlertTitle>لم يتم العثور على نتائج مطابقة</AlertTitle>
                                 <AlertDescription>
-                                    Our AI couldn't find a suitable doctor in our database based on your description. Please try refining your search or browse our specialists manually.
+                                    لم يتمكن الذكاء الاصطناعي من العثور على طبيب مناسب في قاعدة بياناتنا بناءً على وصفك. يرجى محاولة تحسين بحثك أو تصفح المتخصصين لدينا يدويًا.
                                 </AlertDescription>
                             </Alert>
                         )}

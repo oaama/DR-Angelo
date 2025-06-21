@@ -22,7 +22,7 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
       <CardHeader className="flex flex-row items-start gap-4 space-y-0 p-4">
         <Image
           src={doctor.profilePicture}
-          alt={`Dr. ${doctor.name}`}
+          alt={`${doctor.name}`}
           width={80}
           height={80}
           className="rounded-full border-2 border-primary/20 object-cover"
@@ -47,15 +47,15 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
             <div className="flex items-center gap-1">
                 <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                 <span className="font-bold">{doctor.rating.toFixed(1)}</span>
-                <span className="text-sm text-muted-foreground">({doctor.reviews} reviews)</span>
+                <span className="text-sm text-muted-foreground">({doctor.reviews} تقييم)</span>
             </div>
-            <Badge variant={doctor.gender === 'Female' ? 'secondary' : 'outline'} className="capitalize">
+            <Badge variant={doctor.gender === 'أنثى' ? 'secondary' : 'outline'} className="capitalize">
                 {doctor.gender}
             </Badge>
         </div>
       </CardContent>
       <CardFooter className="p-4 bg-muted/50">
-        <Button className="w-full">Book Appointment</Button>
+        <Button className="w-full">احجز موعدًا</Button>
       </CardFooter>
     </Card>
   );

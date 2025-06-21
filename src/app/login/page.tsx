@@ -19,15 +19,15 @@ export default function LoginPage() {
             <div className="flex justify-center mb-4">
                 <StethoscopeIcon className="w-10 h-10 text-primary"/>
             </div>
-          <CardTitle className="text-2xl font-headline">Login to MediFind</CardTitle>
+          <CardTitle className="text-2xl font-headline">تسجيل الدخول إلى طبيبك</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">البريد الإلكتروني</Label>
               <Input
                 id="email"
                 type="email"
@@ -37,24 +37,24 @@ export default function LoginPage() {
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link href="#" className="ml-auto inline-block text-sm underline">
-                  Forgot your password?
+                <Label htmlFor="password">كلمة المرور</Label>
+                <Link href="#" className="ms-auto inline-block text-sm underline">
+                  هل نسيت كلمة المرور؟
                 </Link>
               </div>
               <Input id="password" type="password" required />
             </div>
             <Button type="submit" className="w-full">
-              Login
+              تسجيل الدخول
             </Button>
             <Button variant="outline" className="w-full">
-              Login with Google
+              تسجيل الدخول باستخدام جوجل
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
+            ليس لديك حساب؟{" "}
             <Link href="/signup" className="underline">
-              Sign up
+              إنشاء حساب
             </Link>
           </div>
         </CardContent>
