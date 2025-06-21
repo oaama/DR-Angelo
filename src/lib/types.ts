@@ -1,3 +1,12 @@
+
+export interface Comment {
+  id: string;
+  patientName: string;
+  rating: number;
+  text: string;
+  date: string;
+}
+
 export interface Doctor {
   id: string;
   name: string;
@@ -8,4 +17,5 @@ export interface Doctor {
   reviews: number;
   profilePicture: string;
   bio: string;
+  comments?: Comment[];
 }

@@ -8,9 +8,25 @@ export const doctors: Doctor[] = [
     specialty: 'قلب',
     city: 'القاهرة',
     rating: 4.8,
-    reviews: 124,
+    reviews: 126,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'د. أحمد استشاري أمراض القلب بخبرة تزيد عن 15 عامًا في علاج أمراض القلب.',
+    comments: [
+      {
+        id: 'c1',
+        patientName: 'علي محمد',
+        rating: 5,
+        text: 'دكتور ممتاز جدا وخبرة كبيرة، أنصح به بشدة.',
+        date: '2024-05-15',
+      },
+      {
+        id: 'c2',
+        patientName: 'سارة إبراهيم',
+        rating: 4,
+        text: 'تجربة جيدة، الطبيب مستمع جيد وشرح الحالة بالتفصيل.',
+        date: '2024-05-10',
+      },
+    ]
   },
   {
     id: '2',
@@ -19,9 +35,18 @@ export const doctors: Doctor[] = [
     specialty: 'جلدية',
     city: 'الإسكندرية',
     rating: 4.9,
-    reviews: 210,
+    reviews: 211,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في الأمراض الجلدية التجميلية والطبية، د. فاطمة رائدة في علاجات العناية بالبشرة المبتكرة.',
+    comments: [
+        {
+          id: 'c3',
+          patientName: 'هند رضا',
+          rating: 5,
+          text: 'الدكتورة فاطمة رائعة! عالجت مشكلة بشرتي بفعالية وسرعة.',
+          date: '2024-06-20',
+        },
+      ]
   },
   {
     id: '3',
