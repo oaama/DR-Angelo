@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Crown, LifeBuoy, LogOut, User } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
 
 
 // This is a temporary simulation of a logged-in user.
@@ -20,7 +21,7 @@ const currentUser = {
   email: 'sara.ali@example.com',
   userType: 'patient' as const,
   gender: 'أنثى' as const,
-  avatar: 'https://placehold.co/200x200.png'
+  avatar: 'https://placehold.co/200x200/png'
 };
 const isLoggedIn = !!currentUser;
 
@@ -35,6 +36,7 @@ export function Header() {
           <span className="font-bold sm:inline-block font-headline">طبيبك</span>
         </Link>
         <div className="flex flex-1 items-center justify-end space-x-2">
+          <ThemeToggle />
           {isLoggedIn ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
