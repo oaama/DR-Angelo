@@ -9,14 +9,11 @@ import { Crown, KeyRound, Mail, User, UserCog } from "lucide-react";
 // This is a temporary simulation of a logged-in user.
 // In a real application, you would get this from a session or context.
 const currentUser = {
-  name: 'د. أحمد محمود',
-  email: 'ahmed.mahmoud@dox.com',
-  userType: 'doctor' as const,
-  avatar: 'https://placehold.co/100x100',
-  subscription: {
-      tier: "مميز",
-      renewalDate: "30 يوليو 2025"
-  }
+  name: 'سارة علي',
+  email: 'sara.ali@example.com',
+  userType: 'patient' as const,
+  gender: 'أنثى' as const,
+  avatar: 'https://placehold.co/100x100'
 };
 
 export default function ProfilePage() {
@@ -25,8 +22,8 @@ export default function ProfilePage() {
       <div className="space-y-8">
         <div className="flex items-center gap-6">
           <Avatar className="h-24 w-24 border-4 border-primary/20">
-            <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="doctor portrait" />
-            <AvatarFallback>{currentUser.name.substring(3, 5)}</AvatarFallback>
+            <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="female portrait" />
+            <AvatarFallback>{currentUser.name.substring(0, 2)}</AvatarFallback>
           </Avatar>
           <div>
             <h1 className="text-3xl font-bold font-headline">{currentUser.name}</h1>
@@ -81,6 +78,7 @@ export default function ProfilePage() {
           </CardContent>
         </Card>
 
+        {/* Subscription card is only shown for doctors */}
         {currentUser.userType === 'doctor' && (
             <Card className="shadow-lg">
                 <CardHeader>

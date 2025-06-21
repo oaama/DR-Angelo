@@ -16,9 +16,10 @@ import { Crown, LifeBuoy, LogOut, User } from "lucide-react";
 // This is a temporary simulation of a logged-in user.
 // In a real application, you would get this from a session or context.
 const currentUser = {
-  name: 'د. أحمد محمود',
-  email: 'ahmed.mahmoud@dox.com',
-  userType: 'doctor' as const,
+  name: 'سارة علي',
+  email: 'sara.ali@example.com',
+  userType: 'patient' as const,
+  gender: 'أنثى' as const,
   avatar: 'https://placehold.co/100x100'
 };
 const isLoggedIn = !!currentUser;
@@ -39,8 +40,8 @@ export function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-9 w-9">
-                    <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="doctor portrait" />
-                    <AvatarFallback>{currentUser.name.substring(3, 5)}</AvatarFallback>
+                    <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="female portrait" />
+                    <AvatarFallback>{currentUser.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
@@ -68,9 +69,11 @@ export function Header() {
                     </Link>
                   </DropdownMenuItem>
                 )}
-                <DropdownMenuItem>
-                  <LifeBuoy className="me-2 h-4 w-4" />
-                  <span>الدعم</span>
+                <DropdownMenuItem asChild>
+                  <a href="tel:01228668228">
+                    <LifeBuoy className="me-2 h-4 w-4" />
+                    <span>الدعم</span>
+                  </a>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>

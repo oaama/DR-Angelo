@@ -7,9 +7,11 @@ import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
 // In a real application, you would get this from a session or context.
 const getCurrentUser = async () => {
     return {
-        name: 'د. أحمد محمود',
-        gender: 'ذكر' as const,
-        userType: 'doctor' as const,
+        name: 'سارة علي',
+        email: 'sara.ali@example.com',
+        userType: 'patient' as const,
+        gender: 'أنثى' as const,
+        avatar: 'https://placehold.co/100x100'
     }
 }
 
@@ -20,8 +22,11 @@ export default async function Home({
   searchParams: { specialty?: string; city?: string; gender?: string };
 }) {
   const currentUser = await getCurrentUser();
-  // For a doctor user, we don't apply gender-based default sorting.
+  // For a patient user, we can pass their gender for potential sorting preferences.
   const userGenderForSorting = currentUser.userType === 'patient' ? currentUser.gender : undefined;
+  
+  // The getDoctors function is now fetching from Firestore.
+  // The app will appear empty until you populate your Firestore database.
   const doctors = await getDoctors(searchParams, userGenderForSorting);
   const cities = await getUniqueCities();
   const specialties = await getUniqueSpecialties();
@@ -64,7 +69,7 @@ export default async function Home({
                     لم يتم العثور على نتائج
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    حاول تعديل فلاتر البحث للعثور على المزيد من الأطباء.
+                    يرجى المحاولة مرة أخرى أو تعديل فلاتر البحث. قد تحتاج إلى إضافة بيانات الأطباء إلى قاعدة بيانات Firestore الخاصة بك.
                   </p>
                 </div>
               )}

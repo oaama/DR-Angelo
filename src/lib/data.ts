@@ -1,848 +1,7 @@
 import type { Doctor } from './types';
+import { db } from './firebase';
+import { collection, query, where, getDocs, doc, getDoc, QueryConstraint } from 'firebase/firestore';
 
-export const doctors: Doctor[] = [
-  {
-    id: '1',
-    name: 'د. أحمد محمود',
-    gender: 'ذكر',
-    specialty: 'قلب',
-    city: 'القاهرة',
-    rating: 4.8,
-    reviews: 126,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'د. أحمد استشاري أمراض القلب بخبرة تزيد عن 15 عامًا في علاج أمراض القلب.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-    comments: [
-      {
-        id: 'c1',
-        patientName: 'سارة علي',
-        rating: 5,
-        text: 'دكتور ممتاز جدا وخبرة كبيرة، أنصح به بشدة.',
-        date: '2024-05-15',
-      },
-      {
-        id: 'c2',
-        patientName: 'فاطمة إبراهيم',
-        rating: 4,
-        text: 'تجربة جيدة، الطبيب مستمع جيد وشرح الحالة بالتفصيل.',
-        date: '2024-05-10',
-      },
-    ]
-  },
-  {
-    id: '2',
-    name: 'د. فاطمة علي',
-    gender: 'أنثى',
-    specialty: 'جلدية',
-    city: 'الإسكندرية',
-    rating: 4.9,
-    reviews: 211,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في الأمراض الجلدية التجميلية والطبية، د. فاطمة رائدة في علاجات العناية بالبشرة المبتكرة.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-    comments: [
-        {
-          id: 'c3',
-          patientName: 'هند رضا',
-          rating: 5,
-          text: 'الدكتورة فاطمة رائعة! عالجت مشكلة بشرتي بفعالية وسرعة.',
-          date: '2024-06-20',
-        },
-      ]
-  },
-  {
-    id: '3',
-    name: 'د. محمد إبراهيم',
-    gender: 'ذكر',
-    specialty: 'عظام',
-    city: 'الجيزة',
-    rating: 4.7,
-    reviews: 98,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'يركز د. محمد على الطب الرياضي واستبدال المفاصل، مما يساعد المرضى على استعادة الحركة والعيش بدون ألم.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '4',
-    name: 'د. ياسمين خالد',
-    gender: 'أنثى',
-    specialty: 'أعصاب',
-    city: 'أسوان',
-    rating: 4.6,
-    reviews: 85,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تشتهر د. ياسمين بعملها في الأمراض العصبية التنكسية وأبحاثها المتطورة في صحة الدماغ.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '5',
-    name: 'د. علي حسن',
-    gender: 'ذكر',
-    specialty: 'أطفال',
-    city: 'الدقهلية',
-    rating: 5.0,
-    reviews: 350,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'بشغف لصحة الأطفال، يقدم د. علي رعاية رحيمة وشاملة للرضع والمراهقين.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '6',
-    name: 'د. سارة عبد الرحمن',
-    gender: 'أنثى',
-    specialty: 'قلب',
-    city: 'الغربية',
-    rating: 4.7,
-    reviews: 150,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'د. سارة طبيبة قلب متفانية تركز على الرعاية الوقائية وإدارة أمراض القلب المزمنة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '7',
-    name: 'د. عمر الشريف',
-    gender: 'ذكر',
-    specialty: 'جلدية',
-    city: 'السويس',
-    rating: 4.8,
-    reviews: 180,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'يقدم د. عمر مجموعة واسعة من الخدمات الجلدية مع التركيز على تثقيف المرضى والرعاية الشخصية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '8',
-    name: 'د. هناء مصطفى',
-    gender: 'أنثى',
-    specialty: 'عظام',
-    city: 'الشرقية',
-    rating: 4.9,
-    reviews: 132,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'جرّاحة عظام رائدة، تشتهر د. هناء بخبرتها في التقنيات الجراحية طفيفة التوغل.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '9',
-    name: 'د. خالد سعيد',
-    gender: 'ذكر',
-    specialty: 'أعصاب',
-    city: 'المنيا',
-    rating: 4.5,
-    reviews: 77,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'يتخصص د. خالد في الصرع واضطرابات النوم، باستخدام أحدث تقنيات التشخيص.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '10',
-    name: 'د. نورهان أيمن',
-    gender: 'أنثى',
-    specialty: 'أطفال',
-    city: 'أسيوط',
-    rating: 4.9,
-    reviews: 280,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'د. نورهان طبيبة أطفال محبوبة معروفة بسلوكها الودود والتزامها بالرعاية المرتكزة على الأسرة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '11',
-    name: 'د. طارق شوقي',
-    gender: 'ذكر',
-    specialty: 'باطنة',
-    city: 'بورسعيد',
-    rating: 4.8,
-    reviews: 110,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشاري أمراض باطنة بخبرة واسعة في تشخيص وعلاج الأمراض المعقدة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '12',
-    name: 'د. منى حمدي',
-    gender: 'أنثى',
-    specialty: 'نساء وتوليد',
-    city: 'الأقصر',
-    rating: 4.9,
-    reviews: 195,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في صحة المرأة، تقدم د. منى رعاية شاملة خلال جميع مراحل الحياة.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-  },
-  {
-    id: '13',
-    name: 'د. شريف رمزي',
-    gender: 'ذكر',
-    specialty: 'مسالك بولية',
-    city: 'سوهاج',
-    rating: 4.7,
-    reviews: 95,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'يقدم د. شريف أحدث العلاجات لمشاكل المسالك البولية مع التركيز على راحة المريض.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '14',
-    name: 'د. هبة رشوان',
-    gender: 'أنثى',
-    specialty: 'عيون',
-    city: 'قنا',
-    rating: 4.8,
-    reviews: 140,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'جرّاحة عيون ماهرة، متخصصة في جراحات الليزك وعلاج أمراض الشبكية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '15',
-    name: 'د. وائل غنيم',
-    gender: 'ذكر',
-    specialty: 'أنف وأذن وحنجرة',
-    city: 'بني سويف',
-    rating: 4.6,
-    reviews: 88,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في علاج اضطرابات السمع ومشاكل الجيوب الأنفية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '16',
-    name: 'د. ريهام عبد الغفور',
-    gender: 'أنثى',
-    specialty: 'تغذية',
-    city: 'كفر الشيخ',
-    rating: 4.9,
-    reviews: 250,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تساعد د. ريهام المرضى على تحقيق أهدافهم الصحية من خلال خطط تغذية شخصية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '17',
-    name: 'د. كريم فهمي',
-    gender: 'ذكر',
-    specialty: 'أسنان',
-    city: 'دمياط',
-    rating: 4.8,
-    reviews: 188,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'يقدم د. كريم خدمات طب الأسنان التجميلي والترميمي بأحدث التقنيات.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '18',
-    name: 'د. دينا الشربيني',
-    gender: 'أنثى',
-    specialty: 'نفسية',
-    city: 'الإسماعيلية',
-    rating: 4.7,
-    reviews: 121,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'توفر د. دينا دعماً نفسياً وعلاجاً لمختلف الاضطرابات النفسية في بيئة آمنة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '19',
-    name: 'د. عمرو يوسف',
-    gender: 'ذكر',
-    specialty: 'علاج طبيعي',
-    city: 'البحيرة',
-    rating: 4.9,
-    reviews: 165,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في إعادة التأهيل بعد الإصابات الرياضية والجراحات.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '20',
-    name: 'د. حنان مطاوع',
-    gender: 'أنثى',
-    specialty: 'غدد صماء',
-    city: 'القليوبية',
-    rating: 4.8,
-    reviews: 130,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'خبيرة في علاج اضطرابات الغدد الصماء والسكري.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '21',
-    name: 'د. مصطفى شعبان',
-    gender: 'ذكر',
-    specialty: 'جراحة عامة',
-    city: 'القاهرة',
-    rating: 4.9,
-    reviews: 215,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشاري الجراحة العامة والمناظير، متخصص في جراحات الجهاز الهضمي.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '22',
-    name: 'د. رانيا يوسف',
-    gender: 'أنثى',
-    specialty: 'أورام',
-    city: 'الجيزة',
-    rating: 4.9,
-    reviews: 190,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في علاج الأورام باستخدام أحدث بروتوكولات العلاج الكيميائي والإشعاعي.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '23',
-    name: 'د. باسم سمرة',
-    gender: 'ذكر',
-    specialty: 'أمراض صدرية',
-    city: 'الإسكندرية',
-    rating: 4.7,
-    reviews: 140,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'يعالج جميع أمراض الجهاز التنفسي وحساسية الصدر والربو.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '24',
-    name: 'د. أروى جودة',
-    gender: 'أنثى',
-    specialty: 'جلدية',
-    city: 'الدقهلية',
-    rating: 4.8,
-    reviews: 230,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'خبيرة في علاجات الليزر والتجميل وإزالة الشعر بأحدث التقنيات.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '25',
-    name: 'د. إياد نصار',
-    gender: 'ذكر',
-    specialty: 'قلب',
-    city: 'البحر الأحمر',
-    rating: 4.6,
-    reviews: 95,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'أخصائي أمراض القلب والأوعية الدموية، متخصص في القسطرة القلبية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '26',
-    name: 'د. كندة علوش',
-    gender: 'أنثى',
-    specialty: 'أطفال',
-    city: 'البحيرة',
-    rating: 4.9,
-    reviews: 310,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متابعة النمو والتطور للأطفال وحديثي الولادة وتقديم كافة التطعيمات.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '27',
-    name: 'د. ماجد الكدواني',
-    gender: 'ذكر',
-    specialty: 'عظام',
-    city: 'الفيوم',
-    rating: 4.8,
-    reviews: 180,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في جراحات تغيير المفاصل وإصابات الملاعب.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '28',
-    name: 'د. منة شلبي',
-    gender: 'أنثى',
-    specialty: 'نساء وتوليد',
-    city: 'الغربية',
-    rating: 5.0,
-    reviews: 420,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشارية أمراض النساء والتوليد وعلاج تأخر الإنجاب والحقن المجهري.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-  },
-  {
-    id: '29',
-    name: 'د. آسر ياسين',
-    gender: 'ذكر',
-    specialty: 'نفسية',
-    city: 'الإسماعيلية',
-    rating: 4.7,
-    reviews: 155,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في علاج الاضطرابات النفسية والسلوكية والاستشارات الأسرية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '30',
-    name: 'د. أمينة خليل',
-    gender: 'أنثى',
-    specialty: 'تغذية',
-    city: 'المنوفية',
-    rating: 4.9,
-    reviews: 280,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'خبيرة تغذية علاجية تساعد في وضع أنظمة غذائية مخصصة لمرضى السكري والقلب والسمنة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '31',
-    name: 'د. ظافر العابدين',
-    gender: 'ذكر',
-    specialty: 'أسنان',
-    city: 'المنيا',
-    rating: 4.8,
-    reviews: 205,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في زراعة وتجميل الأسنان وتركيبات البورسلين والزركونيوم.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '32',
-    name: 'د. صبا مبارك',
-    gender: 'أنثى',
-    specialty: 'عيون',
-    city: 'القليوبية',
-    rating: 4.7,
-    reviews: 175,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشارية طب وجراحة العيون وتصحيح الإبصار بالليزك.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '33',
-    name: 'د. باسل خياط',
-    gender: 'ذكر',
-    specialty: 'أنف وأذن وحنجرة',
-    city: 'الوادي الجديد',
-    rating: 4.5,
-    reviews: 65,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'يعالج حالات التهابات الجيوب الأنفية المزمنة ومشاكل السمع.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '34',
-    name: 'د. نيللي كريم',
-    gender: 'أنثى',
-    specialty: 'علاج طبيعي',
-    city: 'السويس',
-    rating: 4.9,
-    reviews: 195,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في برامج إعادة التأهيل والعلاج الطبيعي لآلام الظهر والرقبة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '35',
-    name: 'د. محمد ممدوح',
-    gender: 'ذكر',
-    specialty: 'باطنة',
-    city: 'أسوان',
-    rating: 4.8,
-    reviews: 160,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشاري الأمراض الباطنة والجهاز الهضمي والمناظير.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '36',
-    name: 'د. روبي',
-    gender: 'أنثى',
-    specialty: 'جلدية',
-    city: 'أسيوط',
-    rating: 4.8,
-    reviews: 240,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في علاج حب الشباب وآثاره وتجميل البشرة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '37',
-    name: 'د. سيد رجب',
-    gender: 'ذكر',
-    specialty: 'مسالك بولية',
-    city: 'بني سويف',
-    rating: 4.7,
-    reviews: 115,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشاري جراحة المسالك البولية وأمراض الذكورة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '38',
-    name: 'د. يسرا اللوزي',
-    gender: 'أنثى',
-    specialty: 'أطفال',
-    city: 'بورسعيد',
-    rating: 4.9,
-    reviews: 330,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'طبيبة أطفال متفانية تقدم رعاية صحية شاملة للأطفال منذ الولادة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '39',
-    name: 'د. أحمد حاتم',
-    gender: 'ذكر',
-    specialty: 'قلب',
-    city: 'دمياط',
-    rating: 4.8,
-    reviews: 185,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'أخصائي أمراض القلب، يركز على الوقاية وتشخيص وعلاج أمراض الشرايين التاجية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '40',
-    name: 'د. جميلة عوض',
-    gender: 'أنثى',
-    specialty: 'غدد صماء',
-    city: 'الشرقية',
-    rating: 4.7,
-    reviews: 145,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في علاج مرض السكري واضطرابات الغدة الدرقية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '41',
-    name: 'د. محمود حميدة',
-    gender: 'ذكر',
-    specialty: 'أعصاب',
-    city: 'جنوب سيناء',
-    rating: 4.6,
-    reviews: 80,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشاري أمراض المخ والأعصاب، متخصص في علاج الجلطات الدماغية والصداع.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '42',
-    name: 'د. درة زروق',
-    gender: 'أنثى',
-    specialty: 'أسنان',
-    city: 'كفر الشيخ',
-    rating: 4.9,
-    reviews: 260,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تقدم خدمات طب الأسنان الشاملة بما في ذلك تقويم الأسنان وتبييضها.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '43',
-    name: 'د. خالد النبوي',
-    gender: 'ذكر',
-    specialty: 'جراحة عامة',
-    city: 'مطروح',
-    rating: 4.8,
-    reviews: 120,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في جراحات الفتق والمرارة بالمنظار.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '44',
-    name: 'د. حورية فرغلي',
-    gender: 'أنثى',
-    specialty: 'نساء وتوليد',
-    city: 'الأقصر',
-    rating: 4.8,
-    reviews: 210,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'توفر رعاية متكاملة للحمل والولادة، ومتابعة ما بعد الولادة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '45',
-    name: 'د. فتحي عبد الوهاب',
-    gender: 'ذكر',
-    specialty: 'عيون',
-    city: 'قنا',
-    rating: 4.7,
-    reviews: 165,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'جراح متخصص في عمليات المياه البيضاء وزراعة العدسات.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '46',
-    name: 'د. غادة عادل',
-    gender: 'أنثى',
-    specialty: 'نفسية',
-    city: 'شمال سيناء',
-    rating: 4.6,
-    reviews: 90,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تقدم دعماً نفسياً وعلاجاً للاكتئاب والقلق واضطرابات ما بعد الصدمة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '47',
-    name: 'د. أحمد السقا',
-    gender: 'ذكر',
-    specialty: 'علاج طبيعي',
-    city: 'سوهاج',
-    rating: 4.9,
-    reviews: 220,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في العلاج اليدوي والتأهيل الحركي للإصابات الرياضية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '48',
-    name: 'د. ياسمين صبري',
-    gender: 'أنثى',
-    specialty: 'جلدية',
-    city: 'القاهرة',
-    rating: 4.9,
-    reviews: 300,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'خبيرة في مجال التجميل غير الجراحي، مثل الفيلر والبوتوكس.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-  },
-  {
-    id: '49',
-    name: 'د. أمير كرارة',
-    gender: 'ذكر',
-    specialty: 'عظام',
-    city: 'الجيزة',
-    rating: 4.8,
-    reviews: 250,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشاري جراحة العظام والعمود الفقري.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '50',
-    name: 'د. هند صبري',
-    gender: 'أنثى',
-    specialty: 'أطفال',
-    city: 'الإسكندرية',
-    rating: 5.0,
-    reviews: 450,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تتمتع بخبرة واسعة في التعامل مع الحالات الحرجة للأطفال وحديثي الولادة.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-  },
-  {
-    id: '51',
-    name: 'د. حسن الرداد',
-    gender: 'ذكر',
-    specialty: 'باطنة',
-    city: 'الدقهلية',
-    rating: 4.7,
-    reviews: 130,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في أمراض الكبد والجهاز الهضمي.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '52',
-    name: 'د. إيمي سمير غانم',
-    gender: 'أنثى',
-    specialty: 'تغذية',
-    city: 'الغربية',
-    rating: 4.8,
-    reviews: 290,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تساعدك على الوصول للوزن المثالي بنظام غذائي صحي ومتوازن.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '53',
-    name: 'د. أحمد عز',
-    gender: 'ذكر',
-    specialty: 'أنف وأذن وحنجرة',
-    city: 'الشرقية',
-    rating: 4.6,
-    reviews: 110,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في جراحات تجميل الأنف وعلاج الشخير.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '54',
-    name: 'د. دنيا سمير غانم',
-    gender: 'أنثى',
-    specialty: 'أسنان',
-    city: 'القاهرة',
-    rating: 4.9,
-    reviews: 320,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'خبيرة في تصميم ابتسامة هوليوود والتركيبات الثابتة والمتحركة.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-  },
-  {
-    id: '55',
-    name: 'د. كريم عبد العزيز',
-    gender: 'ذكر',
-    specialty: 'مسالك بولية',
-    city: 'الجيزة',
-    rating: 4.8,
-    reviews: 190,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في علاج حصوات الكلى والمسالك البولية بالمناظير والليزر.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '56',
-    name: 'د. منى زكي',
-    gender: 'أنثى',
-    specialty: 'نفسية',
-    city: 'الإسكندرية',
-    rating: 4.9,
-    reviews: 280,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تقدم استشارات نفسية وعلاج سلوكي معرفي للأفراد والأزواج.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '57',
-    name: 'د. محمد رمضان',
-    gender: 'ذكر',
-    specialty: 'قلب',
-    city: 'قنا',
-    rating: 4.7,
-    reviews: 200,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشاري أمراض القلب التداخلية وتركيب الدعامات.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '58',
-    name: 'د. هنا الزاهد',
-    gender: 'أنثى',
-    specialty: 'عيون',
-    city: 'الأقصر',
-    rating: 4.8,
-    reviews: 180,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في طب عيون الأطفال وعلاج الحول.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '59',
-    name: 'د. محمد هنيدي',
-    gender: 'ذكر',
-    specialty: 'أمراض صدرية',
-    city: 'سوهاج',
-    rating: 4.6,
-    reviews: 95,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في تشخيص وعلاج حساسية الصدر والربو الشعبي.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '60',
-    name: 'د. ياسمين عبد العزيز',
-    gender: 'أنثى',
-    specialty: 'أورام',
-    city: 'أسيوط',
-    rating: 4.9,
-    reviews: 170,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشارية علاج أورام الثدي وأمراض النساء.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '61',
-    name: 'د. أحمد فهمي',
-    gender: 'ذكر',
-    specialty: 'أطفال',
-    city: 'بني سويف',
-    rating: 4.8,
-    reviews: 270,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'أخصائي طب الأطفال، يقدم رعاية متكاملة لصحة طفلك.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '62',
-    name: 'د. شيرين رضا',
-    gender: 'أنثى',
-    specialty: 'جلدية',
-    city: 'البحر الأحمر',
-    rating: 4.9,
-    reviews: 255,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصصة في أحدث تقنيات الحقن التجميلي ونضارة البشرة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '63',
-    name: 'د. أكرم حسني',
-    gender: 'ذكر',
-    specialty: 'عظام',
-    city: 'الإسماعيلية',
-    rating: 4.7,
-    reviews: 195,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'متخصص في جراحة مناظير الكتف والركبة.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '64',
-    name: 'د. أنغام',
-    gender: 'أنثى',
-    specialty: 'أنف وأذن وحنجرة',
-    city: 'بورسعيد',
-    rating: 4.8,
-    reviews: 150,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'استشارية أمراض وأورام الحنجرة والأحبال الصوتية.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '65',
-    name: 'د. تامر حسني',
-    gender: 'ذكر',
-    specialty: 'علاج طبيعي',
-    city: 'السويس',
-    rating: 4.9,
-    reviews: 230,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'برامج متخصصة لإعادة تأهيل إصابات الملاعب والعمود الفقري.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '66',
-    name: 'د. شيرين عبد الوهاب',
-    gender: 'أنثى',
-    specialty: 'باطنة',
-    city: 'دمياط',
-    rating: 4.7,
-    reviews: 140,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'خبيرة في تشخيص وعلاج أمراض السكر والغدد الصماء.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  },
-  {
-    id: '67',
-    name: 'د. عمرو دياب',
-    gender: 'ذكر',
-    specialty: 'جلدية',
-    city: 'جنوب سيناء',
-    rating: 5.0,
-    reviews: 500,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'رائد جراحة التجميل في الشرق الأوسط، متخصص في نحت القوام وشد الوجه.',
-    subscription: { tier: 'مميز', status: 'نشط' },
-  },
-  {
-    id: '68',
-    name: 'د. إليسا',
-    gender: 'أنثى',
-    specialty: 'أورام',
-    city: 'شمال سيناء',
-    rating: 4.9,
-    reviews: 180,
-    profilePicture: 'https://placehold.co/400x400',
-    bio: 'تقدم الدعم النفسي والعلاجي لمرضى السرطان، مع التركيز على التوعية بسرطان الثدي.',
-    subscription: { tier: 'أساسي', status: 'نشط' },
-  }
-];
 
 export async function getDoctors(
   filters: {
@@ -852,96 +11,94 @@ export async function getDoctors(
   },
   userGender?: 'ذكر' | 'أنثى'
 ): Promise<Doctor[]> {
-  // Simulate API delay
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  // This function now fetches from Firestore
+  try {
+    const doctorsCollection = collection(db, 'doctors');
+    const constraints: QueryConstraint[] = [];
 
-  let doctorsToShow = [...doctors];
-
-  const noFiltersApplied = !filters.specialty && !filters.city && !filters.gender;
-
-  // Sort doctors
-  doctorsToShow.sort((a, b) => {
-    // 1. Sort by subscription tier first ('مميز' comes first)
-    const tierOrder = { 'مميز': 1, 'احترافي': 1, 'أساسي': 2 };
-    const tierA = tierOrder[a.subscription.tier] || 3;
-    const tierB = tierOrder[b.subscription.tier] || 3;
-    if (tierA !== tierB) {
-      return tierA - tierB;
+    // Apply filters from the UI
+    if (filters.specialty && filters.specialty !== 'all') {
+      constraints.push(where('specialty', '==', filters.specialty));
+    }
+    if (filters.city && filters.city !== 'all') {
+      constraints.push(where('city', '==', filters.city));
+    }
+    if (filters.gender && filters.gender !== 'all') {
+      constraints.push(where('gender', '==', filters.gender));
     }
 
-    // 2. If user is female and no filters are applied, sort female doctors higher
-    if (userGender === 'أنثى' && noFiltersApplied) {
-      if (a.gender === 'أنثى' && b.gender !== 'أنثى') return -1;
-      if (b.gender === 'أنثى' && a.gender !== 'أنثى') return 1;
-    }
+    const q = query(doctorsCollection, ...constraints);
+    const querySnapshot = await getDocs(q);
 
-    // 3. As a final tie-breaker, sort by rating
-    return b.rating - a.rating;
-  });
-  
-  let filteredDoctors = doctorsToShow;
+    const doctorsToShow: Doctor[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Doctor));
+    
+    // After fetching, we apply the custom sorting logic in JavaScript
+    const noFiltersApplied = !filters.specialty && !filters.city && !filters.gender;
 
-  if (filters.specialty && filters.specialty !== 'all') {
-    filteredDoctors = filteredDoctors.filter(
-      (doctor) => doctor.specialty === filters.specialty
-    );
+    doctorsToShow.sort((a, b) => {
+      // 1. Sort by subscription tier first ('مميز' comes first)
+      const tierOrder = { 'مميز': 1, 'احترافي': 1, 'أساسي': 2 };
+      const tierA = tierOrder[a.subscription.tier] || 3;
+      const tierB = tierOrder[b.subscription.tier] || 3;
+      if (tierA !== tierB) {
+        return tierA - tierB;
+      }
+
+      // 2. If user is female and no filters are applied, sort female doctors higher
+      if (userGender === 'أنثى' && noFiltersApplied) {
+        if (a.gender === 'أنثى' && b.gender !== 'أنثى') return -1;
+        if (b.gender === 'أنثى' && a.gender !== 'أنثى') return 1;
+      }
+
+      // 3. As a final tie-breaker, sort by rating
+      return b.rating - a.rating;
+    });
+
+    return doctorsToShow;
+
+  } catch (error) {
+    console.error("Error fetching doctors from Firestore:", error);
+    console.log("NOTE: This error might be due to a missing Firestore index. The console error message from Firebase usually includes a link to create the required index automatically. Please check the browser console or server logs.");
+    return [];
   }
-
-  if (filters.city && filters.city !== 'all') {
-    filteredDoctors = filteredDoctors.filter(
-      (doctor) => doctor.city === filters.city
-    );
-  }
-
-  if (filters.gender && filters.gender !== 'all') {
-    filteredDoctors = filteredDoctors.filter(
-      (doctor) => doctor.gender === filters.gender
-    );
-  }
-
-  return filteredDoctors;
 }
 
 export async function getDoctorById(id: string): Promise<Doctor | undefined> {
-  // Simulate API delay
-  await new Promise((resolve) => setTimeout(resolve, 300));
-  return doctors.find((doctor) => doctor.id === id);
+  // This function now fetches a single document from Firestore
+  try {
+    const docRef = doc(db, "doctors", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() } as Doctor;
+    } else {
+      console.log("No such document!");
+      return undefined;
+    }
+  } catch (error) {
+    console.error("Error fetching doctor by ID from Firestore:", error);
+    return undefined;
+  }
 }
 
 export async function getUniqueSpecialties(): Promise<string[]> {
-  const specialties = [...new Set(doctors.map((doctor) => doctor.specialty))];
+  // For performance, this is now a hardcoded list.
+  // In a real app, you might manage this list in a separate Firestore document.
+  const specialties = [
+    "قلب", "جلدية", "عظام", "أعصاب", "أطفال", "باطنة", "نساء وتوليد", 
+    "مسالك بولية", "عيون", "أنف وأذن وحنجرة", "تغذية", "أسنان", "نفسية", 
+    "علاج طبيعي", "غدد صماء", "جراحة عامة", "أورام", "أمراض صدرية"
+  ];
   return specialties.sort((a, b) => a.localeCompare(b, 'ar'));
 }
 
 export async function getUniqueCities(): Promise<string[]> {
   const governorates = [
-    "الإسكندرية",
-    "الإسماعيلية",
-    "الأقصر",
-    "البحر الأحمر",
-    "البحيرة",
-    "الجيزة",
-    "الدقهلية",
-    "السويس",
-    "الشرقية",
-    "الغربية",
-    "الفيوم",
-    "القاهرة",
-    "القليوبية",
-    "المنوفية",
-    "المنيا",
-    "الوادي الجديد",
-    "أسوان",
-    "أسيوط",
-    "بني سويف",
-    "بورسعيد",
-    "جنوب سيناء",
-    "دمياط",
-    "سوهاج",
-    "شمال سيناء",
-    "قنا",
-    "كفر الشيخ",
-    "مطروح",
+    "الإسكندرية", "الإسماعيلية", "الأقصر", "البحر الأحمر", "البحيرة",
+    "الجيزة", "الدقهلية", "السويس", "الشرقية", "الغربية", "الفيوم",
+    "القاهرة", "القليوبية", "المنوفية", "المنيا", "الوادي الجديد", "أسوان",
+    "أسيوط", "بني سويف", "بورسعيد", "جنوب سيناء", "دمياط", "سوهاج",
+    "شمال سيناء", "قنا", "كفر الشيخ", "مطروح",
   ];
   return governorates.sort((a, b) => a.localeCompare(b, 'ar'));
 }
