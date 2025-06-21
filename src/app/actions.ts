@@ -28,7 +28,11 @@ export async function recommendDoctorAction(
   const medicalIssueDescription = validatedFields.data.description;
 
   try {
-    const result = await aiDoctorMatch({ medicalIssueDescription });
+    const doctorNames = allDoctors.map(d => d.name);
+    const result = await aiDoctorMatch({ 
+      medicalIssueDescription,
+      doctorList: doctorNames 
+    });
     const recommendedNames = result.recommendedDoctors;
 
     if (!recommendedNames || recommendedNames.length === 0) {

@@ -15,6 +15,7 @@ const AIDoctorMatchInputSchema = z.object({
   medicalIssueDescription: z
     .string()
     .describe('وصف للمشكلة الطبية للمريض.'),
+  doctorList: z.array(z.string()).describe('قائمة بأسماء الأطباء المتاحين للاختيار من بينهم.'),
 });
 export type AIDoctorMatchInput = z.infer<typeof AIDoctorMatchInputSchema>;
 
@@ -33,11 +34,18 @@ const prompt = ai.definePrompt({
   name: 'aiDoctorMatchPrompt',
   input: {schema: AIDoctorMatchInputSchema},
   output: {schema: AIDoctorMatchOutputSchema},
-  prompt: `أنت مساعد ذكاء اصطناعي مصمم لترشيح الأطباء بناءً على وصف المريض لمشكلته الطبية. يجب أن يكون الناتج قائمة بأسماء الأطباء، وتكون قصيرة قدر الإمكان، بحد أقصى 3 أطباء. يجب أن تكون أسماء الأطباء هي أسماء عربية مصرية. يجب أن تكون الأسماء كاملة ومطابقة للأسماء الرسمية للأطباء.
+  prompt: `أنت مساعد ذكاء اصطناعي مصمم لترشيح الأطباء بناءً على وصف المريض لمشكلته الطبية. مهمتك هي اختيار الأطباء الأكثر ملاءمة من القائمة المقدمة فقط.
+
+يجب أن يكون الناتج قائمة بأسماء الأطباء الذين اخترتهم، بحد أقصى 3 أطباء. يجب أن تكون الأسماء التي تعيدها مطابقة تمامًا للأسماء الموجودة في القائمة.
+
+قائمة الأطباء المتاحين للاختيار منها:
+{{#each doctorList}}
+- {{{this}}}
+{{/each}}
 
 وصف حالة المريض: {{{medicalIssueDescription}}}
 
-الأطباء المرشحون:`,
+بناءً على الوصف، قم بترشيح الأطباء المناسبين من القائمة أعلاه.`,
 });
 
 const aiDoctorMatchFlow = ai.defineFlow(
