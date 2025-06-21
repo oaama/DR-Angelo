@@ -13,6 +13,7 @@ export interface Doctor {
   gender: 'ذكر' | 'أنثى';
   specialty: string;
   city: string;
+  phone: string;
   rating: number;
   reviews: number;
   profilePicture: string;

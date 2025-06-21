@@ -4,7 +4,7 @@ import { getDoctorById } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarIcon, ClockIcon, MapPin, MessageSquare, Star, UserCircle, Crown } from 'lucide-react';
+import { CalendarIcon, Phone, MapPin, MessageSquare, Star, UserCircle, Crown } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -34,11 +34,6 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
   if (!doctor) {
     notFound();
   }
-
-  const appointmentTimes = [
-    "09:00 ص", "09:30 ص", "10:00 ص", "10:30 ص",
-    "02:00 م", "02:30 م", "03:00 م", "03:30 م"
-  ];
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
@@ -109,23 +104,17 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <h3 className="font-semibold">المواعيد المتاحة اليوم:</h3>
-                <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
-                  {appointmentTimes.map(time => (
-                    <Button key={time} variant="outline" className="flex items-center gap-2">
-                      <ClockIcon className="h-4 w-4" />
-                      {time}
-                    </Button>
-                  ))}
-                </div>
-                <Button className="w-full mt-4" size="lg">
-                  تأكيد الحجز
-                </Button>
-                <p className="text-center text-xs text-muted-foreground">
-                  ستحتاج إلى تسجيل الدخول لتأكيد حجزك.
-                </p>
-              </div>
+               <div className="text-center">
+                 <p className="text-muted-foreground mb-4">
+                   لتأكيد الحجز، يرجى الاتصال مباشرة برقم الطبيب.
+                 </p>
+                 <Button asChild className="w-full" size="lg">
+                   <a href={`tel:${doctor.phone}`}>
+                     <Phone className="h-5 w-5 me-2" />
+                     اتصل الآن للحجز ({doctor.phone})
+                   </a>
+                 </Button>
+               </div>
             </CardContent>
           </Card>
           
