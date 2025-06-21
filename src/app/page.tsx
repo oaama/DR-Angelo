@@ -46,7 +46,7 @@ export default async function Home({
           <Image
             src="https://placehold.co/1600x900.png"
             alt="خلفية طبية تظهر فريقًا من الأطباء المحترفين في مستشفى"
-            data-ai-hint="professional doctors"
+            data-ai-hint="professional doctors team"
             fill
             className="object-cover object-center animate-hero-zoom"
             priority
