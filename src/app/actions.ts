@@ -28,10 +28,10 @@ export async function recommendDoctorAction(
   const medicalIssueDescription = validatedFields.data.description;
 
   try {
-    const doctorNames = allDoctors.map(d => d.name);
+    const doctorInfoList = allDoctors.map(d => ({ name: d.name, specialty: d.specialty }));
     const result = await aiDoctorMatch({ 
       medicalIssueDescription,
-      doctorList: doctorNames 
+      doctorList: doctorInfoList 
     });
     const recommendedNames = result.recommendedDoctors;
 
