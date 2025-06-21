@@ -4,15 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Crown, KeyRound, Mail, User, UserCog } from "lucide-react";
+import { Crown, KeyRound, Mail, User, UserCog, Camera, FileBadge2 } from "lucide-react";
 
 // This is a temporary simulation of a logged-in user.
 // In a real application, you would get this from a session or context.
+// We set userType to 'doctor' to demonstrate the verification feature.
 const currentUser = {
-  name: 'سارة علي',
-  email: 'sara.ali@example.com',
-  userType: 'patient' as const,
-  gender: 'أنثى' as const,
+  name: 'د. خالد رضوان',
+  email: 'khaled.radwan@example.com',
+  userType: 'doctor' as const,
+  gender: 'ذكر' as const,
   avatar: 'https://placehold.co/200x200.png'
 };
 
@@ -21,10 +22,17 @@ export default function ProfilePage() {
     <div className="container mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="space-y-8 animate-fade-in-up" style={{ animationFillMode: 'backwards' }}>
         <div className="flex items-center gap-6">
-          <Avatar className="h-24 w-24 border-4 border-primary/20">
-            <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} />
-            <AvatarFallback>{currentUser.name.substring(0, 2)}</AvatarFallback>
-          </Avatar>
+          <div className="relative group">
+            <Avatar className="h-24 w-24 border-4 border-primary/20">
+              <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} />
+              <AvatarFallback>{currentUser.name.substring(0, 2)}</AvatarFallback>
+            </Avatar>
+            <label htmlFor="avatar-upload" className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+              <Camera className="h-8 w-8 text-white" />
+              <span className="sr-only">تغيير الصورة الشخصية</span>
+            </label>
+            <input type="file" id="avatar-upload" className="sr-only" accept="image/*" />
+          </div>
           <div>
             <h1 className="text-3xl font-bold font-headline">{currentUser.name}</h1>
             <p className="text-muted-foreground">{currentUser.userType === 'doctor' ? 'طبيب' : 'مريض'}</p>
@@ -78,8 +86,33 @@ export default function ProfilePage() {
           </CardContent>
         </Card>
 
-        {/* Subscription card is only shown for doctors */}
+        {/* Verification and Subscription Cards are only shown for doctors */}
         {currentUser.userType === 'doctor' && (
+          <>
+            <Card className="shadow-lg">
+                <CardHeader>
+                    <CardTitle className="font-headline text-xl flex items-center gap-2">
+                        <FileBadge2 className="h-6 w-6 text-primary" />
+                        توثيق الحساب المهني
+                    </CardTitle>
+                    <CardDescription>
+                        يرجى رفع صورة واضحة من كارنيه النقابة لتوثيق حسابك كطبيب معتمد.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="id-card-upload">صورة الكارنيه</Label>
+                            <Input id="id-card-upload" type="file" />
+                        </div>
+                         <p className="text-sm text-muted-foreground">الحالة الحالية: <span className="font-semibold text-orange-500">لم يتم التحقق</span></p>
+                        <div className="flex justify-end">
+                            <Button type="submit">رفع المستند</Button>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+
             <Card className="shadow-lg">
                 <CardHeader>
                     <CardTitle className="font-headline text-xl flex items-center gap-2">
@@ -104,6 +137,7 @@ export default function ProfilePage() {
                     </div>
                 </CardContent>
             </Card>
+          </>
         )}
       </div>
     </div>
