@@ -1,11 +1,11 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
+import { useActionState, useEffect, useRef } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { recommendDoctorAction } from "@/app/actions";
-import { useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { AlertCircle, Lightbulb } from "lucide-react";
 import { DoctorCard } from "./doctor-card";
@@ -29,7 +29,7 @@ function SubmitButton() {
 }
 
 export function AIRecommender() {
-    const [state, formAction] = useFormState(recommendDoctorAction, initialState);
+    const [state, formAction] = useActionState(recommendDoctorAction, initialState);
     const { toast } = useToast();
     const formRef = useRef<HTMLFormElement>(null);
 
