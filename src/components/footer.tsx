@@ -3,8 +3,8 @@ export function Footer() {
   return (
     <footer className="border-t py-6 md:py-8">
       <div className="container mx-auto px-4 md:px-6 flex flex-col items-center justify-center gap-4">
-        <div className="flex flex-col sm:flex-row items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <span>Developed by <strong className="font-semibold text-foreground">Ang;uos Rezq</strong></span>
+        <div className="flex flex-col sm:flex-row items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+            <span>Developed by: <strong className="font-semibold text-foreground">Eng- Angluos Rezq</strong></span>
             <div className="h-4 w-px bg-border hidden sm:block"></div>
             <a href="https://wa.me/201228668228" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp" className="flex items-center gap-2 text-muted-foreground hover:text-green-500 transition-colors">
                 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="h-5 w-5">
