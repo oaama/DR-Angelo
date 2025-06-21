@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import { Home, ShieldCheck, Users } from 'lucide-react';
 import { StethoscopeIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -13,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { AdminNav } from '@/components/admin-nav';
 
 // Mock admin user for layout
 const adminUser = {
@@ -32,29 +32,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             </Link>
           </div>
           <div className="flex-1">
-            <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
-                href="/admin"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Home className="h-4 w-4" />
-                الرئيسية
-              </Link>
-              <Link
-                href="/admin/verifications"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-              >
-                <ShieldCheck className="h-4 w-4" />
-                توثيق الأطباء
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Users className="h-4 w-4" />
-                إدارة المستخدمين
-              </Link>
-            </nav>
+            <AdminNav />
           </div>
         </div>
       </div>
