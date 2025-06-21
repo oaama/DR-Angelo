@@ -1,4 +1,7 @@
+'use client';
+
 import Link from "next/link"
+import { useState } from "react";
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -13,6 +16,8 @@ import { StethoscopeIcon } from "@/components/icons"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function SignupPage() {
+  const [userType, setUserType] = useState('patient');
+
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-12rem)] py-12 px-4">
       <Card className="mx-auto max-w-sm w-full animate-fade-in-up" style={{ animationFillMode: 'backwards' }}>
@@ -26,10 +31,10 @@ export default function SignupPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4">
+          <form className="grid gap-4">
             <div className="grid gap-2">
               <Label>أنت تسجل كـ</Label>
-              <RadioGroup defaultValue="patient" name="userType" className="grid grid-cols-2 gap-4">
+              <RadioGroup defaultValue="patient" name="userType" className="grid grid-cols-2 gap-4" onValueChange={setUserType}>
                 <Label
                   htmlFor="patient"
                   className="flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
@@ -65,9 +70,17 @@ export default function SignupPage() {
                 required
               />
             </div>
+
+            {userType === 'doctor' && (
+              <div className="grid gap-2">
+                <Label htmlFor="phone">رقم الهاتف</Label>
+                <Input id="phone" type="tel" placeholder="01234567890" required />
+              </div>
+            )}
+            
             <div className="grid gap-2">
               <Label htmlFor="password">كلمة المرور</Label>
-              <Input id="password" type="password" />
+              <Input id="password" type="password" required/>
             </div>
             <Button type="submit" className="w-full">
               إنشاء حساب
@@ -75,7 +88,7 @@ export default function SignupPage() {
             <Button variant="outline" className="w-full">
               إنشاء حساب باستخدام جوجل
             </Button>
-          </div>
+          </form>
           <div className="mt-4 text-center text-sm">
             لديك حساب بالفعل؟{" "}
             <Link href="/login" className="underline">
