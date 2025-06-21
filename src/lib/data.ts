@@ -14,14 +14,14 @@ export const doctors: Doctor[] = [
     comments: [
       {
         id: 'c1',
-        patientName: 'علي محمد',
+        patientName: 'سارة علي',
         rating: 5,
         text: 'دكتور ممتاز جدا وخبرة كبيرة، أنصح به بشدة.',
         date: '2024-05-15',
       },
       {
         id: 'c2',
-        patientName: 'سارة إبراهيم',
+        patientName: 'فاطمة إبراهيم',
         rating: 4,
         text: 'تجربة جيدة، الطبيب مستمع جيد وشرح الحالة بالتفصيل.',
         date: '2024-05-10',
@@ -776,15 +776,30 @@ export const doctors: Doctor[] = [
   }
 ];
 
-export async function getDoctors(filters: {
-  specialty?: string;
-  city?: string;
-  gender?: string;
-}): Promise<Doctor[]> {
+export async function getDoctors(
+  filters: {
+    specialty?: string;
+    city?: string;
+    gender?: string;
+  },
+  userGender?: 'ذكر' | 'أنثى'
+): Promise<Doctor[]> {
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 500));
 
-  let filteredDoctors = doctors;
+  let doctorsToShow = [...doctors];
+
+  // Check if no filters are applied and the user is female, then sort female doctors first
+  const noFiltersApplied = !filters.specialty && !filters.city && !filters.gender;
+  if (userGender === 'أنثى' && noFiltersApplied) {
+    doctorsToShow.sort((a, b) => {
+      if (a.gender === 'أنثى' && b.gender !== 'أنثى') return -1;
+      if (b.gender === 'أنثى' && a.gender !== 'أنثى') return 1;
+      return 0;
+    });
+  }
+
+  let filteredDoctors = doctorsToShow;
 
   if (filters.specialty && filters.specialty !== 'all') {
     filteredDoctors = filteredDoctors.filter(
@@ -820,33 +835,33 @@ export async function getUniqueSpecialties(): Promise<string[]> {
 
 export async function getUniqueCities(): Promise<string[]> {
   const governorates = [
-    'القاهرة',
-    'الجيزة',
-    'الإسكندرية',
-    'الدقهلية',
-    'البحر الأحمر',
-    'البحيرة',
-    'الفيوم',
-    'الغربية',
-    'الإسماعيلية',
-    'المنوفية',
-    'المنيا',
-    'القليوبية',
-    'الوادي الجديد',
-    'السويس',
-    'أسوان',
-    'أسيوط',
-    'بني سويف',
-    'بورسعيد',
-    'دمياط',
-    'الشرقية',
-    'جنوب سيناء',
-    'كفر الشيخ',
-    'مطروح',
-    'الأقصر',
-    'قنا',
-    'شمال سيناء',
-    'سوهاج',
+    "الإسكندرية",
+    "الإسماعيلية",
+    "الأقصر",
+    "البحر الأحمر",
+    "البحيرة",
+    "الجيزة",
+    "الدقهلية",
+    "السويس",
+    "الشرقية",
+    "الغربية",
+    "الفيوم",
+    "القاهرة",
+    "القليوبية",
+    "المنوفية",
+    "المنيا",
+    "الوادي الجديد",
+    "أسوان",
+    "أسيوط",
+    "بني سويف",
+    "بورسعيد",
+    "جنوب سيناء",
+    "دمياط",
+    "سوهاج",
+    "شمال سيناء",
+    "قنا",
+    "كفر الشيخ",
+    "مطروح",
   ];
   return governorates.sort((a, b) => a.localeCompare(b, 'ar'));
 }

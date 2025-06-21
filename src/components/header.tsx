@@ -13,8 +13,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { LifeBuoy, LogOut, User } from "lucide-react";
 
 
+// This is a temporary simulation of a logged-in user.
+// In a real application, you would get this from a session or context.
+const currentUser = {
+  name: 'سارة علي',
+  email: 'sara@example.com',
+  gender: 'أنثى' as const,
+  avatar: '/avatars/02.png'
+};
+const isLoggedIn = !!currentUser;
+
+
 export function Header() {
-  const isLoggedIn = true; // Temporary: Toggle this to see different states
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -29,17 +39,17 @@ export function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-9 w-9">
-                    <AvatarImage src="/avatars/01.png" alt="صورة المستخدم" />
-                    <AvatarFallback>علي</AvatarFallback>
+                    <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} />
+                    <AvatarFallback>سع</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">علي محمد</p>
+                    <p className="text-sm font-medium leading-none">{currentUser.name}</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      ali@example.com
+                      {currentUser.email}
                     </p>
                   </div>
                 </DropdownMenuLabel>

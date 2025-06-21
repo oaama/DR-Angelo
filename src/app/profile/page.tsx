@@ -12,10 +12,10 @@ export default function ProfilePage() {
         <div className="flex items-center gap-6">
           <Avatar className="h-24 w-24 border-4 border-primary/20">
             <AvatarImage src="/avatars/01.png" alt="صورة المستخدم" />
-            <AvatarFallback>AM</AvatarFallback>
+            <AvatarFallback>سع</AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="text-3xl font-bold font-headline">علي محمد</h1>
+            <h1 className="text-3xl font-bold font-headline">سارة علي</h1>
             <p className="text-muted-foreground">مريض</p>
           </div>
         </div>
@@ -37,14 +37,14 @@ export default function ProfilePage() {
                   <User className="w-4 h-4" />
                   الاسم الكامل
                 </Label>
-                <Input id="fullName" defaultValue="علي محمد" />
+                <Input id="fullName" defaultValue="سارة علي" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email" className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
                   البريد الإلكتروني
                 </Label>
-                <Input id="email" type="email" defaultValue="ali@example.com" />
+                <Input id="email" type="email" defaultValue="sara@example.com" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="currentPassword" className="flex items-center gap-2">

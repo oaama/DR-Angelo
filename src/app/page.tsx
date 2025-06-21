@@ -3,12 +3,23 @@ import { DoctorCard } from '@/components/doctor-card';
 import { AIRecommender } from '@/components/ai-recommender';
 import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
 
+// This is a temporary simulation of a logged-in user.
+// In a real application, you would get this from a session or context.
+const getCurrentUser = async () => {
+    return {
+        name: 'سارة علي',
+        gender: 'أنثى' as const
+    }
+}
+
+
 export default async function Home({
   searchParams,
 }: {
   searchParams: { specialty?: string; city?: string; gender?: string };
 }) {
-  const doctors = await getDoctors(searchParams);
+  const currentUser = await getCurrentUser();
+  const doctors = await getDoctors(searchParams, currentUser.gender);
   const cities = await getUniqueCities();
   const specialties = await getUniqueSpecialties();
 
