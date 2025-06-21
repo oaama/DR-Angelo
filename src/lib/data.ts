@@ -12,7 +12,7 @@ export const doctors: Doctor[] = [
         city: 'القاهرة',
         rating: 4.8,
         reviews: 120,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشاري أمراض القلب والقسطرة العلاجية. خبرة أكثر من 15 عامًا في علاج أمراض الشرايين التاجية.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: [
@@ -28,7 +28,7 @@ export const doctors: Doctor[] = [
         city: 'الجيزة',
         rating: 4.9,
         reviews: 250,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائية الأمراض الجلدية والتجميل والليزر. متخصصة في علاج حب الشباب وآثار الندبات.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: [
@@ -43,7 +43,7 @@ export const doctors: Doctor[] = [
         city: 'الإسكندرية',
         rating: 4.7,
         reviews: 95,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشاري جراحة العظام والمفاصل. متخصص في إصابات الملاعب والخشونة.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []
@@ -56,7 +56,7 @@ export const doctors: Doctor[] = [
         city: 'القاهرة',
         rating: 5.0,
         reviews: 310,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشارية طب الأطفال وحديثي الولادة. خبرة واسعة في متابعة نمو وتطور الأطفال.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: []
@@ -69,7 +69,7 @@ export const doctors: Doctor[] = [
         city: 'المنصورة',
         rating: 4.6,
         reviews: 150,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائي الأمراض الباطنة والجهاز الهضمي. تشخيص وعلاج أمراض السكر والضغط.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []
@@ -82,7 +82,7 @@ export const doctors: Doctor[] = [
         city: 'الجيزة',
         rating: 4.9,
         reviews: 180,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشارية أمراض النساء والتوليد والحقن المجهري. متابعة حالات الحمل الحرج.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: []
@@ -95,7 +95,7 @@ export const doctors: Doctor[] = [
         city: 'أسيوط',
         rating: 4.5,
         reviews: 70,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائي جراحة المسالك البولية وأمراض الذكورة.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []
@@ -108,7 +108,7 @@ export const doctors: Doctor[] = [
         city: 'القاهرة',
         rating: 4.8,
         reviews: 220,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشارية طب وجراحة العيون وتصحيح الإبصار بالليزك.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: []
@@ -121,7 +121,7 @@ export const doctors: Doctor[] = [
         city: 'طنطا',
         rating: 4.7,
         reviews: 130,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشاري الأنف والأذن والحنجرة وجراحات تجميل الأنف.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []
@@ -134,7 +134,7 @@ export const doctors: Doctor[] = [
         city: 'الجيزة',
         rating: 4.9,
         reviews: 190,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائية التغذية العلاجية وعلاج السمنة والنحافة.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: []
@@ -147,7 +147,7 @@ export const doctors: Doctor[] = [
         city: 'الإسكندرية',
         rating: 4.8,
         reviews: 280,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشاري تجميل وزراعة الأسنان. أحدث تقنيات تبييض الأسنان.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: []
@@ -160,7 +160,7 @@ export const doctors: Doctor[] = [
         city: 'القاهرة',
         rating: 4.9,
         reviews: 160,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشارية الطب النفسي وعلاج الإدمان. جلسات علاج سلوكي ومعرفي.',
         subscription: { tier: 'مميز', status: 'نشط' },
         comments: []
@@ -173,7 +173,7 @@ export const doctors: Doctor[] = [
         city: 'الزقازيق',
         rating: 4.6,
         reviews: 85,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائي العلاج الطبيعي والتأهيل. متخصص في تأهيل إصابات العمود الفقري.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []
@@ -186,7 +186,7 @@ export const doctors: Doctor[] = [
         city: 'الإسماعيلية',
         rating: 4.8,
         reviews: 110,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائية الجلدية والتجميل. جلسات نضارة البشرة وإزالة الشعر بالليزر.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []
@@ -199,7 +199,7 @@ export const doctors: Doctor[] = [
         city: 'أسوان',
         rating: 4.7,
         reviews: 60,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائي جراحة العظام والمفاصل الصناعية.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []
@@ -212,7 +212,7 @@ export const doctors: Doctor[] = [
         city: 'الأقصر',
         rating: 4.9,
         reviews: 90,
-        profilePicture: 'https://placehold.co/100x100.png',
+        profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائية طب الأطفال وحديثي الولادة.',
         subscription: { tier: 'أساسي', status: 'نشط' },
         comments: []

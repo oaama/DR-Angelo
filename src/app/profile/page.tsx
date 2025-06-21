@@ -13,7 +13,7 @@ const currentUser = {
   email: 'sara.ali@example.com',
   userType: 'patient' as const,
   gender: 'أنثى' as const,
-  avatar: 'https://placehold.co/100x100'
+  avatar: 'https://placehold.co/200x200.png'
 };
 
 export default function ProfilePage() {
@@ -22,7 +22,7 @@ export default function ProfilePage() {
       <div className="space-y-8 animate-fade-in-up" style={{ animationFillMode: 'backwards' }}>
         <div className="flex items-center gap-6">
           <Avatar className="h-24 w-24 border-4 border-primary/20">
-            <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="female portrait" />
+            <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} />
             <AvatarFallback>{currentUser.name.substring(0, 2)}</AvatarFallback>
           </Avatar>
           <div>

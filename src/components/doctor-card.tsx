@@ -27,7 +27,6 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
           width={80}
           height={80}
           className="rounded-full border-2 border-primary/20 object-cover"
-          data-ai-hint={doctor.gender === 'ذكر' ? 'male doctor' : 'female doctor'}
         />
         <div className="flex-1">
           <CardTitle className="text-xl font-bold font-headline">

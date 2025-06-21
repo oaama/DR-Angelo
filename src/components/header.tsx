@@ -20,7 +20,7 @@ const currentUser = {
   email: 'sara.ali@example.com',
   userType: 'patient' as const,
   gender: 'أنثى' as const,
-  avatar: 'https://placehold.co/100x100'
+  avatar: 'https://placehold.co/200x200.png'
 };
 const isLoggedIn = !!currentUser;
 
@@ -40,7 +40,7 @@ export function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-9 w-9">
-                    <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="female portrait" />
+                    <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} />
                     <AvatarFallback>{currentUser.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 </Button>

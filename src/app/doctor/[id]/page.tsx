@@ -53,7 +53,6 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
                 width={160}
                 height={160}
                 className="mx-auto mb-4 rounded-full border-4 border-primary/30 object-cover"
-                data-ai-hint={doctor.gender === 'ذكر' ? 'male doctor' : 'female doctor'}
               />
               <h1 className="text-2xl font-bold font-headline flex items-center gap-2 justify-center">
                 {doctor.name}

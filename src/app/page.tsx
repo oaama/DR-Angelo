@@ -12,7 +12,7 @@ const getCurrentUser = async () => {
         email: 'sara.ali@example.com',
         userType: 'patient' as const,
         gender: 'أنثى' as const,
-        avatar: 'https://placehold.co/100x100'
+        avatar: 'https://placehold.co/200x200.png'
     }
 }
 
@@ -40,7 +40,6 @@ export default async function Home({
             fill
             className="object-cover object-center animate-hero-zoom"
             priority
-            data-ai-hint="medical background"
           />
           <div className="absolute inset-0 bg-black/60" />
         </div>
