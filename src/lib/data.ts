@@ -782,6 +782,12 @@ export async function getDoctors(filters: {
   return filteredDoctors;
 }
 
+export async function getDoctorById(id: string): Promise<Doctor | undefined> {
+  // Simulate API delay
+  await new Promise((resolve) => setTimeout(resolve, 300));
+  return doctors.find((doctor) => doctor.id === id);
+}
+
 export async function getUniqueSpecialties(): Promise<string[]> {
   const specialties = [...new Set(doctors.map((doctor) => doctor.specialty))];
   return specialties.sort((a, b) => a.localeCompare(b, 'ar'));
