@@ -19,7 +19,7 @@ const currentUser = {
 export default function ProfilePage() {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="space-y-8">
+      <div className="space-y-8 animate-fade-in-up" style={{ animationFillMode: 'backwards' }}>
         <div className="flex items-center gap-6">
           <Avatar className="h-24 w-24 border-4 border-primary/20">
             <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="female portrait" />
@@ -93,8 +93,8 @@ export default function ProfilePage() {
                 <CardContent>
                     <div className="flex items-center justify-between p-4 rounded-lg bg-primary/10">
                         <div>
-                            <p className="font-semibold">باقتك الحالية: <span className="text-primary font-bold">{currentUser.subscription.tier}</span></p>
-                            <p className="text-sm text-muted-foreground">تاريخ التجديد: {currentUser.subscription.renewalDate}</p>
+                            <p className="font-semibold">باقتك الحالية: <span className="text-primary font-bold">{'مميز'}</span></p>
+                            <p className="text-sm text-muted-foreground">تاريخ التجديد: {'2025-01-01'}</p>
                         </div>
                         <Button asChild>
                             <Link href="/profile/subscription">

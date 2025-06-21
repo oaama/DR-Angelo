@@ -2,6 +2,7 @@ import { DoctorSearchForm } from '@/components/doctor-search-form';
 import { DoctorCard } from '@/components/doctor-card';
 import { AIRecommender } from '@/components/ai-recommender';
 import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
+import Image from 'next/image';
 
 // This is a temporary simulation of a logged-in user.
 // In a real application, you would get this from a session or context.
@@ -25,33 +26,44 @@ export default async function Home({
   // For a patient user, we can pass their gender for potential sorting preferences.
   const userGenderForSorting = currentUser.userType === 'patient' ? currentUser.gender : undefined;
   
-  // The getDoctors function is now fetching from Firestore.
-  // The app will appear empty until you populate your Firestore database.
   const doctors = await getDoctors(searchParams, userGenderForSorting);
   const cities = await getUniqueCities();
   const specialties = await getUniqueSpecialties();
 
   return (
     <>
-      <section className="w-full border-b">
+      <section className="relative w-full border-b min-h-[400px] md:min-h-[500px] flex items-center justify-center text-center overflow-hidden">
+        <div className="absolute inset-0 z-[-1]">
+          <Image
+            src="https://placehold.co/1920x1080.png"
+            alt="خلفية طبية"
+            fill
+            className="object-cover object-center animate-hero-zoom"
+            priority
+            data-ai-hint="medical background"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
         <div className="container mx-auto px-4 md:px-6 py-12 md:py-20 lg:py-24">
           <div className="mx-auto grid max-w-4xl items-start gap-8">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl font-headline">
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-headline">
                 ابحث عن طبيبك المثالي
               </h1>
-              <p className="mt-4 text-lg text-muted-foreground">
+              <p className="mt-4 text-lg text-primary-foreground/90">
                 ابحث في شبكة المتخصصين لدينا للعثور على الرعاية التي تحتاجها.
               </p>
             </div>
-            <DoctorSearchForm specialties={specialties} cities={cities} />
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
+              <DoctorSearchForm specialties={specialties} cities={cities} />
+            </div>
           </div>
         </div>
       </section>
       <section className="w-full py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-8 animate-fade-in-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
               <h2 className="text-3xl font-bold tracking-tight font-headline">
                 {doctors.length > 0
                   ? `يتم عرض ${doctors.length} من الأطباء`
@@ -69,12 +81,12 @@ export default async function Home({
                     لم يتم العثور على نتائج
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    يرجى المحاولة مرة أخرى أو تعديل فلاتر البحث. قد تحتاج إلى إضافة بيانات الأطباء إلى قاعدة بيانات Firestore الخاصة بك.
+                    يرجى المحاولة مرة أخرى أو تعديل فلاتر البحث.
                   </p>
                 </div>
               )}
             </div>
-            <aside className="space-y-8">
+            <aside className="space-y-8 animate-fade-in-up" style={{ animationDelay: '0.7s', animationFillMode: 'backwards' }}>
               <AIRecommender />
             </aside>
           </div>

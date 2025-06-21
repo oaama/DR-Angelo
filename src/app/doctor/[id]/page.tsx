@@ -44,7 +44,7 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
     <div className="container mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
         {/* Left Column - Doctor Info */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 animate-fade-in-up" style={{ animationFillMode: 'backwards', animationDelay: '0.2s'}}>
           <Card className="overflow-hidden shadow-lg sticky top-24">
             <CardContent className="p-6 text-center">
               <Image
@@ -88,7 +88,7 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
         </div>
 
         {/* Right Column - Details, Booking & Reviews */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-8 animate-fade-in-up" style={{ animationFillMode: 'backwards', animationDelay: '0.4s'}}>
           {/* About Doctor */}
           <Card className="shadow-lg">
             <CardHeader>

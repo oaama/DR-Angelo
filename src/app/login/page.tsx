@@ -14,7 +14,7 @@ import { StethoscopeIcon } from "@/components/icons"
 export default function LoginPage() {
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-12rem)] py-12 px-4">
-      <Card className="mx-auto max-w-sm w-full">
+      <Card className="mx-auto max-w-sm w-full animate-fade-in-up" style={{ animationFillMode: 'backwards' }}>
         <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
                 <StethoscopeIcon className="w-10 h-10 text-primary"/>
