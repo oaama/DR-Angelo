@@ -26,9 +26,7 @@ export default async function Home({
   // For a patient user, we can pass their gender for potential sorting preferences.
   const userGenderForSorting = currentUser.userType === 'patient' ? currentUser.gender : undefined;
 
-  const specialty = searchParams.specialty;
-  const city = searchParams.city;
-  const gender = searchParams.gender;
+  const { specialty, city, gender } = searchParams;
   
   const doctors = await getDoctors({
     specialty,
