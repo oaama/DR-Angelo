@@ -1,11 +1,11 @@
 'use server';
 
 /**
- * @fileOverview This file implements the AI Doctor Match flow, which recommends relevant doctors based on a patient's description of their medical issue.
+ * @fileOverview This file implements the AI Doctor Match flow, which recommends relevant doctors based on a patient's description of their medical issue and provides preliminary advice.
  *
- * - aiDoctorMatch - A function that takes a patient's description of their medical issue and returns a list of recommended doctors.
+ * - aiDoctorMatch - A function that takes a patient's description of their medical issue and returns a list of recommended doctors and initial advice.
  * - AIDoctorMatchInput - The input type for the aiDoctorMatch function, which includes the patient's description.
- * - AIDoctorMatchOutput - The return type for the aiDoctorMatch function, which is a list of recommended doctors.
+ * - AIDoctorMatchOutput - The return type for the aiDoctorMatch function, which is a list of recommended doctors and preliminary advice.
  */
 
 import {ai} from '@/ai/genkit';
@@ -28,6 +28,9 @@ const AIDoctorMatchOutputSchema = z.object({
   recommendedDoctors: z
     .array(z.string())
     .describe('قائمة بأسماء الأطباء الموصى بهم بناءً على وصف المريض.'),
+  preliminaryAdvice: z
+    .string()
+    .describe('نصيحة أولية مختصرة لتخفيف الأعراض حتى زيارة الطبيب. يجب أن تكون عامة ولا تغني عن الاستشارة الطبية.'),
 });
 export type AIDoctorMatchOutput = z.infer<typeof AIDoctorMatchOutputSchema>;
 
@@ -39,7 +42,7 @@ const prompt = ai.definePrompt({
   name: 'aiDoctorMatchPrompt',
   input: {schema: AIDoctorMatchInputSchema},
   output: {schema: AIDoctorMatchOutputSchema},
-  prompt: `أنت مساعد ذكاء اصطناعي خبير في المجال الطبي ومهمتك هي مساعدة المرضى في العثور على الطبيب المناسب.
+  prompt: `أنت مساعد ذكاء اصطناعي خبير في المجال الطبي ومهمتك هي مساعدة المرضى في العثور على الطبيب المناسب وتقديم نصائح أولية.
 بناءً على وصف المريض لمشكلته الطبية، عليك تحليل الحالة وترشيح الطبيب ذو التخصص الأكثر ملاءمة.
 
 قائمة الأطباء المتاحين وتخصصاتهم هي كالتالي:
@@ -53,9 +56,10 @@ const prompt = ai.definePrompt({
 1. اقرأ وصف حالة المريض بعناية.
 2. حدد التخصص الطبي الأنسب للحالة (مثال: ألم في الصدر -> قلب، طفح جلدي -> جلدية، ألم في المعدة -> باطنة).
 3. اختر ما يصل إلى ثلاثة أطباء من القائمة أعلاه يطابق تخصصهم التخصص المطلوب.
-4. يجب أن تكون الأسماء التي تعيدها مطابقة تمامًا للأسماء الموجودة في القائمة.
+4. قدم نصيحة أولية ومختصرة (جملة أو جملتين) لتخفيف الأعراض بشكل مؤقت حتى يتمكن المريض من زيارة الطبيب. يجب أن تكون النصيحة عامة وآمنة (مثال: "لتهدئة السعال، يمكنك تجربة المشروبات الدافئة مثل العسل والليمون"). لا تقدم نصائح تتطلب أدوية.
+5. يجب أن تكون الأسماء التي تعيدها مطابقة تمامًا للأسماء الموجودة في القائمة.
 
-قم بإعادة قائمة بأسماء الأطباء الموصى بهم فقط.`,
+قم بإعادة قائمة بأسماء الأطباء الموصى بهم، بالإضافة إلى النصيحة الأولية في الحقول المخصصة.`,
 });
 
 const aiDoctorMatchFlow = ai.defineFlow(

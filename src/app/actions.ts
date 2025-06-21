@@ -12,7 +12,7 @@ const schema = z.object({
 export async function recommendDoctorAction(
   prevState: any,
   formData: FormData
-): Promise<{ doctors: Doctor[] | null; message: string | null; }> {
+): Promise<{ doctors: Doctor[] | null; message: string | null; advice: string | null; }> {
   
   const validatedFields = schema.safeParse({
     description: formData.get('description'),
@@ -22,6 +22,7 @@ export async function recommendDoctorAction(
     return {
       doctors: null,
       message: validatedFields.error.flatten().fieldErrors.description?.[0] || 'إدخال غير صالح.',
+      advice: null,
     };
   }
   
@@ -34,16 +35,17 @@ export async function recommendDoctorAction(
       doctorList: doctorInfoList 
     });
     const recommendedNames = result.recommendedDoctors;
+    const advice = result.preliminaryAdvice;
 
     if (!recommendedNames || recommendedNames.length === 0) {
-      return { doctors: [], message: 'لم يتمكن الذكاء الاصطناعي من ترشيح طبيب. يرجى محاولة إعادة صياغة مشكلتك.' };
+      return { doctors: [], message: 'لم يتمكن الذكاء الاصطناعي من ترشيح طبيب. يرجى محاولة إعادة صياغة مشكلتك.', advice: null };
     }
     
     // Filter the local static data based on the names recommended by the AI
     const recommendedDoctors = allDoctors.filter(doctor => recommendedNames.includes(doctor.name));
 
     if (recommendedDoctors.length === 0) {
-        return { doctors: [], message: 'تعذر العثور على طبيب مطابق في قاعدة بياناتنا بناءً على توصية الذكاء الاصطناعي.' };
+        return { doctors: [], message: 'تعذر العثور على طبيب مطابق في قاعدة بياناتنا بناءً على توصية الذكاء الاصطناعي.', advice: null };
     }
 
     // Sort recommended doctors by subscription tier first, then rating
@@ -57,9 +59,9 @@ export async function recommendDoctorAction(
       return b.rating - a.rating;
     });
 
-    return { doctors: recommendedDoctors, message: null };
+    return { doctors: recommendedDoctors, message: null, advice: advice };
   } catch (error) {
     console.error('AI Doctor Match Error:', error);
-    return { doctors: null, message: 'حدث خطأ غير متوقع في خدمة الذكاء الاصطناعي. يرجى المحاولة مرة أخرى في وقت لاحق.' };
+    return { doctors: null, message: 'حدث خطأ غير متوقع في خدمة الذكاء الاصطناعي. يرجى المحاولة مرة أخرى في وقت لاحق.', advice: null };
   }
 }
