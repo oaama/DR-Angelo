@@ -40,15 +40,11 @@ export function AIRecommender() {
                 title: 'خطأ',
                 description: state.message,
             });
+        } else if (state.doctors) {
+            // Reset the form on success
+            formRef.current?.reset();
         }
-    }, [state.message, toast]);
-
-    const handleFormAction = (formData: FormData) => {
-        formAction(formData);
-        if(!state.message){
-             formRef.current?.reset();
-        }
-    };
+    }, [state, toast]);
 
     return (
         <Card className="sticky top-20 shadow-lg">
@@ -62,7 +58,7 @@ export function AIRecommender() {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <form action={handleFormAction} ref={formRef} className="space-y-4">
+                <form action={formAction} ref={formRef} className="space-y-4">
                     <Textarea
                         name="description"
                         placeholder="مثال: 'أعاني من سعال مستمر وألم في الصدر...'"
