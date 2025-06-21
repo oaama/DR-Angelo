@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { StethoscopeIcon } from "@/components/icons"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function SignupPage() {
   return (
@@ -26,6 +27,25 @@ export default function SignupPage() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label>أنت تسجل كـ</Label>
+              <RadioGroup defaultValue="patient" name="userType" className="grid grid-cols-2 gap-4">
+                <Label
+                  htmlFor="patient"
+                  className="flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                >
+                  <RadioGroupItem value="patient" id="patient" className="sr-only" />
+                  مريض
+                </Label>
+                <Label
+                  htmlFor="doctor"
+                  className="flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                >
+                  <RadioGroupItem value="doctor" id="doctor" className="sr-only" />
+                  دكتور
+                </Label>
+              </RadioGroup>
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="first-name">الاسم الأول</Label>
