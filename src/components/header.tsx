@@ -10,17 +10,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Crown, LifeBuoy, LogOut, User } from "lucide-react";
+import { Crown, LifeBuoy, LogOut, User, Shield } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 
 
 // This is a temporary simulation of a logged-in user.
 // In a real application, you would get this from a session or context.
 const currentUser = {
-  name: 'سارة علي',
-  email: 'sara.ali@example.com',
-  userType: 'patient' as const,
-  gender: 'أنثى' as const,
+  name: 'المسؤول',
+  email: 'admin@tabeebk.com',
+  userType: 'admin' as const, // 'patient', 'doctor', 'admin'
   avatar: 'https://placehold.co/200x200.png'
 };
 const isLoggedIn = !!currentUser;
@@ -57,6 +56,14 @@ export function Header() {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                {currentUser.userType === 'admin' && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin">
+                      <Shield className="me-2 h-4 w-4" />
+                      <span>لوحة التحكم</span>
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem asChild>
                   <Link href="/profile">
                     <User className="me-2 h-4 w-4" />

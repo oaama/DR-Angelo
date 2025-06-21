@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
+import { headers } from 'next/headers';
 
 const tajawal = Tajawal({ subsets: ['arabic'], weight: ['400', '700'], variable: '--font-tajawal' });
 
@@ -19,6 +20,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = headers();
+  const pathname = headersList.get('x-next-pathname') || '';
+  const isAdminRoute = pathname.startsWith('/admin');
+
+  // If it's an admin route, render a simpler layout without the main header/footer
+  if (isAdminRoute) {
+    return (
+      <html lang="ar" dir="rtl" suppressHydrationWarning>
+        <body className={cn('font-body antialiased', tajawal.variable)}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    );
+  }
+
+  // Default layout for the public-facing site
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body className={cn('font-body antialiased', tajawal.variable)}>

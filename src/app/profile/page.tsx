@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Crown, KeyRound, Mail, User, UserCog, Camera, FileBadge2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 // This is a temporary simulation of a logged-in user.
 // In a real application, you would get this from a session or context.
@@ -14,10 +15,19 @@ const currentUser = {
   email: 'khaled.radwan@example.com',
   userType: 'doctor' as const,
   gender: 'ذكر' as const,
-  avatar: 'https://placehold.co/200x200.png'
+  avatar: 'https://placehold.co/200x200.png',
+  verificationStatus: 'pending' as const,
 };
 
 export default function ProfilePage() {
+    const statusMap = {
+        pending: { text: "قيد المراجعة", className: "bg-yellow-100 text-yellow-800 border-yellow-200" },
+        verified: { text: "تم التحقق", className: "bg-green-100 text-green-800 border-green-200" },
+        rejected: { text: "مرفوض", className: "bg-red-100 text-red-800 border-red-200" },
+    };
+    const statusInfo = statusMap[currentUser.verificationStatus] || { text: 'لم يتم التحقق', className: 'bg-orange-100 text-orange-800 border-orange-200' };
+    const isVerificationLocked = currentUser.verificationStatus === 'pending' || currentUser.verificationStatus === 'verified';
+
   return (
     <div className="container mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="space-y-8 animate-fade-in-up" style={{ animationFillMode: 'backwards' }}>
@@ -103,11 +113,13 @@ export default function ProfilePage() {
                     <form className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="id-card-upload">صورة الكارنيه</Label>
-                            <Input id="id-card-upload" type="file" />
+                            <Input id="id-card-upload" type="file" disabled={isVerificationLocked} />
                         </div>
-                         <p className="text-sm text-muted-foreground">الحالة الحالية: <span className="font-semibold text-orange-500">لم يتم التحقق</span></p>
+                         <p className="text-sm text-muted-foreground">الحالة الحالية: <Badge variant="outline" className={statusInfo.className}>{statusInfo.text}</Badge></p>
                         <div className="flex justify-end">
-                            <Button type="submit">رفع المستند</Button>
+                            <Button type="submit" disabled={isVerificationLocked}>
+                                {currentUser.verificationStatus === 'rejected' ? "إعادة رفع المستند" : "رفع المستند"}
+                            </Button>
                         </div>
                     </form>
                 </CardContent>

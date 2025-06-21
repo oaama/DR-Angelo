@@ -16,6 +16,9 @@ export const doctors: Doctor[] = [
         profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشاري أمراض القلب والقسطرة العلاجية. خبرة أكثر من 15 عامًا في علاج أمراض الشرايين التاجية.',
         subscription: { tier: 'مميز', status: 'نشط' },
+        verificationStatus: 'verified',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-05-01',
         comments: [
             { id: 'c1', patientName: 'أحمد علي', rating: 5, text: 'طبيب ممتاز وشرحه وافي.', date: '2024-05-10' },
             { id: 'c2', patientName: 'فاطمة محمود', rating: 4, text: 'تجربة جيدة بشكل عام.', date: '2024-05-08' },
@@ -33,6 +36,9 @@ export const doctors: Doctor[] = [
         profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائية الأمراض الجلدية والتجميل والليزر. متخصصة في علاج حب الشباب وآثار الندبات.',
         subscription: { tier: 'مميز', status: 'نشط' },
+        verificationStatus: 'pending',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-05-15',
         comments: [
             { id: 'c3', patientName: 'سارة إبراهيم', rating: 5, text: 'النتائج كانت مذهلة! شكرًا دكتورة فاطمة.', date: '2024-05-12' },
         ]
@@ -49,6 +55,9 @@ export const doctors: Doctor[] = [
         profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشاري جراحة العظام والمفاصل. متخصص في إصابات الملاعب والخشونة.',
         subscription: { tier: 'أساسي', status: 'نشط' },
+        verificationStatus: 'verified',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-04-20',
         comments: []
     },
     {
@@ -63,6 +72,9 @@ export const doctors: Doctor[] = [
         profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشارية طب الأطفال وحديثي الولادة. خبرة واسعة في متابعة نمو وتطور الأطفال.',
         subscription: { tier: 'مميز', status: 'نشط' },
+        verificationStatus: 'pending',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-05-18',
         comments: []
     },
     {
@@ -77,6 +89,9 @@ export const doctors: Doctor[] = [
         profilePicture: 'https://placehold.co/200x200.png',
         bio: 'أخصائي الأمراض الباطنة والجهاز الهضمي. تشخيص وعلاج أمراض السكر والضغط.',
         subscription: { tier: 'أساسي', status: 'نشط' },
+        verificationStatus: 'rejected',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-05-10',
         comments: []
     },
     {
@@ -91,148 +106,11 @@ export const doctors: Doctor[] = [
         profilePicture: 'https://placehold.co/200x200.png',
         bio: 'استشارية أمراض النساء والتوليد والحقن المجهري. متابعة حالات الحمل الحرج.',
         subscription: { tier: 'مميز', status: 'نشط' },
+        verificationStatus: 'verified',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-03-11',
         comments: []
     },
-    {
-        id: '7',
-        name: 'د. أحمد شوقي',
-        gender: 'ذكر',
-        specialty: 'مسالك بولية',
-        city: 'أسيوط',
-        phone: '01234567896',
-        rating: 4.5,
-        reviews: 70,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'أخصائي جراحة المسالك البولية وأمراض الذكورة.',
-        subscription: { tier: 'أساسي', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '8',
-        name: 'د. نادية حمدي',
-        gender: 'أنثى',
-        specialty: 'عيون',
-        city: 'القاهرة',
-        phone: '01234567897',
-        rating: 4.8,
-        reviews: 220,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'استشارية طب وجراحة العيون وتصحيح الإبصار بالليزك.',
-        subscription: { tier: 'مميز', status: 'نشط' },
-        comments: []
-    },
-     {
-        id: '9',
-        name: 'د. يوسف القاضي',
-        gender: 'ذكر',
-        specialty: 'أنف وأذن وحنجرة',
-        city: 'طنطا',
-        phone: '01234567898',
-        rating: 4.7,
-        reviews: 130,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'استشاري الأنف والأذن والحنجرة وجراحات تجميل الأنف.',
-        subscription: { tier: 'أساسي', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '10',
-        name: 'د. منى عبد الرحمن',
-        gender: 'أنثى',
-        specialty: 'تغذية',
-        city: 'الجيزة',
-        phone: '01234567899',
-        rating: 4.9,
-        reviews: 190,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'أخصائية التغذية العلاجية وعلاج السمنة والنحافة.',
-        subscription: { tier: 'مميز', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '11',
-        name: 'د. شريف حمدي',
-        gender: 'ذكر',
-        specialty: 'أسنان',
-        city: 'الإسكندرية',
-        phone: '01234567810',
-        rating: 4.8,
-        reviews: 280,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'استشاري تجميل وزراعة الأسنان. أحدث تقنيات تبييض الأسنان.',
-        subscription: { tier: 'مميز', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '12',
-        name: 'د. إيمان سالم',
-        gender: 'أنثى',
-        specialty: 'نفسية',
-        city: 'القاهرة',
-        phone: '01234567811',
-        rating: 4.9,
-        reviews: 160,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'استشارية الطب النفسي وعلاج الإدمان. جلسات علاج سلوكي ومعرفي.',
-        subscription: { tier: 'مميز', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '13',
-        name: 'د. كريم فهمي',
-        gender: 'ذكر',
-        specialty: 'علاج طبيعي',
-        city: 'الزقازيق',
-        phone: '01234567812',
-        rating: 4.6,
-        reviews: 85,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'أخصائي العلاج الطبيعي والتأهيل. متخصص في تأهيل إصابات العمود الفقري.',
-        subscription: { tier: 'أساسي', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '14',
-        name: 'د. آية محمود',
-        gender: 'أنثى',
-        specialty: 'جلدية',
-        city: 'الإسماعيلية',
-        phone: '01234567813',
-        rating: 4.8,
-        reviews: 110,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'أخصائية الجلدية والتجميل. جلسات نضارة البشرة وإزالة الشعر بالليزر.',
-        subscription: { tier: 'أساسي', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '15',
-        name: 'د. حسام البدري',
-        gender: 'ذكر',
-        specialty: 'عظام',
-        city: 'أسوان',
-        phone: '01234567814',
-        rating: 4.7,
-        reviews: 60,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'أخصائي جراحة العظام والمفاصل الصناعية.',
-        subscription: { tier: 'أساسي', status: 'نشط' },
-        comments: []
-    },
-    {
-        id: '16',
-        name: 'د. مروة السيد',
-        gender: 'أنثى',
-        specialty: 'أطفال',
-        city: 'الأقصر',
-        phone: '01234567815',
-        rating: 4.9,
-        reviews: 90,
-        profilePicture: 'https://placehold.co/200x200.png',
-        bio: 'أخصائية طب الأطفال وحديثي الولادة.',
-        subscription: { tier: 'أساسي', status: 'نشط' },
-        comments: []
-    }
 ];
 
 
@@ -245,7 +123,7 @@ export async function getDoctors(
   userGender?: 'ذكر' | 'أنثى'
 ): Promise<Doctor[]> {
   
-  let doctorsToShow = [...doctors];
+  let doctorsToShow = [...doctors].filter(d => d.verificationStatus === 'verified');
 
   // Apply filters from the UI
   if (filters.specialty && filters.specialty !== 'all') {
