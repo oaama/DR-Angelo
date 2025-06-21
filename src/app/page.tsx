@@ -3,18 +3,7 @@ import { DoctorCard } from '@/components/doctor-card';
 import { AIRecommender } from '@/components/ai-recommender';
 import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
 import Image from 'next/image';
-
-// This is a temporary simulation of a logged-in user.
-// In a real application, you would get this from a session or context.
-const getCurrentUser = async () => {
-    return {
-        name: 'سارة علي',
-        email: 'sara.ali@example.com',
-        userType: 'patient' as const,
-        gender: 'أنثى' as const,
-        avatar: 'https://placehold.co/200x200.png'
-    }
-}
+import { getCurrentUser } from '@/lib/auth';
 
 
 export default async function Home({
@@ -24,7 +13,7 @@ export default async function Home({
 }) {
   const currentUser = await getCurrentUser();
   // For a patient user, we can pass their gender for potential sorting preferences.
-  const userGenderForSorting = currentUser.userType === 'patient' ? currentUser.gender : undefined;
+  const userGenderForSorting = currentUser?.userType === 'patient' ? currentUser.gender : undefined;
 
   const specialty = searchParams.specialty;
   const city = searchParams.city;

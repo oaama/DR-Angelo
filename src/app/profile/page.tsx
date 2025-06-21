@@ -6,26 +6,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Crown, KeyRound, Mail, User, UserCog, Camera, FileBadge2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { getCurrentUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-// This is a temporary simulation of a logged-in user.
-// In a real application, you would get this from a session or context.
-// We set userType to 'doctor' to demonstrate the verification feature.
-const currentUser = {
-  name: 'د. خالد رضوان',
-  email: 'khaled.radwan@example.com',
-  userType: 'doctor' as const,
-  gender: 'ذكر' as const,
-  avatar: 'https://placehold.co/200x200.png',
-  verificationStatus: 'pending' as const,
-};
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+        redirect('/login');
+    }
+
     const statusMap = {
         pending: { text: "قيد المراجعة", className: "bg-yellow-100 text-yellow-800 border-yellow-200" },
         verified: { text: "تم التحقق", className: "bg-green-100 text-green-800 border-green-200" },
         rejected: { text: "مرفوض", className: "bg-red-100 text-red-800 border-red-200" },
+        unverified: { text: 'لم يتم التحقق', className: 'bg-gray-100 text-gray-800 border-gray-200' },
     };
-    const statusInfo = statusMap[currentUser.verificationStatus] || { text: 'لم يتم التحقق', className: 'bg-orange-100 text-orange-800 border-orange-200' };
+    const statusInfo = statusMap[currentUser.verificationStatus] || statusMap.unverified;
     const isVerificationLocked = currentUser.verificationStatus === 'pending' || currentUser.verificationStatus === 'verified';
 
   return (

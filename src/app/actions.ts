@@ -4,6 +4,9 @@ import { aiDoctorMatch } from '@/ai/flows/ai-doctor-match';
 import type { Doctor } from '@/lib/types';
 import { z } from 'zod';
 import { doctors as allDoctors } from '@/lib/data'; // Import the raw data array
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
 
 const schema = z.object({
   description: z.string().min(10, { message: 'يجب أن يكون الوصف 10 أحرف على الأقل.' }),
@@ -64,4 +67,44 @@ export async function recommendDoctorAction(
     console.error('AI Doctor Match Error:', error);
     return { doctors: null, message: 'حدث خطأ غير متوقع في خدمة الذكاء الاصطناعي. يرجى المحاولة مرة أخرى في وقت لاحق.', advice: null };
   }
+}
+
+// --- Auth Actions ---
+
+const loginSchema = z.object({
+  email: z.string().email({ message: 'البريد الإلكتروني غير صالح.' }),
+  password: z.string().min(1, { message: 'كلمة المرور مطلوبة.' }),
+});
+
+export async function loginAction(prevState: any, formData: FormData) {
+  const validatedFields = loginSchema.safeParse(Object.fromEntries(formData));
+
+  if (!validatedFields.success) {
+    const firstError = Object.values(validatedFields.error.flatten().fieldErrors)[0]?.[0];
+    return {
+      message: firstError || 'إدخال غير صالح.',
+    };
+  }
+  
+  const { email, password } = validatedFields.data;
+
+  // In a real app, you'd look up the user in a database.
+  // Here, we just check for the hardcoded admin user.
+  if (email === 'admin@tabeebk.com' && password === 'password123') {
+    // Set a session cookie
+    cookies().set('session_userType', 'admin', { httpOnly: true, path: '/' });
+    cookies().set('session_userName', 'المسؤول', { httpOnly: true, path: '/' });
+    cookies().set('session_userEmail', 'admin@tabeebk.com', { httpOnly: true, path: '/' });
+    
+    redirect('/admin');
+  }
+
+  return { message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة.' };
+}
+
+export async function logoutAction() {
+    cookies().delete('session_userType');
+    cookies().delete('session_userName');
+    cookies().delete('session_userEmail');
+    redirect('/');
 }

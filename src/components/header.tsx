@@ -12,20 +12,22 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Crown, LifeBuoy, LogOut, User, Shield } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
-
-
-// This is a temporary simulation of a logged-in user.
-// In a real application, you would get this from a session or context.
-const currentUser = {
-  name: 'المسؤول',
-  email: 'admin@tabeebk.com',
-  userType: 'admin' as const, // 'patient', 'doctor', 'admin'
-  avatar: 'https://placehold.co/200x200.png'
-};
-const isLoggedIn = !!currentUser;
+import { cookies } from "next/headers";
+import { logoutAction } from "@/app/actions";
 
 
 export function Header() {
+  const userType = cookies().get('session_userType')?.value;
+  const userName = cookies().get('session_userName')?.value;
+  const userEmail = cookies().get('session_userEmail')?.value;
+
+  const isLoggedIn = !!userType;
+  const currentUser = isLoggedIn ? {
+      name: userName!,
+      email: userEmail!,
+      userType: userType as 'admin' | 'doctor' | 'patient',
+      avatar: 'https://placehold.co/200x200.png'
+  } : null;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -36,7 +38,7 @@ export function Header() {
         </Link>
         <div className="flex flex-1 items-center justify-end space-x-2">
           <ThemeToggle />
-          {isLoggedIn ? (
+          {isLoggedIn && currentUser ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
@@ -85,9 +87,13 @@ export function Header() {
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <LogOut className="me-2 h-4 w-4" />
-                  <span>تسجيل الخروج</span>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="p-0">
+                  <form action={logoutAction} className="w-full">
+                    <button type="submit" className="w-full text-right flex items-center px-2 py-1.5 bg-transparent border-none cursor-default">
+                      <LogOut className="me-2 h-4 w-4" />
+                      <span>تسجيل الخروج</span>
+                    </button>
+                  </form>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
