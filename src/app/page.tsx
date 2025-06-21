@@ -25,11 +25,15 @@ export default async function Home({
   const currentUser = await getCurrentUser();
   // For a patient user, we can pass their gender for potential sorting preferences.
   const userGenderForSorting = currentUser.userType === 'patient' ? currentUser.gender : undefined;
+
+  const specialty = searchParams.specialty;
+  const city = searchParams.city;
+  const gender = searchParams.gender;
   
   const doctors = await getDoctors({
-    specialty: searchParams.specialty,
-    city: searchParams.city,
-    gender: searchParams.gender,
+    specialty,
+    city,
+    gender,
   }, userGenderForSorting);
   
   const cities = await getUniqueCities();
@@ -42,6 +46,7 @@ export default async function Home({
           <Image
             src="https://placehold.co/1920x1080.png"
             alt="خلفية طبية"
+            data-ai-hint="doctor medical"
             fill
             className="object-cover object-center animate-hero-zoom"
             priority
