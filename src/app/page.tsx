@@ -45,8 +45,8 @@ export default async function Home({
         <div className="absolute inset-0 z-[-1]">
           <Image
             src="https://placehold.co/1600x900.png"
-            alt="خلفية طبية لفريق من الأطباء"
-            data-ai-hint="doctors team"
+            alt="خلفية طبية تظهر فريقًا من الأطباء المحترفين في مستشفى"
+            data-ai-hint="professional doctors"
             fill
             className="object-cover object-center animate-hero-zoom"
             priority
