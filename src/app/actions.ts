@@ -3,8 +3,7 @@
 import { aiDoctorMatch } from '@/ai/flows/ai-doctor-match';
 import type { Doctor } from '@/lib/types';
 import { z } from 'zod';
-import { db } from '@/lib/firebase';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { doctors as allDoctors } from '@/lib/data'; // Import the raw data array
 
 const schema = z.object({
   description: z.string().min(10, { message: 'يجب أن يكون الوصف 10 أحرف على الأقل.' }),
@@ -36,17 +35,23 @@ export async function recommendDoctorAction(
       return { doctors: [], message: 'لم يتمكن الذكاء الاصطناعي من ترشيح طبيب. يرجى محاولة إعادة صياغة مشكلتك.' };
     }
     
-    // Firestore `in` query is limited to 30 values, which is fine as we only ask for max 3 doctors.
-    const doctorsRef = collection(db, 'doctors');
-    const q = query(doctorsRef, where('name', 'in', recommendedNames));
-    const querySnapshot = await getDocs(q);
-
-    const recommendedDoctors: Doctor[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Doctor));
-
+    // Filter the local static data based on the names recommended by the AI
+    const recommendedDoctors = allDoctors.filter(doctor => recommendedNames.includes(doctor.name));
 
     if (recommendedDoctors.length === 0) {
         return { doctors: [], message: 'تعذر العثور على طبيب مطابق في قاعدة بياناتنا بناءً على توصية الذكاء الاصطناعي.' };
     }
+
+    // Sort recommended doctors by subscription tier first, then rating
+    recommendedDoctors.sort((a, b) => {
+      const tierOrder = { 'مميز': 1, 'احترافي': 1, 'أساسي': 2 };
+      const tierA = tierOrder[a.subscription.tier] || 3;
+      const tierB = tierOrder[b.subscription.tier] || 3;
+      if (tierA !== tierB) {
+        return tierA - tierB;
+      }
+      return b.rating - a.rating;
+    });
 
     return { doctors: recommendedDoctors, message: null };
   } catch (error) {
