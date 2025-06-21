@@ -4,9 +4,11 @@ import { getDoctorById } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarIcon, ClockIcon, MapPin, MessageSquare, Star, UserCircle } from 'lucide-react';
+import { CalendarIcon, ClockIcon, MapPin, MessageSquare, Star, UserCircle, Crown } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import * as React from 'react';
 
 function StarRating({ rating, className }: { rating: number, className?: string }) {
   const totalStars = 5;
@@ -53,7 +55,21 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
                 className="mx-auto mb-4 rounded-full border-4 border-primary/30 object-cover"
                 data-ai-hint="doctor portrait"
               />
-              <h1 className="text-2xl font-bold font-headline">{doctor.name}</h1>
+              <h1 className="text-2xl font-bold font-headline flex items-center gap-2 justify-center">
+                {doctor.name}
+                {doctor.subscription.tier === 'مميز' && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Crown className="h-6 w-6 text-yellow-500" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>طبيب مميز</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+              </h1>
               <p className="text-lg text-primary">{doctor.specialty}</p>
               <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground">
                 <MapPin className="h-5 w-5" />
@@ -182,6 +198,3 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
     </div>
   );
 }
-
-// React is not defined so I need to import it
-import * as React from 'react';

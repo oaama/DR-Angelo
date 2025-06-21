@@ -17,5 +17,9 @@ export interface Doctor {
   reviews: number;
   profilePicture: string;
   bio: string;
+  subscription: {
+    tier: 'أساسي' | 'مميز' | 'احترافي';
+    status: 'نشط' | 'منتهي';
+  };
   comments?: Comment[];
 }

@@ -1,9 +1,23 @@
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { KeyRound, Mail, User, UserCog } from "lucide-react";
+import { Crown, KeyRound, Mail, User, UserCog } from "lucide-react";
+
+// This is a temporary simulation of a logged-in user.
+// In a real application, you would get this from a session or context.
+const currentUser = {
+  name: 'د. أحمد محمود',
+  email: 'ahmed.mahmoud@dox.com',
+  userType: 'doctor' as const,
+  avatar: 'https://placehold.co/100x100',
+  subscription: {
+      tier: "مميز",
+      renewalDate: "30 يوليو 2025"
+  }
+};
 
 export default function ProfilePage() {
   return (
@@ -11,12 +25,12 @@ export default function ProfilePage() {
       <div className="space-y-8">
         <div className="flex items-center gap-6">
           <Avatar className="h-24 w-24 border-4 border-primary/20">
-            <AvatarImage src="/avatars/01.png" alt="صورة المستخدم" />
-            <AvatarFallback>سع</AvatarFallback>
+            <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} data-ai-hint="doctor portrait" />
+            <AvatarFallback>{currentUser.name.substring(3, 5)}</AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="text-3xl font-bold font-headline">سارة علي</h1>
-            <p className="text-muted-foreground">مريض</p>
+            <h1 className="text-3xl font-bold font-headline">{currentUser.name}</h1>
+            <p className="text-muted-foreground">{currentUser.userType === 'doctor' ? 'طبيب' : 'مريض'}</p>
           </div>
         </div>
 
@@ -37,14 +51,14 @@ export default function ProfilePage() {
                   <User className="w-4 h-4" />
                   الاسم الكامل
                 </Label>
-                <Input id="fullName" defaultValue="سارة علي" />
+                <Input id="fullName" defaultValue={currentUser.name} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email" className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
                   البريد الإلكتروني
                 </Label>
-                <Input id="email" type="email" defaultValue="sara@example.com" />
+                <Input id="email" type="email" defaultValue={currentUser.email} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="currentPassword" className="flex items-center gap-2">
@@ -66,6 +80,33 @@ export default function ProfilePage() {
             </form>
           </CardContent>
         </Card>
+
+        {currentUser.userType === 'doctor' && (
+            <Card className="shadow-lg">
+                <CardHeader>
+                    <CardTitle className="font-headline text-xl flex items-center gap-2">
+                        <Crown className="h-6 w-6 text-primary" />
+                        إدارة الاشتراك
+                    </CardTitle>
+                    <CardDescription>
+                        قم بترقية باقتك للوصول إلى ميزات حصرية وزيادة ظهورك للمرضى.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-primary/10">
+                        <div>
+                            <p className="font-semibold">باقتك الحالية: <span className="text-primary font-bold">{currentUser.subscription.tier}</span></p>
+                            <p className="text-sm text-muted-foreground">تاريخ التجديد: {currentUser.subscription.renewalDate}</p>
+                        </div>
+                        <Button asChild>
+                            <Link href="/profile/subscription">
+                                عرض كل الباقات
+                            </Link>
+                        </Button>
+                    </div>
+                </CardContent>
+            </Card>
+        )}
       </div>
     </div>
   );

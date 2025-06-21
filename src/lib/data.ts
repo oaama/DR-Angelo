@@ -11,6 +11,7 @@ export const doctors: Doctor[] = [
     reviews: 126,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'د. أحمد استشاري أمراض القلب بخبرة تزيد عن 15 عامًا في علاج أمراض القلب.',
+    subscription: { tier: 'مميز', status: 'نشط' },
     comments: [
       {
         id: 'c1',
@@ -38,6 +39,7 @@ export const doctors: Doctor[] = [
     reviews: 211,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في الأمراض الجلدية التجميلية والطبية، د. فاطمة رائدة في علاجات العناية بالبشرة المبتكرة.',
+    subscription: { tier: 'مميز', status: 'نشط' },
     comments: [
         {
           id: 'c3',
@@ -58,6 +60,7 @@ export const doctors: Doctor[] = [
     reviews: 98,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'يركز د. محمد على الطب الرياضي واستبدال المفاصل، مما يساعد المرضى على استعادة الحركة والعيش بدون ألم.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '4',
@@ -69,6 +72,7 @@ export const doctors: Doctor[] = [
     reviews: 85,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تشتهر د. ياسمين بعملها في الأمراض العصبية التنكسية وأبحاثها المتطورة في صحة الدماغ.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '5',
@@ -80,6 +84,7 @@ export const doctors: Doctor[] = [
     reviews: 350,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'بشغف لصحة الأطفال، يقدم د. علي رعاية رحيمة وشاملة للرضع والمراهقين.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '6',
@@ -91,6 +96,7 @@ export const doctors: Doctor[] = [
     reviews: 150,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'د. سارة طبيبة قلب متفانية تركز على الرعاية الوقائية وإدارة أمراض القلب المزمنة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '7',
@@ -102,6 +108,7 @@ export const doctors: Doctor[] = [
     reviews: 180,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'يقدم د. عمر مجموعة واسعة من الخدمات الجلدية مع التركيز على تثقيف المرضى والرعاية الشخصية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '8',
@@ -113,6 +120,7 @@ export const doctors: Doctor[] = [
     reviews: 132,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'جرّاحة عظام رائدة، تشتهر د. هناء بخبرتها في التقنيات الجراحية طفيفة التوغل.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '9',
@@ -124,6 +132,7 @@ export const doctors: Doctor[] = [
     reviews: 77,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'يتخصص د. خالد في الصرع واضطرابات النوم، باستخدام أحدث تقنيات التشخيص.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '10',
@@ -135,6 +144,7 @@ export const doctors: Doctor[] = [
     reviews: 280,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'د. نورهان طبيبة أطفال محبوبة معروفة بسلوكها الودود والتزامها بالرعاية المرتكزة على الأسرة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '11',
@@ -146,6 +156,7 @@ export const doctors: Doctor[] = [
     reviews: 110,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشاري أمراض باطنة بخبرة واسعة في تشخيص وعلاج الأمراض المعقدة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '12',
@@ -157,6 +168,7 @@ export const doctors: Doctor[] = [
     reviews: 195,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في صحة المرأة، تقدم د. منى رعاية شاملة خلال جميع مراحل الحياة.',
+    subscription: { tier: 'مميز', status: 'نشط' },
   },
   {
     id: '13',
@@ -168,6 +180,7 @@ export const doctors: Doctor[] = [
     reviews: 95,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'يقدم د. شريف أحدث العلاجات لمشاكل المسالك البولية مع التركيز على راحة المريض.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '14',
@@ -179,6 +192,7 @@ export const doctors: Doctor[] = [
     reviews: 140,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'جرّاحة عيون ماهرة، متخصصة في جراحات الليزك وعلاج أمراض الشبكية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '15',
@@ -190,6 +204,7 @@ export const doctors: Doctor[] = [
     reviews: 88,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في علاج اضطرابات السمع ومشاكل الجيوب الأنفية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '16',
@@ -201,6 +216,7 @@ export const doctors: Doctor[] = [
     reviews: 250,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تساعد د. ريهام المرضى على تحقيق أهدافهم الصحية من خلال خطط تغذية شخصية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '17',
@@ -212,6 +228,7 @@ export const doctors: Doctor[] = [
     reviews: 188,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'يقدم د. كريم خدمات طب الأسنان التجميلي والترميمي بأحدث التقنيات.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '18',
@@ -223,6 +240,7 @@ export const doctors: Doctor[] = [
     reviews: 121,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'توفر د. دينا دعماً نفسياً وعلاجاً لمختلف الاضطرابات النفسية في بيئة آمنة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '19',
@@ -234,6 +252,7 @@ export const doctors: Doctor[] = [
     reviews: 165,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في إعادة التأهيل بعد الإصابات الرياضية والجراحات.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '20',
@@ -245,6 +264,7 @@ export const doctors: Doctor[] = [
     reviews: 130,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'خبيرة في علاج اضطرابات الغدد الصماء والسكري.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '21',
@@ -256,6 +276,7 @@ export const doctors: Doctor[] = [
     reviews: 215,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشاري الجراحة العامة والمناظير، متخصص في جراحات الجهاز الهضمي.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '22',
@@ -267,6 +288,7 @@ export const doctors: Doctor[] = [
     reviews: 190,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في علاج الأورام باستخدام أحدث بروتوكولات العلاج الكيميائي والإشعاعي.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '23',
@@ -278,6 +300,7 @@ export const doctors: Doctor[] = [
     reviews: 140,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'يعالج جميع أمراض الجهاز التنفسي وحساسية الصدر والربو.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '24',
@@ -289,6 +312,7 @@ export const doctors: Doctor[] = [
     reviews: 230,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'خبيرة في علاجات الليزر والتجميل وإزالة الشعر بأحدث التقنيات.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '25',
@@ -300,6 +324,7 @@ export const doctors: Doctor[] = [
     reviews: 95,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'أخصائي أمراض القلب والأوعية الدموية، متخصص في القسطرة القلبية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '26',
@@ -311,6 +336,7 @@ export const doctors: Doctor[] = [
     reviews: 310,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متابعة النمو والتطور للأطفال وحديثي الولادة وتقديم كافة التطعيمات.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '27',
@@ -322,6 +348,7 @@ export const doctors: Doctor[] = [
     reviews: 180,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في جراحات تغيير المفاصل وإصابات الملاعب.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '28',
@@ -333,6 +360,7 @@ export const doctors: Doctor[] = [
     reviews: 420,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشارية أمراض النساء والتوليد وعلاج تأخر الإنجاب والحقن المجهري.',
+    subscription: { tier: 'مميز', status: 'نشط' },
   },
   {
     id: '29',
@@ -344,6 +372,7 @@ export const doctors: Doctor[] = [
     reviews: 155,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في علاج الاضطرابات النفسية والسلوكية والاستشارات الأسرية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '30',
@@ -355,6 +384,7 @@ export const doctors: Doctor[] = [
     reviews: 280,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'خبيرة تغذية علاجية تساعد في وضع أنظمة غذائية مخصصة لمرضى السكري والقلب والسمنة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '31',
@@ -366,6 +396,7 @@ export const doctors: Doctor[] = [
     reviews: 205,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في زراعة وتجميل الأسنان وتركيبات البورسلين والزركونيوم.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '32',
@@ -377,6 +408,7 @@ export const doctors: Doctor[] = [
     reviews: 175,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشارية طب وجراحة العيون وتصحيح الإبصار بالليزك.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '33',
@@ -388,6 +420,7 @@ export const doctors: Doctor[] = [
     reviews: 65,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'يعالج حالات التهابات الجيوب الأنفية المزمنة ومشاكل السمع.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '34',
@@ -399,6 +432,7 @@ export const doctors: Doctor[] = [
     reviews: 195,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في برامج إعادة التأهيل والعلاج الطبيعي لآلام الظهر والرقبة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '35',
@@ -410,6 +444,7 @@ export const doctors: Doctor[] = [
     reviews: 160,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشاري الأمراض الباطنة والجهاز الهضمي والمناظير.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '36',
@@ -421,6 +456,7 @@ export const doctors: Doctor[] = [
     reviews: 240,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في علاج حب الشباب وآثاره وتجميل البشرة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '37',
@@ -432,6 +468,7 @@ export const doctors: Doctor[] = [
     reviews: 115,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشاري جراحة المسالك البولية وأمراض الذكورة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '38',
@@ -443,6 +480,7 @@ export const doctors: Doctor[] = [
     reviews: 330,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'طبيبة أطفال متفانية تقدم رعاية صحية شاملة للأطفال منذ الولادة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '39',
@@ -454,6 +492,7 @@ export const doctors: Doctor[] = [
     reviews: 185,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'أخصائي أمراض القلب، يركز على الوقاية وتشخيص وعلاج أمراض الشرايين التاجية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '40',
@@ -465,6 +504,7 @@ export const doctors: Doctor[] = [
     reviews: 145,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في علاج مرض السكري واضطرابات الغدة الدرقية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '41',
@@ -476,6 +516,7 @@ export const doctors: Doctor[] = [
     reviews: 80,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشاري أمراض المخ والأعصاب، متخصص في علاج الجلطات الدماغية والصداع.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '42',
@@ -487,6 +528,7 @@ export const doctors: Doctor[] = [
     reviews: 260,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تقدم خدمات طب الأسنان الشاملة بما في ذلك تقويم الأسنان وتبييضها.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '43',
@@ -498,6 +540,7 @@ export const doctors: Doctor[] = [
     reviews: 120,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في جراحات الفتق والمرارة بالمنظار.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '44',
@@ -509,6 +552,7 @@ export const doctors: Doctor[] = [
     reviews: 210,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'توفر رعاية متكاملة للحمل والولادة، ومتابعة ما بعد الولادة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '45',
@@ -520,6 +564,7 @@ export const doctors: Doctor[] = [
     reviews: 165,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'جراح متخصص في عمليات المياه البيضاء وزراعة العدسات.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '46',
@@ -531,6 +576,7 @@ export const doctors: Doctor[] = [
     reviews: 90,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تقدم دعماً نفسياً وعلاجاً للاكتئاب والقلق واضطرابات ما بعد الصدمة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '47',
@@ -542,6 +588,7 @@ export const doctors: Doctor[] = [
     reviews: 220,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في العلاج اليدوي والتأهيل الحركي للإصابات الرياضية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '48',
@@ -553,6 +600,7 @@ export const doctors: Doctor[] = [
     reviews: 300,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'خبيرة في مجال التجميل غير الجراحي، مثل الفيلر والبوتوكس.',
+    subscription: { tier: 'مميز', status: 'نشط' },
   },
   {
     id: '49',
@@ -564,6 +612,7 @@ export const doctors: Doctor[] = [
     reviews: 250,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشاري جراحة العظام والعمود الفقري.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '50',
@@ -575,6 +624,7 @@ export const doctors: Doctor[] = [
     reviews: 450,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تتمتع بخبرة واسعة في التعامل مع الحالات الحرجة للأطفال وحديثي الولادة.',
+    subscription: { tier: 'مميز', status: 'نشط' },
   },
   {
     id: '51',
@@ -586,6 +636,7 @@ export const doctors: Doctor[] = [
     reviews: 130,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في أمراض الكبد والجهاز الهضمي.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '52',
@@ -597,6 +648,7 @@ export const doctors: Doctor[] = [
     reviews: 290,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تساعدك على الوصول للوزن المثالي بنظام غذائي صحي ومتوازن.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '53',
@@ -608,6 +660,7 @@ export const doctors: Doctor[] = [
     reviews: 110,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في جراحات تجميل الأنف وعلاج الشخير.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '54',
@@ -619,6 +672,7 @@ export const doctors: Doctor[] = [
     reviews: 320,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'خبيرة في تصميم ابتسامة هوليوود والتركيبات الثابتة والمتحركة.',
+    subscription: { tier: 'مميز', status: 'نشط' },
   },
   {
     id: '55',
@@ -630,6 +684,7 @@ export const doctors: Doctor[] = [
     reviews: 190,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في علاج حصوات الكلى والمسالك البولية بالمناظير والليزر.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '56',
@@ -641,6 +696,7 @@ export const doctors: Doctor[] = [
     reviews: 280,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تقدم استشارات نفسية وعلاج سلوكي معرفي للأفراد والأزواج.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '57',
@@ -652,6 +708,7 @@ export const doctors: Doctor[] = [
     reviews: 200,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشاري أمراض القلب التداخلية وتركيب الدعامات.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '58',
@@ -663,6 +720,7 @@ export const doctors: Doctor[] = [
     reviews: 180,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في طب عيون الأطفال وعلاج الحول.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '59',
@@ -674,6 +732,7 @@ export const doctors: Doctor[] = [
     reviews: 95,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في تشخيص وعلاج حساسية الصدر والربو الشعبي.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '60',
@@ -685,6 +744,7 @@ export const doctors: Doctor[] = [
     reviews: 170,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشارية علاج أورام الثدي وأمراض النساء.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '61',
@@ -696,6 +756,7 @@ export const doctors: Doctor[] = [
     reviews: 270,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'أخصائي طب الأطفال، يقدم رعاية متكاملة لصحة طفلك.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '62',
@@ -707,6 +768,7 @@ export const doctors: Doctor[] = [
     reviews: 255,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصصة في أحدث تقنيات الحقن التجميلي ونضارة البشرة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '63',
@@ -718,6 +780,7 @@ export const doctors: Doctor[] = [
     reviews: 195,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'متخصص في جراحة مناظير الكتف والركبة.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '64',
@@ -729,6 +792,7 @@ export const doctors: Doctor[] = [
     reviews: 150,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'استشارية أمراض وأورام الحنجرة والأحبال الصوتية.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '65',
@@ -740,6 +804,7 @@ export const doctors: Doctor[] = [
     reviews: 230,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'برامج متخصصة لإعادة تأهيل إصابات الملاعب والعمود الفقري.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '66',
@@ -751,6 +816,7 @@ export const doctors: Doctor[] = [
     reviews: 140,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'خبيرة في تشخيص وعلاج أمراض السكر والغدد الصماء.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   },
   {
     id: '67',
@@ -762,6 +828,7 @@ export const doctors: Doctor[] = [
     reviews: 500,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'رائد جراحة التجميل في الشرق الأوسط، متخصص في نحت القوام وشد الوجه.',
+    subscription: { tier: 'مميز', status: 'نشط' },
   },
   {
     id: '68',
@@ -773,6 +840,7 @@ export const doctors: Doctor[] = [
     reviews: 180,
     profilePicture: 'https://placehold.co/400x400',
     bio: 'تقدم الدعم النفسي والعلاجي لمرضى السرطان، مع التركيز على التوعية بسرطان الثدي.',
+    subscription: { tier: 'أساسي', status: 'نشط' },
   }
 ];
 
@@ -789,16 +857,28 @@ export async function getDoctors(
 
   let doctorsToShow = [...doctors];
 
-  // Check if no filters are applied and the user is female, then sort female doctors first
   const noFiltersApplied = !filters.specialty && !filters.city && !filters.gender;
-  if (userGender === 'أنثى' && noFiltersApplied) {
-    doctorsToShow.sort((a, b) => {
+
+  // Sort doctors
+  doctorsToShow.sort((a, b) => {
+    // 1. Sort by subscription tier first ('مميز' comes first)
+    const tierOrder = { 'مميز': 1, 'احترافي': 1, 'أساسي': 2 };
+    const tierA = tierOrder[a.subscription.tier] || 3;
+    const tierB = tierOrder[b.subscription.tier] || 3;
+    if (tierA !== tierB) {
+      return tierA - tierB;
+    }
+
+    // 2. If user is female and no filters are applied, sort female doctors higher
+    if (userGender === 'أنثى' && noFiltersApplied) {
       if (a.gender === 'أنثى' && b.gender !== 'أنثى') return -1;
       if (b.gender === 'أنثى' && a.gender !== 'أنثى') return 1;
-      return 0;
-    });
-  }
+    }
 
+    // 3. As a final tie-breaker, sort by rating
+    return b.rating - a.rating;
+  });
+  
   let filteredDoctors = doctorsToShow;
 
   if (filters.specialty && filters.specialty !== 'all') {

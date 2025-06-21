@@ -7,8 +7,9 @@ import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
 // In a real application, you would get this from a session or context.
 const getCurrentUser = async () => {
     return {
-        name: 'سارة علي',
-        gender: 'أنثى' as const
+        name: 'د. أحمد محمود',
+        gender: 'ذكر' as const,
+        userType: 'doctor' as const,
     }
 }
 
@@ -19,7 +20,9 @@ export default async function Home({
   searchParams: { specialty?: string; city?: string; gender?: string };
 }) {
   const currentUser = await getCurrentUser();
-  const doctors = await getDoctors(searchParams, currentUser.gender);
+  // For a doctor user, we don't apply gender-based default sorting.
+  const userGenderForSorting = currentUser.userType === 'patient' ? currentUser.gender : undefined;
+  const doctors = await getDoctors(searchParams, userGenderForSorting);
   const cities = await getUniqueCities();
   const specialties = await getUniqueSpecialties();
 
