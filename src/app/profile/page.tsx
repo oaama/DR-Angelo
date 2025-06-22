@@ -113,7 +113,7 @@ export default async function ProfilePage() {
                             <Label htmlFor="id-card-upload">صورة الكارنيه</Label>
                             <Input id="id-card-upload" type="file" disabled={isVerificationLocked} />
                         </div>
-                         <p className="text-sm text-muted-foreground">الحالة الحالية: <Badge variant="outline" className={statusInfo.className}>{statusInfo.text}</Badge></p>
+                         <div className="text-sm text-muted-foreground">الحالة الحالية: <Badge variant="outline" className={statusInfo.className}>{statusInfo.text}</Badge></div>
                         <div className="flex justify-end">
                             <Button type="submit" disabled={isVerificationLocked}>
                                 {currentUser.verificationStatus === 'rejected' ? "إعادة رفع المستند" : "رفع المستند"}
