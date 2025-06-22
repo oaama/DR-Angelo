@@ -10,10 +10,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Crown, LifeBuoy, LogOut, User, Shield } from "lucide-react";
+import { Crown, LifeBuoy, User, Shield } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { cookies } from "next/headers";
-import { logoutAction } from "@/app/actions";
+import { LogoutMenuItem } from "./logout-menu-item";
 
 
 export function Header() {
@@ -87,14 +87,7 @@ export function Header() {
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="p-0">
-                  <form action={logoutAction} className="w-full">
-                    <button type="submit" className="w-full text-right flex items-center px-2 py-1.5 bg-transparent border-none cursor-default">
-                      <LogOut className="me-2 h-4 w-4" />
-                      <span>تسجيل الخروج</span>
-                    </button>
-                  </form>
-                </DropdownMenuItem>
+                <LogoutMenuItem />
               </DropdownMenuContent>
             </DropdownMenu>
 
