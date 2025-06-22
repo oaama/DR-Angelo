@@ -30,7 +30,7 @@ export async function getCurrentUser(): Promise<User | null> {
       name: 'المسؤول',
       email: 'admin@tabeebk.com',
       userType: 'admin',
-      gender: 'ذكر', // Mock
+      gender: 'ذكر',
       avatar: 'https://placehold.co/200x200.png',
       verificationStatus: 'unverified',
     };
@@ -38,38 +38,60 @@ export async function getCurrentUser(): Promise<User | null> {
 
   // Handle Doctor User
   if (userType === 'doctor') {
-    const doctor = doctors.find(d => d.email === userEmail);
-    // If doctor not found in static data, it might be a new signup.
-    // We must have at least a name from the cookie to proceed.
-    if (!doctor && !userName) return null;
-
-    return {
-      id: doctor?.id || 'new_doctor',
-      name: doctor?.name || userName!,
-      email: userEmail,
-      userType: 'doctor',
-      gender: doctor?.gender || 'ذكر',
-      avatar: doctor?.profilePicture || 'https://placehold.co/200x200.png',
-      // New doctors who are not in the static data should have 'unverified' status by default
-      verificationStatus: doctor?.verificationStatus || 'unverified', 
-    };
+    const existingDoctor = doctors.find(d => d.email === userEmail);
+    if (existingDoctor) {
+      return {
+        id: existingDoctor.id,
+        name: existingDoctor.name,
+        email: existingDoctor.email,
+        userType: 'doctor',
+        gender: existingDoctor.gender,
+        avatar: existingDoctor.profilePicture,
+        verificationStatus: existingDoctor.verificationStatus,
+      };
+    }
+    // If not an existing doctor, it must be a new signup.
+    // Use the cookie data.
+    if (userName) {
+      return {
+        id: 'new_doctor',
+        name: userName,
+        email: userEmail,
+        userType: 'doctor',
+        gender: 'ذكر', // Default for new doctor
+        avatar: 'https://placehold.co/200x200.png',
+        verificationStatus: 'unverified',
+      };
+    }
   }
 
   // Handle Patient User
   if (userType === 'patient') {
-    const patient = patients.find(p => p.email === userEmail);
-    // If patient not found in static data (new signup), fallback to cookie data.
-    if (!patient && !userName) return null;
-
-    return {
-      id: patient?.id || 'new_patient',
-      name: patient?.name || userName!,
-      email: userEmail,
-      userType: 'patient',
-      gender: 'أنثى', // Mock for patients
-      avatar: 'https://placehold.co/200x200.png',
-      verificationStatus: 'unverified', // Patients don't need verification
-    };
+    const existingPatient = patients.find(p => p.email === userEmail);
+    if (existingPatient) {
+        return {
+            id: existingPatient.id,
+            name: existingPatient.name,
+            email: existingPatient.email,
+            userType: 'patient',
+            gender: 'أنثى', // Mock for patients
+            avatar: 'https://placehold.co/200x200.png',
+            verificationStatus: 'unverified',
+        };
+    }
+    // If not an existing patient, it's a new signup.
+    // Use the cookie data.
+    if (userName) {
+        return {
+            id: 'new_patient',
+            name: userName,
+            email: userEmail,
+            userType: 'patient',
+            gender: 'أنثى', // Mock for patients
+            avatar: 'https://placehold.co/200x200.png',
+            verificationStatus: 'unverified',
+        };
+    }
   }
 
   return null;
