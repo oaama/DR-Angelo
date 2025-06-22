@@ -43,3 +43,12 @@ export function Spinner({ className, ...props }: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function GoogleIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <title>Google</title>
+        <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.85 3.18-1.73 4.1-1.02 1.02-2.62 1.98-4.66 1.98-3.57 0-6.47-2.92-6.47-6.55s2.9-6.55 6.47-6.55c2.03 0 3.33.83 4.1 1.59l2.5-2.5C18.16 3.7 15.65 2.5 12.48 2.5c-5.48 0-9.88 4.4-9.88 9.88s4.4 9.88 9.88 9.88c5.77 0 9.4-4.12 9.4-9.68 0-.9-.08-1.46-.22-2.08h-9.18z"/>
+    </svg>
+  );
+}

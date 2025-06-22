@@ -110,6 +110,15 @@ export async function logoutAction() {
     redirect('/');
 }
 
+// This action simulates a Google login by setting a cookie for a mock patient user.
+export async function googleLoginAction() {
+  cookies().set('session_userType', 'patient', { httpOnly: true, path: '/' });
+  cookies().set('session_userName', 'سارة جوجل', { httpOnly: true, path: '/' });
+  cookies().set('session_userEmail', 'sara.google@example.com', { httpOnly: true, path: '/' });
+  
+  redirect('/');
+}
+
 // --- Admin Actions ---
 
 export async function sendWelcomeMessageAction(name: string, userType: 'patient' | 'doctor'): Promise<{ success: boolean; message: string; subject?: string; }> {
