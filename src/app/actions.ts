@@ -186,10 +186,6 @@ const doctorProfileSchema = z.object({
 });
 
 export async function updateDoctorProfileAction(prevState: any, formData: FormData) {
-    // This is a placeholder. In a real app, you'd update the database.
-    console.log('--- Updating Doctor Profile ---');
-    console.log('Form Data:', Object.fromEntries(formData.entries()));
-
     const validatedFields = doctorProfileSchema.safeParse({
         fullName: formData.get('fullName'),
         email: formData.get('email'),
@@ -200,22 +196,23 @@ export async function updateDoctorProfileAction(prevState: any, formData: FormDa
     });
 
     if (!validatedFields.success) {
+        // In a real app, you would return these errors to the form.
+        // For now, we'll just log them and do nothing.
         console.error('Validation Errors:', validatedFields.error.flatten().fieldErrors);
-        // In a real app, you'd return these errors to the form.
-        // For now, we'll just log them.
         return; 
     }
     
-    // Simulate updating cookies to reflect changes without a database
+    // In a real app, you'd update the database here.
+    // For now, we simulate updating by setting cookies to reflect changes.
     const { fullName, email, phone, city, specialty, bio } = validatedFields.data;
-    cookies().set('session_userName', fullName, { httpOnly: true, path: '/' });
-    cookies().set('session_userEmail', email, { httpOnly: true, path: '/' });
-    cookies().set('session_userPhone', phone, { httpOnly: true, path: '/' });
-    cookies().set('session_userCity', city, { httpOnly: true, path: '/' });
-    cookies().set('session_userSpecialty', specialty, { httpOnly: true, path: '/' });
-    cookies().set('session_userBio', bio, { httpOnly: true, path: '/' });
+    const cookieStore = cookies();
+    cookieStore.set('session_userName', fullName, { httpOnly: true, path: '/' });
+    cookieStore.set('session_userEmail', email, { httpOnly: true, path: '/' });
+    cookieStore.set('session_userPhone', phone, { httpOnly: true, path: '/' });
+    cookieStore.set('session_userCity', city, { httpOnly: true, path: '/' });
+    cookieStore.set('session_userSpecialty', specialty, { httpOnly: true, path: '/' });
+    cookieStore.set('session_userBio', bio, { httpOnly: true, path: '/' });
 
-    console.log('--- Profile Update Simulated ---');
     revalidatePath('/profile');
     redirect('/profile');
 }
@@ -223,18 +220,15 @@ export async function updateDoctorProfileAction(prevState: any, formData: FormDa
 export async function requestVerificationAction(prevState: any, formData: FormData) {
     const idCardFile = formData.get('id-card-upload') as File;
     
-    // In a real app, you would upload this file to cloud storage.
-    // We'll just simulate it.
     if (!idCardFile || idCardFile.size === 0) {
+        // In a real app, you'd return an error message to the form.
         console.error('No file provided for verification.');
-        return; // In a real app, return an error message
+        return;
     }
 
-    console.log('--- Verification Request Submitted ---');
-    console.log('File Name:', idCardFile.name);
-    console.log('File Size:', idCardFile.size);
-
-    // Simulate updating the user's status to 'pending'
+    // In a real app, you would upload this file to cloud storage
+    // and update the user's status to 'pending' in the database.
+    // For now, we just simulate it by setting a cookie.
     cookies().set('session_verificationStatus', 'pending', { httpOnly: true, path: '/' });
     
     revalidatePath('/profile');
@@ -258,7 +252,7 @@ export async function sendWelcomeMessageAction(name: string, userType: 'patient'
 
 export async function approveVerificationAction(formData: FormData) {
     const doctorId = formData.get('doctorId') as string;
-    // In a real app, you'd update the doctor's status in the database.
+    // In a real app, you'd update the doctor's status to 'verified' in the database.
     console.log(`--- Approving verification for Doctor ID: ${doctorId} ---`);
     revalidatePath('/admin/verifications');
     redirect('/admin/verifications');
@@ -266,7 +260,7 @@ export async function approveVerificationAction(formData: FormData) {
 
 export async function rejectVerificationAction(formData: FormData) {
     const doctorId = formData.get('doctorId') as string;
-    // In a real app, you'd update the doctor's status in the database.
+    // In a real app, you'd update the doctor's status to 'rejected' in the database.
     console.log(`--- Rejecting verification for Doctor ID: ${doctorId} ---`);
     revalidatePath('/admin/verifications');
     redirect('/admin/verifications');

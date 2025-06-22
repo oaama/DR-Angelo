@@ -46,16 +46,15 @@ export async function getCurrentUser(): Promise<User | null> {
   // Handle Doctor User
   if (userType === 'doctor') {
     let doctorData: Doctor | undefined = doctors.find(d => d.email === userEmail);
-    let isNew = !doctorData;
-
-    if (isNew && userName) {
-        // This is a new doctor who just signed up and is not in the static data yet.
-        // We build a temporary profile from cookies.
+    
+    // If the doctor is not in our static data, it means they are a new user.
+    // We build a temporary profile for them from the available cookie data.
+    if (!doctorData && userName) {
         doctorData = {
             id: `new-doc-${userEmail}`,
             name: userName,
             email: userEmail,
-            gender: 'ذكر',
+            gender: 'ذكر', // Default gender
             profilePicture: 'https://placehold.co/200x200.png',
             verificationStatus: 'unverified',
             phone: '',
@@ -69,8 +68,9 @@ export async function getCurrentUser(): Promise<User | null> {
     }
     
     if (doctorData) {
-        // For both existing and new doctors, override data with fresh cookie values if they exist.
-        // This allows simulated "updates" to be reflected immediately.
+        // For both existing and new doctors, we construct the final user object.
+        // We prioritize fresh data from cookies (simulating a live session update)
+        // over the static data from our "database".
         return {
             id: doctorData.id,
             name: cookieStore.get('session_userName')?.value || doctorData.name,
@@ -96,19 +96,20 @@ export async function getCurrentUser(): Promise<User | null> {
             name: existingPatient.name,
             email: existingPatient.email,
             userType: 'patient',
-            gender: 'أنثى', // Mock for patients
+            gender: 'أنثى', // Mock gender for patients
             avatar: 'https://placehold.co/200x200.png',
             verificationStatus: 'unverified',
         };
     }
     
+    // Handle new patient from cookies
     if (userName) {
         return {
             id: `new-patient-${userEmail}`,
             name: userName,
             email: userEmail,
             userType: 'patient',
-            gender: 'أنثى', // Mock for patients
+            gender: 'أنثى', // Mock gender for new patients
             avatar: 'https://placehold.co/200x200.png',
             verificationStatus: 'unverified',
         };
