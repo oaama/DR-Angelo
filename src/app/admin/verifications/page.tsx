@@ -1,5 +1,4 @@
 import { doctors } from '@/lib/data';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -11,7 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { CheckCircle, XCircle, FileText } from 'lucide-react';
-import Link from 'next/link';
+import { approveVerificationAction, rejectVerificationAction } from '@/app/actions';
 
 export default async function VerificationsPage() {
   const pendingDoctors = doctors.filter(
@@ -56,14 +55,20 @@ export default async function VerificationsPage() {
                   </TableCell>
                   <TableCell className="text-center">
                     <div className="flex gap-2 justify-center">
-                        <Button variant="outline" size="icon" className="text-green-600 border-green-600 hover:bg-green-50 hover:text-green-700 h-8 w-8">
-                          <CheckCircle className="h-4 w-4" />
-                          <span className="sr-only">قبول</span>
-                        </Button>
-                        <Button variant="outline" size="icon" className="text-red-600 border-red-600 hover:bg-red-50 hover:text-red-700 h-8 w-8">
-                          <XCircle className="h-4 w-4" />
-                          <span className="sr-only">رفض</span>
-                        </Button>
+                        <form action={approveVerificationAction}>
+                          <input type="hidden" name="doctorId" value={doctor.id} />
+                          <Button type="submit" variant="outline" size="icon" className="text-green-600 border-green-600 hover:bg-green-50 hover:text-green-700 h-8 w-8">
+                            <CheckCircle className="h-4 w-4" />
+                            <span className="sr-only">قبول</span>
+                          </Button>
+                        </form>
+                         <form action={rejectVerificationAction}>
+                          <input type="hidden" name="doctorId" value={doctor.id} />
+                          <Button type="submit" variant="outline" size="icon" className="text-red-600 border-red-600 hover:bg-red-50 hover:text-red-700 h-8 w-8">
+                            <XCircle className="h-4 w-4" />
+                            <span className="sr-only">رفض</span>
+                          </Button>
+                        </form>
                     </div>
                   </TableCell>
                 </TableRow>

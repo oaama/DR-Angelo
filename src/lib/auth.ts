@@ -2,6 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { doctors, patients } from './data';
+import type { Doctor } from './types';
 
 // This is the unified User type used throughout the app for the current session user.
 export type User = {
@@ -12,12 +13,18 @@ export type User = {
   gender: 'ذكر' | 'أنثى';
   avatar: string;
   verificationStatus: 'verified' | 'pending' | 'rejected' | 'unverified';
+  // Doctor specific fields
+  phone?: string;
+  bio?: string;
+  specialty?: string;
+  city?: string;
 };
 
 export async function getCurrentUser(): Promise<User | null> {
-  const userType = cookies().get('session_userType')?.value;
-  const userName = cookies().get('session_userName')?.value;
-  const userEmail = cookies().get('session_userEmail')?.value;
+  const cookieStore = cookies();
+  const userType = cookieStore.get('session_userType')?.value;
+  const userName = cookieStore.get('session_userName')?.value;
+  const userEmail = cookieStore.get('session_userEmail')?.value;
 
   if (!userType || !userEmail) {
     return null;
@@ -38,30 +45,45 @@ export async function getCurrentUser(): Promise<User | null> {
 
   // Handle Doctor User
   if (userType === 'doctor') {
-    const existingDoctor = doctors.find(d => d.email === userEmail);
-    if (existingDoctor) {
-      return {
-        id: existingDoctor.id,
-        name: existingDoctor.name,
-        email: existingDoctor.email,
-        userType: 'doctor',
-        gender: existingDoctor.gender,
-        avatar: existingDoctor.profilePicture,
-        verificationStatus: existingDoctor.verificationStatus,
-      };
+    let doctorData: Doctor | undefined = doctors.find(d => d.email === userEmail);
+    let isNew = !doctorData;
+
+    if (isNew && userName) {
+        // This is a new doctor who just signed up and is not in the static data yet.
+        // We build a temporary profile from cookies.
+        doctorData = {
+            id: `new-doc-${userEmail}`,
+            name: userName,
+            email: userEmail,
+            gender: 'ذكر',
+            profilePicture: 'https://placehold.co/200x200.png',
+            verificationStatus: 'unverified',
+            phone: '',
+            specialty: '',
+            city: '',
+            bio: '',
+            rating: 0,
+            reviews: 0,
+            subscription: { tier: 'أساسي', status: 'نشط' },
+        };
     }
-    // If not an existing doctor, it must be a new signup.
-    // Use the cookie data.
-    if (userName) {
-      return {
-        id: 'new_doctor',
-        name: userName,
-        email: userEmail,
-        userType: 'doctor',
-        gender: 'ذكر', // Default for new doctor
-        avatar: 'https://placehold.co/200x200.png',
-        verificationStatus: 'unverified',
-      };
+    
+    if (doctorData) {
+        // For both existing and new doctors, override data with fresh cookie values if they exist.
+        // This allows simulated "updates" to be reflected immediately.
+        return {
+            id: doctorData.id,
+            name: cookieStore.get('session_userName')?.value || doctorData.name,
+            email: doctorData.email,
+            userType: 'doctor',
+            gender: doctorData.gender,
+            avatar: doctorData.profilePicture,
+            phone: cookieStore.get('session_userPhone')?.value || doctorData.phone,
+            city: cookieStore.get('session_userCity')?.value || doctorData.city,
+            specialty: cookieStore.get('session_userSpecialty')?.value || doctorData.specialty,
+            bio: cookieStore.get('session_userBio')?.value || doctorData.bio,
+            verificationStatus: (cookieStore.get('session_verificationStatus')?.value as User['verificationStatus']) || doctorData.verificationStatus,
+        };
     }
   }
 
@@ -79,11 +101,10 @@ export async function getCurrentUser(): Promise<User | null> {
             verificationStatus: 'unverified',
         };
     }
-    // If not an existing patient, it's a new signup.
-    // Use the cookie data.
+    
     if (userName) {
         return {
-            id: 'new_patient',
+            id: `new-patient-${userEmail}`,
             name: userName,
             email: userEmail,
             userType: 'patient',

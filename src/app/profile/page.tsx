@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Crown, KeyRound, Mail, User, UserCog, Camera, FileBadge2 } from "lucide-react";
+import { Crown, UserCog, Camera, FileBadge2, Phone, Building, Stethoscope, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { getUniqueCities, getUniqueSpecialties } from "@/lib/data";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { updateDoctorProfileAction, requestVerificationAction } from "@/app/actions";
 
 
 export default async function ProfilePage() {
@@ -16,6 +20,13 @@ export default async function ProfilePage() {
     if (!currentUser) {
         redirect('/login');
     }
+
+    const isDoctor = currentUser.userType === 'doctor';
+    // Fetch lists only if the user is a doctor
+    const [cities, specialties] = isDoctor ? await Promise.all([
+        getUniqueCities(),
+        getUniqueSpecialties()
+    ]) : [[], []];
 
     const statusMap = {
         pending: { text: "قيد المراجعة", className: "bg-yellow-100 text-yellow-800 border-yellow-200" },
@@ -43,7 +54,7 @@ export default async function ProfilePage() {
           </div>
           <div>
             <h1 className="text-3xl font-bold font-headline">{currentUser.name}</h1>
-            <p className="text-muted-foreground">{currentUser.userType === 'doctor' ? 'طبيب' : 'مريض'}</p>
+            <p className="text-muted-foreground capitalize">{currentUser.userType}</p>
           </div>
         </div>
 
@@ -54,39 +65,51 @@ export default async function ProfilePage() {
               تعديل الملف الشخصي
             </CardTitle>
             <CardDescription>
-              يمكنك تحديث معلوماتك الشخصية من هنا.
+              يمكنك تحديث معلوماتك الشخصية من هنا. سيتم حفظ التغييرات عند الضغط على الزر.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form action={updateDoctorProfileAction} className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="fullName" className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  الاسم الكامل
-                </Label>
-                <Input id="fullName" defaultValue={currentUser.name} />
+                <Label htmlFor="fullName">الاسم الكامل</Label>
+                <Input id="fullName" name="fullName" defaultValue={currentUser.name} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  البريد الإلكتروني
-                </Label>
-                <Input id="email" type="email" defaultValue={currentUser.email} />
+                <Label htmlFor="email">البريد الإلكتروني</Label>
+                <Input id="email" name="email" type="email" defaultValue={currentUser.email} required />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="currentPassword" className="flex items-center gap-2">
-                  <KeyRound className="w-4 h-4" />
-                  كلمة المرور الحالية
-                </Label>
-                <Input id="currentPassword" type="password" placeholder="اتركها فارغة لعدم التغيير" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="newPassword" className="flex items-center gap-2">
-                  <KeyRound className="w-4 h-4" />
-                  كلمة المرور الجديدة
-                </Label>
-                <Input id="newPassword" type="password" placeholder="اتركها فارغة لعدم التغيير" />
-              </div>
+
+              {isDoctor && (
+                <>
+                   <div className="space-y-2">
+                      <Label htmlFor="phone" className="flex items-center gap-2"><Phone className="w-4 h-4"/> رقم الهاتف</Label>
+                      <Input id="phone" name="phone" type="tel" defaultValue={currentUser.phone} required />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="city" className="flex items-center gap-2"><Building className="w-4 h-4"/> المدينة</Label>
+                        <Select name="city" defaultValue={currentUser.city} required>
+                            <SelectTrigger id="city"><SelectValue placeholder="اختر المدينة" /></SelectTrigger>
+                            <SelectContent>
+                                {cities.map(city => <SelectItem key={city} value={city}>{city}</SelectItem>)}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                        <Label htmlFor="specialty" className="flex items-center gap-2"><Stethoscope className="w-4 h-4"/> التخصص</Label>
+                        <Select name="specialty" defaultValue={currentUser.specialty} required>
+                            <SelectTrigger id="specialty"><SelectValue placeholder="اختر التخصص" /></SelectTrigger>
+                            <SelectContent>
+                                {specialties.map(spec => <SelectItem key={spec} value={spec}>{spec}</SelectItem>)}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                     <div className="space-y-2 md:col-span-2">
+                      <Label htmlFor="bio" className="flex items-center gap-2"><FileText className="w-4 h-4"/> السيرة الذاتية</Label>
+                      <Textarea id="bio" name="bio" placeholder="اكتب نبذة عن خبراتك وإنجازاتك المهنية..." rows={5} defaultValue={currentUser.bio} required />
+                    </div>
+                </>
+              )}
+
               <div className="md:col-span-2 flex justify-end">
                 <Button type="submit">حفظ التغييرات</Button>
               </div>
@@ -94,8 +117,7 @@ export default async function ProfilePage() {
           </CardContent>
         </Card>
 
-        {/* Verification and Subscription Cards are only shown for doctors */}
-        {currentUser.userType === 'doctor' && (
+        {isDoctor && (
           <>
             <Card className="shadow-lg">
                 <CardHeader>
@@ -108,15 +130,15 @@ export default async function ProfilePage() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form className="space-y-4">
+                    <form action={requestVerificationAction} className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="id-card-upload">صورة الكارنيه</Label>
-                            <Input id="id-card-upload" type="file" disabled={isVerificationLocked} />
+                            <Input id="id-card-upload" name="id-card-upload" type="file" disabled={isVerificationLocked} required />
                         </div>
                          <div className="text-sm text-muted-foreground">الحالة الحالية: <Badge variant="outline" className={statusInfo.className}>{statusInfo.text}</Badge></div>
                         <div className="flex justify-end">
                             <Button type="submit" disabled={isVerificationLocked}>
-                                {currentUser.verificationStatus === 'rejected' ? "إعادة رفع المستند" : "رفع المستند"}
+                                {currentUser.verificationStatus === 'rejected' ? "إعادة رفع المستند" : "رفع المستند لتوثيقه"}
                             </Button>
                         </div>
                     </form>
