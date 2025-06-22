@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Crown, UserCog, Camera, FileBadge2, Phone, Building, Stethoscope, FileText } from "lucide-react";
+import { Crown, UserCog, FileBadge2, Phone, Building, Stethoscope, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -12,6 +11,7 @@ import { getUniqueCities, getUniqueSpecialties } from "@/lib/data";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { updateDoctorProfileAction, requestVerificationAction } from "@/app/actions";
+import { ProfileAvatar } from "@/components/profile-avatar";
 
 
 export default async function ProfilePage() {
@@ -41,17 +41,7 @@ export default async function ProfilePage() {
     <div className="container mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="space-y-8 animate-fade-in-up" style={{ animationFillMode: 'backwards' }}>
         <div className="flex items-center gap-6">
-          <div className="relative group">
-            <Avatar className="h-24 w-24 border-4 border-primary/20">
-              <AvatarImage src={currentUser.avatar} alt={`صورة ${currentUser.name}`} />
-              <AvatarFallback>{currentUser.name.substring(0, 2)}</AvatarFallback>
-            </Avatar>
-            <label htmlFor="avatar-upload" className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-              <Camera className="h-8 w-8 text-white" />
-              <span className="sr-only">تغيير الصورة الشخصية</span>
-            </label>
-            <input type="file" id="avatar-upload" className="sr-only" accept="image/*" />
-          </div>
+          <ProfileAvatar user={currentUser} />
           <div>
             <h1 className="text-3xl font-bold font-headline">{currentUser.name}</h1>
             <p className="text-muted-foreground capitalize">{currentUser.userType}</p>

@@ -4,6 +4,10 @@ import { AIRecommender } from '@/components/ai-recommender';
 import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
 import Image from 'next/image';
 import { getCurrentUser } from '@/lib/auth';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ScanLine } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 
 export default async function Home({
@@ -86,6 +90,24 @@ export default async function Home({
             </div>
             <aside className="space-y-8 animate-fade-in-up" style={{ animationDelay: '0.7s', animationFillMode: 'backwards' }}>
               <AIRecommender />
+              <Card className="sticky top-[34rem] shadow-lg">
+                  <CardHeader>
+                      <CardTitle className="flex items-center gap-2 font-headline">
+                          <ScanLine className="h-6 w-6 text-primary" />
+                          محلل الروشتات الطبية
+                      </CardTitle>
+                      <CardDescription>
+                          هل لديك روشتة؟ ارفع صورتها وسيقوم الذكاء الاصطناعي بتحليلها لك.
+                      </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                      <Button asChild className="w-full">
+                          <Link href="/prescription-analyzer">
+                              جرب الآن
+                          </Link>
+                      </Button>
+                  </CardContent>
+              </Card>
             </aside>
           </div>
         </div>

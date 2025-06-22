@@ -1,9 +1,10 @@
 'use server';
 
 import { aiDoctorMatch } from '@/ai/flows/ai-doctor-match';
+import { analyzePrescription } from '@/ai/flows/prescription-analyzer-flow';
 import type { Doctor } from '@/lib/types';
 import { z } from 'zod';
-import { doctors as allDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data'; // Import the raw data array
+import { doctors as allDoctors } from '@/lib/data'; // Import the raw data array
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { generateWelcomeMessage } from '@/ai/flows/welcome-message-flow';
@@ -176,6 +177,21 @@ export async function googleLoginAction() {
 
 // --- Profile Actions ---
 
+export async function updateAvatarAction(prevState: any, formData: FormData) {
+    const avatarFile = formData.get('avatar-upload') as File;
+
+    if (!avatarFile || avatarFile.size === 0) {
+        return { message: 'لم يتم اختيار أي ملف.' };
+    }
+    // In a real app, you would upload this file to cloud storage
+    // and update the user's avatar URL in the database.
+    // For now, we just log it and revalidate the path to show a "saved" state.
+    console.log(`--- Simulating avatar upload for file: ${avatarFile.name} ---`);
+    
+    revalidatePath('/profile');
+    return { message: 'تم تحديث الصورة بنجاح!' };
+}
+
 const doctorProfileSchema = z.object({
     fullName: z.string().min(1, { message: 'الاسم الكامل مطلوب.' }),
     email: z.string().email({ message: 'البريد الإلكتروني غير صالح.' }),
@@ -264,4 +280,47 @@ export async function rejectVerificationAction(formData: FormData) {
     console.log(`--- Rejecting verification for Doctor ID: ${doctorId} ---`);
     revalidatePath('/admin/verifications');
     redirect('/admin/verifications');
+}
+
+
+// --- AI Actions ---
+
+const prescriptionFileSchema = z.object({
+    prescriptionImage: z
+        .instanceof(File, { message: 'الرجاء اختيار صورة.' })
+        .refine(file => file.size > 0, { message: 'الملف المختار فارغ.' })
+        .refine(file => file.type.startsWith('image/'), { message: 'يجب أن يكون الملف المختار صورة.' }),
+});
+
+export async function analyzePrescriptionAction(prevState: any, formData: FormData) {
+    const validatedFields = prescriptionFileSchema.safeParse({
+        prescriptionImage: formData.get('prescriptionImage'),
+    });
+
+    if (!validatedFields.success) {
+        return {
+            analysis: null,
+            message: validatedFields.error.flatten().fieldErrors.prescriptionImage?.[0] || 'إدخال غير صالح.',
+        };
+    }
+
+    const { prescriptionImage } = validatedFields.data;
+
+    try {
+        const buffer = await prescriptionImage.arrayBuffer();
+        const base64 = Buffer.from(buffer).toString('base64');
+        const dataUri = `data:${prescriptionImage.type};base64,${base64}`;
+
+        const result = await analyzePrescription({ photoDataUri: dataUri });
+
+        if (!result || !result.medications) {
+            return { analysis: null, message: 'لم يتمكن الذكاء الاصطناعي من تحليل الروشتة. حاول مرة أخرى بصورة أوضح.' };
+        }
+
+        return { analysis: result, message: null };
+
+    } catch (error) {
+        console.error('Prescription Analysis Error:', error);
+        return { analysis: null, message: 'حدث خطأ غير متوقع أثناء تحليل الروشتة. يرجى المحاولة مرة أخرى.' };
+    }
 }
