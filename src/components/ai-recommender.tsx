@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { recommendDoctorAction } from "@/app/actions";
 import { useToast } from "@/hooks/use-toast";
-import { AlertCircle, Lightbulb, Info } from "lucide-react";
+import { AlertCircle, Compass, Info } from "lucide-react";
 import { DoctorCard } from "./doctor-card";
 import { Spinner } from "./icons";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
@@ -23,8 +23,8 @@ function SubmitButton() {
     const { pending } = useFormStatus();
     return (
         <Button type="submit" className="w-full" disabled={pending}>
-            {pending ? <Spinner className="me-2" /> : <Lightbulb className="me-2 h-4 w-4" />}
-            {pending ? "جاري التحليل..." : "احصل على ترشيح"}
+            {pending ? <Spinner className="me-2" /> : <Compass className="me-2 h-4 w-4" />}
+            {pending ? "جاري التحليل..." : "اسأل مرشدك الطبي"}
         </Button>
     )
 }
@@ -51,11 +51,11 @@ export function AIRecommender() {
         <Card className="sticky top-20 shadow-lg">
             <CardHeader>
                 <CardTitle className="flex items-center gap-2 font-headline">
-                    <Lightbulb className="h-6 w-6 text-primary" />
-                    ترشيح الطبيب بالذكاء الاصطناعي
+                    <Compass className="h-6 w-6 text-primary" />
+                    مرشدك الطبي الذكي
                 </CardTitle>
                 <CardDescription>
-                    صف مشكلتك الطبية، وسيقوم الذكاء الاصطناعي بترشيح أخصائي لك وتقديم نصيحة أولية.
+                    صف مشكلتك الطبية، وسيقوم مرشدك الذكي بتحليل حالتك وترشيح أفضل الأطباء لك.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -73,7 +73,7 @@ export function AIRecommender() {
                 {state.advice && (
                     <Alert variant="default" className="mt-6 bg-primary/10 border-primary/20">
                         <Info className="h-4 w-4 text-primary" />
-                        <AlertTitle className="font-bold">نصيحة أولية</AlertTitle>
+                        <AlertTitle className="font-bold">نصيحة من مرشدك</AlertTitle>
                         <AlertDescription>
                             <p>{state.advice}</p>
                             <p className="text-xs mt-2 text-muted-foreground">تنبيه: هذه النصيحة لا تغني عن استشارة الطبيب المختص.</p>
@@ -83,7 +83,7 @@ export function AIRecommender() {
 
                 {state.doctors && (
                     <div className="mt-6 space-y-4">
-                        <h3 className="font-bold text-lg">ترشيحاتنا لك:</h3>
+                        <h3 className="font-bold text-lg">ترشيحات مرشدك لك:</h3>
                         {state.doctors.length > 0 ? (
                            <div className="space-y-4">
                              {state.doctors.map(doctor => (
@@ -95,7 +95,7 @@ export function AIRecommender() {
                                 <AlertCircle className="h-4 w-4" />
                                 <AlertTitle>لم يتم العثور على نتائج مطابقة</AlertTitle>
                                 <AlertDescription>
-                                    لم يتمكن الذكاء الاصطناعي من العثور على طبيب مناسب في قاعدة بياناتنا بناءً على وصفك. يرجى محاولة تحسين بحثك أو تصفح المتخصصين لدينا يدويًا.
+                                    لم يتمكن مرشدك الذكي من العثور على طبيب مناسب في قاعدة بياناتنا بناءً على وصفك. يرجى محاولة تحسين بحثك أو تصفح المتخصصين لدينا يدويًا.
                                 </AlertDescription>
                             </Alert>
                         )}
