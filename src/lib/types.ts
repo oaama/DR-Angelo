@@ -24,7 +24,7 @@ export interface Doctor {
     status: 'نشط' | 'منتهي';
   };
   comments?: Comment[];
-  verificationStatus: 'verified' | 'pending' | 'rejected';
+  verificationStatus: 'verified' | 'pending' | 'rejected' | 'unverified';
   idCardImage?: string; // URL to the uploaded ID card
   submissionDate?: string; // Date of ID submission
 }
