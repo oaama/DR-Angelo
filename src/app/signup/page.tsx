@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link"
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from 'react-dom';
 import { Button } from "@/components/ui/button"
 import {
@@ -15,7 +15,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { GoogleIcon, StethoscopeIcon, Spinner } from "@/components/icons"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { googleLoginAction } from "@/app/actions";
+import { googleLoginAction, signupAction } from "@/app/actions";
+import { useToast } from "@/hooks/use-toast";
 
 function GoogleSignupButton() {
   const { pending } = useFormStatus();
@@ -27,9 +28,31 @@ function GoogleSignupButton() {
   )
 }
 
+function SubmitButton() {
+    const { pending } = useFormStatus();
+    return (
+        <Button type="submit" className="w-full" disabled={pending}>
+            {pending ? <Spinner className="me-2" /> : null}
+            إنشاء حساب
+        </Button>
+    );
+}
 
 export default function SignupPage() {
   const [userType, setUserType] = useState('patient');
+  const { toast } = useToast();
+  const [state, formAction] = useActionState(signupAction, { message: null });
+
+  useEffect(() => {
+    if (state?.message) {
+      toast({
+        variant: 'destructive',
+        title: 'خطأ في إنشاء الحساب',
+        description: state.message,
+      });
+    }
+  }, [state, toast]);
+
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-12rem)] py-12 px-4">
@@ -45,7 +68,7 @@ export default function SignupPage() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            <form className="grid gap-4">
+            <form action={formAction} className="grid gap-4">
               <div className="grid gap-2">
                 <Label>أنت تسجل كـ</Label>
                 <RadioGroup defaultValue="patient" name="userType" className="grid grid-cols-2 gap-4" onValueChange={setUserType}>
@@ -67,18 +90,19 @@ export default function SignupPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="first-name">الاسم الأول</Label>
-                  <Input id="first-name" placeholder="أحمد" required />
+                  <Label htmlFor="firstName">الاسم الأول</Label>
+                  <Input id="firstName" name="firstName" placeholder="أحمد" required />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="last-name">الاسم الأخير</Label>
-                  <Input id="last-name" placeholder="محمود" required />
+                  <Label htmlFor="lastName">الاسم الأخير</Label>
+                  <Input id="lastName" name="lastName" placeholder="محمود" required />
                 </div>
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">البريد الإلكتروني</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="m@example.com"
                   required
@@ -88,17 +112,15 @@ export default function SignupPage() {
               {userType === 'doctor' && (
                 <div className="grid gap-2">
                   <Label htmlFor="phone">رقم الهاتف</Label>
-                  <Input id="phone" type="tel" placeholder="01234567890" required />
+                  <Input id="phone" name="phone" type="tel" placeholder="01234567890" required />
                 </div>
               )}
               
               <div className="grid gap-2">
                 <Label htmlFor="password">كلمة المرور</Label>
-                <Input id="password" type="password" required/>
+                <Input id="password" name="password" type="password" required/>
               </div>
-              <Button type="submit" className="w-full">
-                إنشاء حساب
-              </Button>
+              <SubmitButton />
             </form>
             <div className="relative">
               <div className="absolute inset-0 flex items-center">

@@ -103,6 +103,53 @@ export async function loginAction(prevState: any, formData: FormData) {
   return { message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة.' };
 }
 
+
+const signupSchema = z.object({
+  firstName: z.string().min(1, { message: 'الاسم الأول مطلوب.' }),
+  lastName: z.string().min(1, { message: 'الاسم الأخير مطلوب.' }),
+  email: z.string().email({ message: 'البريد الإلكتروني غير صالح.' }),
+  password: z.string().min(6, { message: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل.' }),
+  userType: z.enum(['patient', 'doctor']),
+  phone: z.string().optional(),
+});
+
+export async function signupAction(prevState: any, formData: FormData) {
+  const validatedFields = signupSchema.safeParse({
+    firstName: formData.get('firstName'),
+    lastName: formData.get('lastName'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    userType: formData.get('userType'),
+    phone: formData.get('phone'),
+  });
+
+  if (!validatedFields.success) {
+    const firstError = Object.values(validatedFields.error.flatten().fieldErrors)[0]?.[0];
+    return {
+      message: firstError || 'إدخال غير صالح.',
+    };
+  }
+  
+  const { firstName, lastName, email, userType } = validatedFields.data;
+  const fullName = `${firstName} ${lastName}`;
+
+  // In a real app, you'd save the user to a database here.
+  // For now, we'll just simulate it by setting cookies.
+
+  // Check if user already exists (mock check)
+  if (email === 'admin@tabeebk.com') {
+      return { message: 'هذا البريد الإلكتروني مسجل بالفعل.' };
+  }
+
+  // Set session cookies for the new user
+  cookies().set('session_userType', userType, { httpOnly: true, path: '/' });
+  cookies().set('session_userName', fullName, { httpOnly: true, path: '/' });
+  cookies().set('session_userEmail', email, { httpOnly: true, path: '/' });
+    
+  redirect('/profile'); // Redirect to profile page after signup
+}
+
+
 export async function logoutAction() {
     cookies().delete('session_userType');
     cookies().delete('session_userName');
