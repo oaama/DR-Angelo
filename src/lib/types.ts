@@ -10,6 +10,7 @@ export interface Comment {
 export interface Doctor {
   id: string;
   name: string;
+  email: string;
   gender: 'ذكر' | 'أنثى';
   specialty: string;
   city: string;
@@ -26,4 +27,12 @@ export interface Doctor {
   verificationStatus: 'verified' | 'pending' | 'rejected';
   idCardImage?: string; // URL to the uploaded ID card
   submissionDate?: string; // Date of ID submission
+}
+
+export interface Patient {
+  id: string;
+  name: string;
+  email: string;
+  joinDate: string;
+  userType: 'patient';
 }

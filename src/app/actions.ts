@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { doctors as allDoctors } from '@/lib/data'; // Import the raw data array
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { generateWelcomeMessage } from '@/ai/flows/welcome-message-flow';
 
 
 const schema = z.object({
@@ -107,4 +108,18 @@ export async function logoutAction() {
     cookies().delete('session_userName');
     cookies().delete('session_userEmail');
     redirect('/');
+}
+
+// --- Admin Actions ---
+
+export async function sendWelcomeMessageAction(name: string, userType: 'patient' | 'doctor'): Promise<{ success: boolean; message: string; subject?: string; }> {
+  try {
+    const result = await generateWelcomeMessage({ name, userType });
+    // In a real app, you would send the email here.
+    // For this demo, we'll just return the generated content.
+    return { success: true, message: result.body, subject: result.subject };
+  } catch (error) {
+    console.error('Welcome Message Generation Error:', error);
+    return { success: false, message: 'حدث خطأ أثناء إنشاء الرسالة الترحيبية.' };
+  }
 }

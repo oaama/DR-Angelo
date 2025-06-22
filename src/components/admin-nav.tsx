@@ -11,7 +11,7 @@ export function AdminNav() {
     const links = [
         { href: '/admin', label: 'الرئيسية', icon: Home },
         { href: '/admin/verifications', label: 'توثيق الأطباء', icon: ShieldCheck },
-        { href: '#', label: 'إدارة المستخدمين', icon: Users, disabled: true },
+        { href: '/admin/users', label: 'إدارة المستخدمين', icon: Users, disabled: false },
     ];
 
     return (

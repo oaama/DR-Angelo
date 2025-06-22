@@ -1,4 +1,4 @@
-import { doctors } from '@/lib/data';
+import { doctors, patients } from '@/lib/data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShieldCheck, User, UserPlus, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
@@ -11,8 +11,7 @@ import { Button } from '@/components/ui/button';
 export default async function AdminDashboard() {
     const allDoctors = doctors;
     const pendingVerifications = allDoctors.filter(d => d.verificationStatus === 'pending').length;
-    // In a real app, we'd have a separate list for patients
-    const totalPatients = 250; // Mock data
+    const totalPatients = patients.length;
 
     // --- Chart Data Processing ---
     const monthNames = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];

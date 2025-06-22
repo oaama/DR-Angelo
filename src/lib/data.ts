@@ -1,4 +1,4 @@
-import type { Doctor } from './types';
+import type { Doctor, Patient } from './types';
 
 // This is a static data source.
 // Replace this with your actual backend API calls.
@@ -7,6 +7,7 @@ export const doctors: Doctor[] = [
     {
         id: '1',
         name: 'د. محمد عبد السلام',
+        email: 'mohamed.salam@example.com',
         gender: 'ذكر',
         specialty: 'قلب',
         city: 'القاهرة',
@@ -27,6 +28,7 @@ export const doctors: Doctor[] = [
     {
         id: '2',
         name: 'د. فاطمة الزهراء',
+        email: 'fatima.zahraa@example.com',
         gender: 'أنثى',
         specialty: 'جلدية',
         city: 'الجيزة',
@@ -46,6 +48,7 @@ export const doctors: Doctor[] = [
     {
         id: '3',
         name: 'د. علي حسن',
+        email: 'ali.hassan@example.com',
         gender: 'ذكر',
         specialty: 'عظام',
         city: 'الإسكندرية',
@@ -63,6 +66,7 @@ export const doctors: Doctor[] = [
     {
         id: '4',
         name: 'د. هدى مصطفى',
+        email: 'hoda.mustafa@example.com',
         gender: 'أنثى',
         specialty: 'أطفال',
         city: 'القاهرة',
@@ -80,6 +84,7 @@ export const doctors: Doctor[] = [
     {
         id: '5',
         name: 'د. خالد رضوان',
+        email: 'khaled.radwan@example.com',
         gender: 'ذكر',
         specialty: 'باطنة',
         city: 'المنصورة',
@@ -97,6 +102,7 @@ export const doctors: Doctor[] = [
     {
         id: '6',
         name: 'د. رانيا الشناوي',
+        email: 'rania.shenawy@example.com',
         gender: 'أنثى',
         specialty: 'نساء وتوليد',
         city: 'الجيزة',
@@ -111,6 +117,13 @@ export const doctors: Doctor[] = [
         submissionDate: '2024-03-11',
         comments: []
     },
+];
+
+export const patients: Patient[] = [
+    { id: 'p1', name: 'أحمد علي', email: 'ahmed.ali@email.com', joinDate: '2024-05-20', userType: 'patient' },
+    { id: 'p2', name: 'سارة إبراهيم', email: 'sara.ibrahim@email.com', joinDate: '2024-05-21', userType: 'patient' },
+    { id: 'p3', name: 'محمود خالد', email: 'mahmoud.k@email.com', joinDate: '2024-05-22', userType: 'patient' },
+    { id: 'p4', name: 'هند رضا', email: 'hind.reda@email.com', joinDate: '2024-05-23', userType: 'patient' },
 ];
 
 

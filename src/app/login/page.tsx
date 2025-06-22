@@ -51,8 +51,6 @@ export default function LoginPage() {
           <CardTitle className="text-2xl font-headline">تسجيل الدخول إلى طبيبك</CardTitle>
           <CardDescription>
             أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك.
-            <br />
-            <span className="text-xs">(للإدارة: admin@tabeebk.com / password123)</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
