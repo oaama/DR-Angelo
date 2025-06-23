@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ScanLine, PackageSearch } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { AdCard } from '@/components/ad-card';
 
 
 export default async function Home({
@@ -127,6 +128,7 @@ export default async function Home({
                         </Button>
                     </CardContent>
                 </Card>
+                <AdCard />
               </div>
             </aside>
           </div>

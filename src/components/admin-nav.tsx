@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, ShieldCheck, Users } from 'lucide-react';
+import { Home, ShieldCheck, Users, Megaphone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function AdminNav() {
@@ -12,6 +12,7 @@ export function AdminNav() {
         { href: '/admin', label: 'الرئيسية', icon: Home },
         { href: '/admin/verifications', label: 'توثيق الأطباء', icon: ShieldCheck },
         { href: '/admin/users', label: 'إدارة المستخدمين', icon: Users, disabled: false },
+        { href: '/admin/ads', label: 'إدارة الإعلانات', icon: Megaphone, disabled: false },
     ];
 
     return (
