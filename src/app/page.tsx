@@ -88,7 +88,7 @@ export default async function Home({
                 </div>
               )}
             </div>
-            <aside className="animate-fade-in-up" style={{ animationDelay: '0.7s', animationFillMode: 'backwards' }}>
+            <aside className="lg:col-span-1 animate-fade-in-up" style={{ animationFillMode: 'backwards', animationDelay: '0.7s' }}>
               <div className="sticky top-20 space-y-8">
                 <AIRecommender />
                 <Card className="shadow-lg">
@@ -98,7 +98,7 @@ export default async function Home({
                             مفسّر الروشتات
                         </CardTitle>
                         <CardDescription>
-                            هل لديك روشتة غير واضحة؟ ارفع صورتها وسيقوم الذكاء الاصطناعي بتفسيرها لك.
+                            لتجنب أي التباس، قم بتحميل صورة الروشتة. سيقوم نظامنا الذكي بتحليلها وتوضيح أسماء الأدوية والجرعات بدقة.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
