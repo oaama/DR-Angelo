@@ -38,29 +38,18 @@ export default async function Home({
 
   return (
     <>
-      <section className="relative w-full border-b min-h-[400px] md:min-h-[500px] flex items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0 z-[-1]">
-          <Image
-            src="https://placehold.co/1600x900.png"
-            alt="خلفية طبية تظهر فريقًا من الأطباء المحترفين في مستشفى"
-            data-ai-hint="professional doctors team"
-            fill
-            className="object-cover object-center animate-hero-zoom"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-        <div className="container mx-auto px-4 md:px-6 py-12 md:py-20 lg:py-24">
-          <div className="mx-auto grid max-w-4xl items-start gap-8">
+      <section className="w-full border-b bg-muted/20">
+        <div className="container mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32">
+          <div className="mx-auto grid max-w-3xl items-center justify-center text-center gap-8">
             <div className="animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'backwards' }}>
-              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-headline">
+              <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl font-headline">
                 ابحث عن طبيبك المثالي
               </h1>
-              <p className="mt-4 text-lg text-primary-foreground/90">
+              <p className="mt-4 text-lg text-muted-foreground">
                 ابحث في شبكة المتخصصين لدينا للعثور على الرعاية التي تحتاجها.
               </p>
             </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
+            <div className="w-full animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
               <DoctorSearchForm specialties={specialties} cities={cities} />
             </div>
           </div>
