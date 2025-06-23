@@ -175,6 +175,33 @@ export async function googleLoginAction() {
   redirect('/');
 }
 
+// --- Forgot Password Action ---
+const forgotPasswordSchema = z.object({
+  email: z.string().email({ message: 'البريد الإلكتروني غير صالح.' }),
+});
+
+export async function forgotPasswordAction(prevState: any, formData: FormData) {
+  const validatedFields = forgotPasswordSchema.safeParse({
+    email: formData.get('email'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      message: validatedFields.error.flatten().fieldErrors.email?.[0] || 'إدخال غير صالح.',
+      success: false,
+    };
+  }
+
+  // In a real app, you would generate a reset token and send an email.
+  // For this simulation, we always return a success message to prevent email enumeration.
+  console.log(`--- Simulating password reset for: ${validatedFields.data.email} ---`);
+
+  return {
+    message: 'إذا كان هذا البريد الإلكتروني مسجلاً في نظامنا، فسيتم إرسال رابط لإعادة تعيين كلمة المرور إليه.',
+    success: true,
+  };
+}
+
 // --- Profile Actions ---
 
 export async function updateAvatarAction(prevState: any, formData: FormData) {

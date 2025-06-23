@@ -25,7 +25,7 @@ function SubmitButton() {
     return (
         <Button type="submit" className="w-full" disabled={pending}>
             {pending ? <Spinner className="me-2" /> : <FileScan className="me-2 h-4 w-4" />}
-            {pending ? "جاري التحليل..." : "تحليل الروشتة"}
+            {pending ? "جاري التفسير..." : "فسّر الروشتة"}
         </Button>
     );
 }
@@ -72,9 +72,9 @@ export default function PrescriptionAnalyzerPage() {
         <div className="container mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="space-y-8 animate-fade-in-up">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold font-headline">محلل الروشتات الطبية</h1>
+                    <h1 className="text-4xl font-bold font-headline">مفسّر الروشتات</h1>
                     <p className="mt-4 text-lg text-muted-foreground">
-                        ارفع صورة روشتة طبية واضحة، وسيقوم الذكاء الاصطناعي بتحليلها لك.
+                        ارفع صورة روشتة طبية، وسيقوم الذكاء الاصطناعي بتفسيرها لك بدقة.
                     </p>
                 </div>
                 
@@ -110,7 +110,7 @@ export default function PrescriptionAnalyzerPage() {
                             <div className="space-y-6">
                                 <Alert variant="default" className="bg-green-100/50 border-green-200">
                                     <AlertCircle className="h-4 w-4 text-green-700" />
-                                    <AlertTitle className="font-bold text-green-800">تم تحليل الروشتة بنجاح</AlertTitle>
+                                    <AlertTitle className="font-bold text-green-800">تم تفسير الروشتة بنجاح</AlertTitle>
                                 </Alert>
 
                                 <Card>
@@ -148,7 +148,7 @@ export default function PrescriptionAnalyzerPage() {
                                     </CardContent>
                                 </Card>
                                 
-                                <Button onClick={() => window.location.reload()} className="w-full">تحليل روشتة أخرى</Button>
+                                <Button onClick={() => window.location.reload()} className="w-full">تفسير روشتة أخرى</Button>
                             </div>
                         )}
                     </CardContent>

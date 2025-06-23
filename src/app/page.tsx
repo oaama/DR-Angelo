@@ -68,7 +68,7 @@ export default async function Home({
             <div className="lg:col-span-2 space-y-8 animate-fade-in-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
               <h2 className="text-3xl font-bold tracking-tight font-headline">
                 {doctors.length > 0
-                  ? `يتم عرض ${doctors.length} من الأطباء`
+                  ? `يتم عرض ${doctors.length} من الأطباء الموثوقين`
                   : 'لا يوجد أطباء يطابقون بحثك'}
               </h2>
               {doctors.length > 0 ? (
@@ -94,10 +94,10 @@ export default async function Home({
                   <CardHeader>
                       <CardTitle className="flex items-center gap-2 font-headline">
                           <ScanLine className="h-6 w-6 text-primary" />
-                          محلل الروشتات الطبية
+                          مفسّر الروشتات
                       </CardTitle>
                       <CardDescription>
-                          هل لديك روشتة؟ ارفع صورتها وسيقوم الذكاء الاصطناعي بتحليلها لك.
+                          هل لديك روشتة غير واضحة؟ ارفع صورتها وسيقوم الذكاء الاصطناعي بتفسيرها لك.
                       </CardDescription>
                   </CardHeader>
                   <CardContent>

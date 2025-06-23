@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Crown, UserCog, FileBadge2, Phone, Building, Stethoscope, FileText } from "lucide-react";
+import { Crown, UserCog, FileBadge2, Phone, Building, Stethoscope, FileText, ShieldCheck, ShieldAlert, XCircle, ShieldOff } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { updateDoctorProfileAction, requestVerificationAction } from "@/app/actions";
 import { ProfileAvatar } from "@/components/profile-avatar";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 
 export default async function ProfilePage() {
@@ -47,6 +48,56 @@ export default async function ProfilePage() {
             <p className="text-muted-foreground capitalize">{currentUser.userType}</p>
           </div>
         </div>
+
+        {isDoctor && (
+          <Card className="shadow-lg border-l-4 border-primary">
+            <CardHeader>
+              <CardTitle className="font-headline text-xl">حالة حسابك كطبيب</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {
+                {
+                  'verified': (
+                    <Alert variant="default" className="bg-green-100 text-green-900 border-green-300">
+                      <ShieldCheck className="h-5 w-5 text-green-600" />
+                      <AlertTitle className="font-bold">تهانينا! حسابك موثق</AlertTitle>
+                      <AlertDescription>
+                        أنت الآن جزء من شبكة أطباء "طبيبك" الموثوقين. ملفك الشخصي يظهر للمرضى في نتائج البحث ويمكنك استقبال الحجوزات.
+                      </AlertDescription>
+                    </Alert>
+                  ),
+                  'pending': (
+                     <Alert variant="default" className="bg-yellow-100 text-yellow-900 border-yellow-300">
+                      <ShieldAlert className="h-5 w-5 text-yellow-600" />
+                      <AlertTitle className="font-bold">حسابك قيد المراجعة</AlertTitle>
+                      <AlertDescription>
+                        لقد استلمنا طلبك لتوثيق الحساب. يقوم فريقنا بمراجعته حاليًا وسيتم إعلامك بالنتيجة خلال 48 ساعة. ملفك الشخصي لن يظهر في البحث حتى يتم التوثيق.
+                      </AlertDescription>
+                    </Alert>
+                  ),
+                   'rejected': (
+                     <Alert variant="destructive">
+                      <XCircle className="h-5 w-5" />
+                      <AlertTitle className="font-bold">تم رفض طلب التوثيق</AlertTitle>
+                      <AlertDescription>
+                        للأسف، لم نتمكن من توثيق حسابك بالمعلومات الحالية. يرجى مراجعة بريدك الإلكتروني لمعرفة السبب، أو قم بإعادة رفع مستند واضح في قسم "توثيق الحساب" أدناه.
+                      </AlertDescription>
+                    </Alert>
+                  ),
+                  'unverified': (
+                     <Alert variant="default" className="bg-blue-100 text-blue-900 border-blue-300">
+                      <ShieldOff className="h-5 w-5 text-blue-600" />
+                      <AlertTitle className="font-bold">حسابك غير موثق</AlertTitle>
+                      <AlertDescription>
+                        للوصول إلى جميع ميزات الأطباء والظهور في نتائج البحث، يرجى إكمال ملفك الشخصي ورفع كارنيه النقابة من قسم "توثيق الحساب" أدناه.
+                      </AlertDescription>
+                    </Alert>
+                  )
+                }[currentUser.verificationStatus]
+              }
+            </CardContent>
+          </Card>
+        )}
 
         <Card className="shadow-lg">
           <CardHeader>
