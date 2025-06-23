@@ -117,6 +117,85 @@ export const doctors: Doctor[] = [
         submissionDate: '2024-03-11',
         comments: []
     },
+    {
+        id: '7',
+        name: 'د. يوسف النجار',
+        email: 'youssef.nagar@example.com',
+        gender: 'ذكر',
+        specialty: 'أنف وأذن وحنجرة',
+        city: 'طنطا',
+        phone: '01234567896',
+        rating: 4.5,
+        reviews: 88,
+        profilePicture: 'https://placehold.co/200x200.png',
+        bio: 'أخصائي أمراض الأنف والأذن والحنجرة. متخصص في عمليات الجيوب الأنفية بالمنظار.',
+        subscription: { tier: 'أساسي', status: 'نشط' },
+        verificationStatus: 'verified',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-02-15',
+        comments: [
+            { id: 'c4', patientName: 'كريم عادل', rating: 5, text: 'طبيب محترف ومريح في التعامل.', date: '2024-04-22' },
+        ]
+    },
+    {
+        id: '8',
+        name: 'د. نورهان السيد',
+        email: 'nourhan.sayed@example.com',
+        gender: 'أنثى',
+        specialty: 'عيون',
+        city: 'أسيوط',
+        phone: '01234567897',
+        rating: 4.8,
+        reviews: 160,
+        profilePicture: 'https://placehold.co/200x200.png',
+        bio: 'استشارية طب وجراحة العيون وتصحيح الإبصار بالليزر. خبرة في علاج المياه البيضاء والزرقاء.',
+        subscription: { tier: 'مميز', status: 'نشط' },
+        verificationStatus: 'verified',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-01-30',
+        comments: [
+            { id: 'c5', patientName: 'منى فتحي', rating: 5, text: 'عملية الليزك كانت ناجحة جدًا، أنصح بها بشدة.', date: '2024-03-18' },
+            { id: 'c6', patientName: 'طارق شوقي', rating: 5, text: 'أفضل طبيبة عيون تعاملت معها.', date: '2024-03-20' },
+        ]
+    },
+    {
+        id: '9',
+        name: 'د. عمر الشريف',
+        email: 'omar.sherif@example.com',
+        gender: 'ذكر',
+        specialty: 'نفسية',
+        city: 'القاهرة',
+        phone: '01234567898',
+        rating: 4.9,
+        reviews: 210,
+        profilePicture: 'https://placehold.co/200x200.png',
+        bio: 'طبيب ومعالج نفسي متخصص في علاج الاكتئاب والقلق. يقدم جلسات فردية وأسرية.',
+        subscription: { tier: 'أساسي', status: 'نشط' },
+        verificationStatus: 'pending',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-05-20',
+        comments: []
+    },
+    {
+        id: '10',
+        name: 'د. آية محفوظ',
+        email: 'aya.mahfouz@example.com',
+        gender: 'أنثى',
+        specialty: 'أسنان',
+        city: 'الجيزة',
+        phone: '01234567899',
+        rating: 4.7,
+        reviews: 135,
+        profilePicture: 'https://placehold.co/200x200.png',
+        bio: 'أخصائية طب وتجميل الأسنان. خبرة في تبييض الأسنان وابتسامة هوليود.',
+        subscription: { tier: 'أساسي', status: 'نشط' },
+        verificationStatus: 'verified',
+        idCardImage: 'https://placehold.co/400x250.png',
+        submissionDate: '2024-04-05',
+        comments: [
+            { id: 'c7', patientName: 'وليد توفيق', rating: 4, text: 'العيادة نظيفة والتعامل جيد.', date: '2024-05-01' },
+        ]
+    }
 ];
 
 export const patients: Patient[] = [
