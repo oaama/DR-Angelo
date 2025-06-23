@@ -53,6 +53,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: null,
 };
 
 export default function RootLayout({
