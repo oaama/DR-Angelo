@@ -9,6 +9,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { generateWelcomeMessage } from '@/ai/flows/welcome-message-flow';
 import { revalidatePath } from 'next/cache';
+import { findMedication } from '@/ai/flows/medication-finder-flow';
 
 
 const schema = z.object({
@@ -353,4 +354,31 @@ export async function analyzePrescriptionAction(prevState: any, formData: FormDa
         console.error('Prescription Interpretation Error:', error);
         return { analysis: null, message: 'حدث خطأ غير متوقع أثناء تفسير الروشتة. يرجى المحاولة مرة أخرى.' };
     }
+}
+
+const findMedicationSchema = z.object({
+  medicationName: z.string().min(3, { message: 'يجب أن يكون اسم الدواء 3 أحرف على الأقل.' }),
+});
+
+export async function findMedicationAction(prevState: any, formData: FormData) {
+  const validatedFields = findMedicationSchema.safeParse({
+    medicationName: formData.get('medicationName'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      response: null,
+      message: validatedFields.error.flatten().fieldErrors.medicationName?.[0] || 'إدخال غير صالح.',
+    };
+  }
+  
+  const { medicationName } = validatedFields.data;
+
+  try {
+    const result = await findMedication({ medicationName });
+    return { response: result.responseMessage, message: null };
+  } catch (error) {
+    console.error('Find Medication AI Error:', error);
+    return { response: null, message: 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.' };
+  }
 }

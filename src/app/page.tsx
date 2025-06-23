@@ -5,7 +5,7 @@ import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
 import Image from 'next/image';
 import { getCurrentUser } from '@/lib/auth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScanLine } from 'lucide-react';
+import { ScanLine, PackageSearch } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -88,12 +88,12 @@ export default async function Home({
                 </div>
               )}
             </div>
-            <aside className="lg:col-span-1 animate-fade-in-up" style={{ animationFillMode: 'backwards', animationDelay: '0.7s' }}>
-              <div className="sticky top-20 space-y-8">
+            <aside className="lg:col-span-1">
+              <div className="sticky top-20 space-y-8 animate-fade-in-up" style={{ animationFillMode: 'backwards', animationDelay: '0.7s' }}>
                 <AIRecommender />
                 <Card className="shadow-lg">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2 font-headline">
+                        <CardTitle className="flex items-center gap-2 font-headline text-xl">
                             <ScanLine className="h-6 w-6 text-primary" />
                             مفسّر الروشتات
                         </CardTitle>
@@ -105,6 +105,24 @@ export default async function Home({
                         <Button asChild className="w-full">
                             <Link href="/prescription-analyzer">
                                 جرب الآن
+                            </Link>
+                        </Button>
+                    </CardContent>
+                </Card>
+                <Card className="shadow-lg">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2 font-headline text-xl">
+                            <PackageSearch className="h-6 w-6 text-primary" />
+                            البحث عن دواء ناقص
+                        </CardTitle>
+                        <CardDescription>
+                            هل تبحث عن دواء غير متوفر؟ أخبرنا وسنساعدك في محاولة إيجاده.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <Button asChild className="w-full">
+                            <Link href="/find-medication">
+                                ابحث عن دوائك
                             </Link>
                         </Button>
                     </CardContent>
