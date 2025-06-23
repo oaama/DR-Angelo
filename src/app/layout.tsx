@@ -10,9 +10,49 @@ import { headers } from 'next/headers';
 
 const tajawal = Tajawal({ subsets: ['arabic'], weight: ['400', '700'], variable: '--font-tajawal' });
 
+// IMPORTANT: Replace with your actual production domain
+const siteUrl = 'https://tabeebk.example.com';
+
 export const metadata: Metadata = {
-  title: 'طبيبك',
-  description: 'ابحث عن الطبيب المناسب لاحتياجاتك.',
+  metadataBase: new URL(siteUrl),
+  title: {
+    template: '%s | طبيبك',
+    default: 'طبيبك - ابحث عن طبيبك المثالي في مصر',
+  },
+  description: 'منصة طبيبك هي دليلك الشامل للعثور على أفضل الأطباء والمتخصصين في مصر. ابحث حسب التخصص، المدينة، واحجز موعدك بسهولة. استخدم مرشدنا الذكي واحصل على توصيات مخصصة.',
+  openGraph: {
+    title: 'طبيبك - دليلك الشامل لأفضل الأطباء في مصر',
+    description: 'ابحث عن الأطباء، اقرأ التقييمات، واحجز موعدك. طبيبك يسهل عليك الوصول للرعاية الصحية.',
+    url: siteUrl,
+    siteName: 'طبيبك',
+    images: [
+      {
+        url: 'https://placehold.co/1200x630.png',
+        width: 1200,
+        height: 630,
+        alt: 'طبيبك - ابحث عن طبيبك المثالي',
+      },
+    ],
+    locale: 'ar_EG',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'طبيبك - دليلك الشامل لأفضل الأطباء في مصر',
+    description: 'ابحث عن الأطباء، اقرأ التقييمات، واحجز موعدك. طبيبك يسهل عليك الوصول للرعاية الصحية.',
+    images: ['https://placehold.co/1200x630.png'], 
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
