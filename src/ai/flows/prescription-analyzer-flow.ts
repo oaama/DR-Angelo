@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview Analyzes a medical prescription image.
+ * @fileOverview Interprets a medical prescription image.
  * - analyzePrescription - A function that analyzes the prescription.
  * - PrescriptionAnalyzerInput - The input type for the function.
  * - PrescriptionAnalyzerOutput - The return type for the function.
@@ -38,10 +38,10 @@ const prompt = ai.definePrompt({
   name: 'prescriptionAnalyzerPrompt',
   input: {schema: PrescriptionAnalyzerInputSchema},
   output: {schema: PrescriptionAnalyzerOutputSchema},
-  prompt: `أنت صيدلي خبير ومساعد ذكاء اصطناعي. مهمتك هي قراءة وتحليل صورة روشتة طبية مقدمة من المستخدم بدقة.
+  prompt: `أنت صيدلي خبير ومساعد ذكاء اصطناعي. مهمتك هي قراءة وتفسير صورة روشتة طبية مقدمة من المستخدم بدقة.
 
 التعليمات:
-1.  **تحليل الصورة:** افحص الصورة التالية بعناية.
+1.  **تفسير الصورة:** افحص الصورة التالية بعناية.
     - صورة الروشتة: {{media url=photoDataUri}}
 
 2.  **استخراج الأدوية:**
@@ -54,7 +54,7 @@ const prompt = ai.definePrompt({
 
 4.  **تكوين الإجابة:**
     - قم بتعبئة الحقول \`medications\` و \`notes\` بالمعلومات التي استخرجتها.
-    - **مهم جدًا:** يجب أن تنبه المستخدم في نهاية الملاحظات بأن هذا التحليل هو للمساعدة فقط ولا يغني إطلاقًا عن استشارة صيدلي متخصص ومراجعة الطبيب.`,
+    - **مهم جدًا:** يجب أن تنبه المستخدم في نهاية الملاحظات بأن هذا التفسير هو للمساعدة فقط ولا يغني إطلاقًا عن استشارة صيدلي متخصص ومراجعة الطبيب.`,
 });
 
 const prescriptionAnalyzerFlow = ai.defineFlow(

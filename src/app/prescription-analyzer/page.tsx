@@ -40,7 +40,7 @@ export default function PrescriptionAnalyzerPage() {
         if (state.message) {
             toast({
                 variant: 'destructive',
-                title: 'خطأ في التحليل',
+                title: 'خطأ في التفسير',
                 description: state.message,
             });
         }

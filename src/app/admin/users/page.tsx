@@ -71,7 +71,7 @@ export default function UsersPage() {
 
 
     const userTypeMap: { [key: string]: { className: string } } = {
-        'طبيب': { className: "border-primary/50 bg-primary/10 text-primary-foreground" },
+        'طبيب': { className: "border-primary/50 bg-primary/10 text-primary" },
         'مريض': { className: "border-muted-foreground/50 bg-muted/40 text-muted-foreground" },
     };
 

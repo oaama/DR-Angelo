@@ -341,13 +341,13 @@ export async function analyzePrescriptionAction(prevState: any, formData: FormDa
         const result = await analyzePrescription({ photoDataUri: dataUri });
 
         if (!result || !result.medications) {
-            return { analysis: null, message: 'لم يتمكن الذكاء الاصطناعي من تحليل الروشتة. حاول مرة أخرى بصورة أوضح.' };
+            return { analysis: null, message: 'لم يتمكن الذكاء الاصطناعي من تفسير الروشتة. حاول مرة أخرى بصورة أوضح.' };
         }
 
         return { analysis: result, message: null };
 
     } catch (error) {
-        console.error('Prescription Analysis Error:', error);
-        return { analysis: null, message: 'حدث خطأ غير متوقع أثناء تحليل الروشتة. يرجى المحاولة مرة أخرى.' };
+        console.error('Prescription Interpretation Error:', error);
+        return { analysis: null, message: 'حدث خطأ غير متوقع أثناء تفسير الروشتة. يرجى المحاولة مرة أخرى.' };
     }
 }
