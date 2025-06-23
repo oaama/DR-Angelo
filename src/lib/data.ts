@@ -174,15 +174,25 @@ export async function getDoctors(
   return doctorsToShow;
 }
 
-export async function getDoctorById(id: string): Promise<Doctor | undefined> {
-  const doctor = doctors.find(doctor => doctor.id === id);
-  // Only return the doctor if they are verified.
-  // This prevents unverified doctors from being accessed via a direct link.
-  if (doctor && doctor.verificationStatus === 'verified') {
-    return doctor;
+export async function getDoctorById(id: string, bypassVerificationCheck = false): Promise<Doctor | undefined> {
+  const doctor = doctors.find(d => d.id === id);
+  if (!doctor) {
+      return undefined;
   }
+
+  // For the doctor's own profile view, we can bypass the verification check.
+  if (bypassVerificationCheck) {
+      return doctor;
+  }
+
+  // For public views, only return verified doctors.
+  if (doctor.verificationStatus === 'verified') {
+      return doctor;
+  }
+
   return undefined;
 }
+
 
 export async function getUniqueSpecialties(): Promise<string[]> {
   // For performance, this is now a hardcoded list.
