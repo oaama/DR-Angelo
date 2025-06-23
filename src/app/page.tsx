@@ -88,26 +88,28 @@ export default async function Home({
                 </div>
               )}
             </div>
-            <aside className="space-y-8 animate-fade-in-up" style={{ animationDelay: '0.7s', animationFillMode: 'backwards' }}>
-              <AIRecommender />
-              <Card className="sticky top-[34rem] shadow-lg">
-                  <CardHeader>
-                      <CardTitle className="flex items-center gap-2 font-headline">
-                          <ScanLine className="h-6 w-6 text-primary" />
-                          مفسّر الروشتات
-                      </CardTitle>
-                      <CardDescription>
-                          هل لديك روشتة غير واضحة؟ ارفع صورتها وسيقوم الذكاء الاصطناعي بتفسيرها لك.
-                      </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                      <Button asChild className="w-full">
-                          <Link href="/prescription-analyzer">
-                              جرب الآن
-                          </Link>
-                      </Button>
-                  </CardContent>
-              </Card>
+            <aside className="animate-fade-in-up" style={{ animationDelay: '0.7s', animationFillMode: 'backwards' }}>
+              <div className="sticky top-20 space-y-8">
+                <AIRecommender />
+                <Card className="shadow-lg">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2 font-headline">
+                            <ScanLine className="h-6 w-6 text-primary" />
+                            مفسّر الروشتات
+                        </CardTitle>
+                        <CardDescription>
+                            هل لديك روشتة غير واضحة؟ ارفع صورتها وسيقوم الذكاء الاصطناعي بتفسيرها لك.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <Button asChild className="w-full">
+                            <Link href="/prescription-analyzer">
+                                جرب الآن
+                            </Link>
+                        </Button>
+                    </CardContent>
+                </Card>
+              </div>
             </aside>
           </div>
         </div>

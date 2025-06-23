@@ -48,7 +48,7 @@ export function AIRecommender() {
     }, [state, toast]);
 
     return (
-        <Card className="sticky top-20 shadow-lg">
+        <Card className="shadow-lg">
             <CardHeader>
                 <CardTitle className="flex items-center gap-2 font-headline">
                     <Compass className="h-6 w-6 text-primary" />
