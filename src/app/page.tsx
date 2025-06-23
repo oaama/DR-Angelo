@@ -1,7 +1,8 @@
+
 import { DoctorSearchForm } from '@/components/doctor-search-form';
 import { DoctorCard } from '@/components/doctor-card';
 import { AIRecommender } from '@/components/ai-recommender';
-import { getDoctors, getUniqueCities, getUniqueSpecialties } from '@/lib/data';
+import { getDoctors, getUniqueCities, getUniqueSpecialties, getActiveAds } from '@/lib/data';
 import Image from 'next/image';
 import { getCurrentUser } from '@/lib/auth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,6 +33,8 @@ export default async function Home({
   
   const cities = await getUniqueCities();
   const specialties = await getUniqueSpecialties();
+  const homepageAds = await getActiveAds('homepage-sidebar');
+  const mainAd = homepageAds.length > 0 ? homepageAds[0] : null;
 
   return (
     <>
@@ -128,7 +131,7 @@ export default async function Home({
                         </Button>
                     </CardContent>
                 </Card>
-                <AdCard />
+                {mainAd && <AdCard ad={mainAd} />}
               </div>
             </aside>
           </div>

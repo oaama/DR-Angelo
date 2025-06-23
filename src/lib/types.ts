@@ -1,4 +1,5 @@
 
+
 export interface Comment {
   id: string;
   patientName: string;
@@ -35,4 +36,15 @@ export interface Patient {
   email: string;
   joinDate: string;
   userType: 'patient';
+}
+
+export interface Ad {
+  id: string;
+  type: 'image' | 'text';
+  title: string;
+  description: string;
+  imageUrl?: string | null;
+  link: string;
+  placement: 'homepage-sidebar' | 'search-results';
+  status: 'active' | 'draft' | 'expired';
 }

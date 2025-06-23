@@ -1,4 +1,5 @@
-import type { Doctor, Patient } from './types';
+
+import type { Doctor, Patient, Ad } from './types';
 
 // This is a static data source.
 // Replace this with your actual backend API calls.
@@ -198,6 +199,39 @@ export const doctors: Doctor[] = [
     }
 ];
 
+export const ads: Ad[] = [
+    {
+        id: 'ad1',
+        type: 'image',
+        title: 'أفضل عروض عيادات الليزر',
+        description: 'خصومات تصل إلى 50% على جلسات إزالة الشعر بالليزر. احجز الآن واستمتع ببشرة ناعمة!',
+        imageUrl: 'https://placehold.co/600x400.png',
+        link: '#',
+        placement: 'homepage-sidebar',
+        status: 'active',
+    },
+    {
+        id: 'ad2',
+        type: 'text',
+        title: 'استشارة مجانية',
+        description: 'احصل على استشارة أولية مجانية عند حجزك مع أي طبيب نفسي هذا الشهر.',
+        imageUrl: null,
+        link: '#',
+        placement: 'search-results',
+        status: 'active',
+    },
+     {
+        id: 'ad3',
+        type: 'image',
+        title: 'خصم خاص على تبييض الأسنان',
+        description: 'ابتسامة هوليود بين يديك بخصم 25%.',
+        imageUrl: 'https://placehold.co/600x400.png',
+        link: '#',
+        placement: 'homepage-sidebar',
+        status: 'expired',
+    },
+];
+
 export const patients: Patient[] = [
     { id: 'p1', name: 'أحمد علي', email: 'ahmed.ali@email.com', joinDate: '2024-05-20', userType: 'patient' },
     { id: 'p2', name: 'سارة إبراهيم', email: 'sara.ibrahim@email.com', joinDate: '2024-05-21', userType: 'patient' },
@@ -293,4 +327,9 @@ export async function getUniqueCities(): Promise<string[]> {
     "شمال سيناء", "قنا", "كفر الشيخ", "مطروح",
   ];
   return governorates.sort((a, b) => a.localeCompare(b, 'ar'));
+}
+
+export async function getActiveAds(placement: Ad['placement']): Promise<Ad[]> {
+  const placementAds = ads.filter(ad => ad.status === 'active' && ad.placement === placement);
+  return placementAds;
 }
