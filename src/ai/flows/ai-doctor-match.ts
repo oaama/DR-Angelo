@@ -8,7 +8,7 @@
  * - AIDoctorMatchOutput - The return type for the aiDoctorMatch function, which is a list of recommended doctors and preliminary advice.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, gemini15Flash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const DoctorInfoSchema = z.object({
@@ -40,6 +40,7 @@ export async function aiDoctorMatch(input: AIDoctorMatchInput): Promise<AIDoctor
 
 const prompt = ai.definePrompt({
   name: 'aiDoctorMatchPrompt',
+  model: gemini15Flash,
   input: {schema: AIDoctorMatchInputSchema},
   output: {schema: AIDoctorMatchOutputSchema},
   prompt: `أنت مساعد طبي افتراضي وخبير في توجيه المرضى. مهمتك هي تحليل شكوى المريض واختيار الطبيب الأنسب من قائمة محددة وتقديم نصيحة أولية.

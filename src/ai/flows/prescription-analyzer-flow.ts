@@ -6,7 +6,7 @@
  * - PrescriptionAnalyzerOutput - The return type for the function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, gemini15Flash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const PrescriptionAnalyzerInputSchema = z.object({
@@ -36,6 +36,7 @@ export async function analyzePrescription(input: PrescriptionAnalyzerInput): Pro
 
 const prompt = ai.definePrompt({
   name: 'prescriptionAnalyzerPrompt',
+  model: gemini15Flash,
   input: {schema: PrescriptionAnalyzerInputSchema},
   output: {schema: PrescriptionAnalyzerOutputSchema},
   prompt: `أنت صيدلي خبير ومساعد ذكاء اصطناعي. مهمتك هي قراءة وتفسير صورة روشتة طبية مقدمة من المستخدم بدقة.

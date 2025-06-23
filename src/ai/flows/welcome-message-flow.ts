@@ -6,7 +6,7 @@
  * - WelcomeMessageOutput - The return type for the function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, gemini15Flash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const WelcomeMessageInputSchema = z.object({
@@ -27,6 +27,7 @@ export async function generateWelcomeMessage(input: WelcomeMessageInput): Promis
 
 const prompt = ai.definePrompt({
   name: 'welcomeMessagePrompt',
+  model: gemini15Flash,
   input: {schema: WelcomeMessageInputSchema},
   output: {schema: WelcomeMessageOutputSchema},
   prompt: `أنت مسؤول التواصل في منصة "طبيبك". مهمتك هي كتابة رسالة ترحيبية احترافية وشخصية للمستخدمين الجدد.

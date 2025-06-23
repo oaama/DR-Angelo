@@ -6,7 +6,7 @@
  * - FindMedicationOutput - The return type for the function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, gemini15Flash} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const FindMedicationInputSchema = z.object({
@@ -25,6 +25,7 @@ export async function findMedication(input: FindMedicationInput): Promise<FindMe
 
 const prompt = ai.definePrompt({
   name: 'findMedicationPrompt',
+  model: gemini15Flash,
   input: {schema: FindMedicationInputSchema},
   output: {schema: FindMedicationOutputSchema},
   prompt: `أنت مساعد صيدلي افتراضي. قام مستخدم بالإبلاغ عن دواء ناقص اسمه "{{medicationName}}".
