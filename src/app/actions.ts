@@ -35,7 +35,10 @@ export async function recommendDoctorAction(
   const medicalIssueDescription = validatedFields.data.description;
 
   try {
-    const doctorInfoList = allDoctors.map(d => ({ name: d.name, specialty: d.specialty }));
+    // CRITICAL: Only use verified doctors for AI recommendations.
+    const verifiedDoctors = allDoctors.filter(d => d.verificationStatus === 'verified');
+    const doctorInfoList = verifiedDoctors.map(d => ({ name: d.name, specialty: d.specialty }));
+    
     const result = await aiDoctorMatch({ 
       medicalIssueDescription,
       doctorList: doctorInfoList 
@@ -47,8 +50,8 @@ export async function recommendDoctorAction(
       return { doctors: [], message: 'لم يتمكن الذكاء الاصطناعي من ترشيح طبيب. يرجى محاولة إعادة صياغة مشكلتك.', advice: null };
     }
     
-    // Filter the local static data based on the names recommended by the AI
-    const recommendedDoctors = allDoctors.filter(doctor => recommendedNames.includes(doctor.name));
+    // Filter the verified doctors list based on the names recommended by the AI
+    const recommendedDoctors = verifiedDoctors.filter(doctor => recommendedNames.includes(doctor.name));
 
     if (recommendedDoctors.length === 0) {
         return { doctors: [], message: 'تعذر العثور على طبيب مطابق في قاعدة بياناتنا بناءً على توصية الذكاء الاصطناعي.', advice: null };

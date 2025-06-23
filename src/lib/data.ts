@@ -175,7 +175,13 @@ export async function getDoctors(
 }
 
 export async function getDoctorById(id: string): Promise<Doctor | undefined> {
-  return doctors.find(doctor => doctor.id === id);
+  const doctor = doctors.find(doctor => doctor.id === id);
+  // Only return the doctor if they are verified.
+  // This prevents unverified doctors from being accessed via a direct link.
+  if (doctor && doctor.verificationStatus === 'verified') {
+    return doctor;
+  }
+  return undefined;
 }
 
 export async function getUniqueSpecialties(): Promise<string[]> {
