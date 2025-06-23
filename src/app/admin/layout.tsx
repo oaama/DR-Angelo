@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { AdminNav } from '@/components/admin-nav';
+import { Menu } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 // Mock admin user for layout
 const adminUser = {
@@ -38,7 +40,21 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       </div>
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6">
-          {/* Mobile Nav would go here */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="shrink-0 md:hidden"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">فتح قائمة التنقل</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="flex flex-col">
+              <AdminNav />
+            </SheetContent>
+          </Sheet>
           <div className="w-full flex-1">
             {/* Can add a search bar here later */}
           </div>

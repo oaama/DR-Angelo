@@ -61,7 +61,7 @@ export default function AdsManagementPage() {
                         <TableHeader>
                             <TableRow>
                                 <TableHead>عنوان الإعلان</TableHead>
-                                <TableHead>مكان العرض</TableHead>
+                                <TableHead className="hidden sm:table-cell">مكان العرض</TableHead>
                                 <TableHead>الحالة</TableHead>
                                 <TableHead className="hidden md:table-cell">تاريخ البدء</TableHead>
                                 <TableHead className="hidden md:table-cell">تاريخ الانتهاء</TableHead>
@@ -76,7 +76,7 @@ export default function AdsManagementPage() {
                                 return (
                                 <TableRow key={ad.id}>
                                     <TableCell className="font-medium">{ad.title}</TableCell>
-                                    <TableCell>{ad.placement}</TableCell>
+                                    <TableCell className="hidden sm:table-cell">{ad.placement}</TableCell>
                                     <TableCell>
                                         <Badge variant="outline" className={statusInfo.className}>
                                             {statusInfo.text}
