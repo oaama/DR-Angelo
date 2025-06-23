@@ -1,5 +1,18 @@
-# Firebase Studio
+# دليلك الطبي الذكي
 
-This is a NextJS starter in Firebase Studio.
+## الوصف
 
-To get started, take a look at src/app/page.tsx.
+هذا المشروع هو منصة طبية ذكية تهدف إلى ربط المرضى بالأطباء المتخصصين وتوفير أدوات مساعدة مثل تحليل الوصفات الطبية، البحث عن الأدوية، وتقديم توصيات بناءً على الأعراض باستخدام الذكاء الاصطناعي. تهدف المنصة إلى تسهيل الوصول إلى الرعاية الصحية وتقديم معلومات طبية موثوقة وشاملة.
+
+## التقنيات المستخدمة
+
+*   **الواجهة الأمامية:** Next.js, React, Tailwind CSS, Shadcn UI
+*   **الخلفية:** Firebase Authentication, Firestore Database, Cloud Functions for Firebase
+*   **الذكاء الاصطناعي:** Google AI Platform, Genkit
+*   **النشر:** Firebase App Hosting
+
+## تعليمات التثبيت
+
+1.  **استنساخ المستودع:**
+
+
