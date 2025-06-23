@@ -19,7 +19,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 // Mock admin user for layout
 const adminUser = {
   name: 'المسؤول',
-  avatar: 'https://placehold.co/200x200.png',
+  avatar: 'https://placehold.co/200.png',
 };
 
 export default function AdminLayout({ children }: { children: ReactNode }) {

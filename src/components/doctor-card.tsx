@@ -24,6 +24,7 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
         <Image
           src={doctor.profilePicture}
           alt={`${doctor.name}`}
+          data-ai-hint="profile picture"
           width={80}
           height={80}
           className="rounded-full border-2 border-primary/20 object-cover"

@@ -38,7 +38,7 @@ export async function getCurrentUser(): Promise<User | null> {
       email: 'admin@tabeebk.com',
       userType: 'admin',
       gender: 'ذكر',
-      avatar: 'https://placehold.co/200x200.png',
+      avatar: 'https://placehold.co/200.png',
       verificationStatus: 'unverified',
     };
   }
@@ -55,7 +55,7 @@ export async function getCurrentUser(): Promise<User | null> {
             name: userName,
             email: userEmail,
             gender: 'ذكر', // Default gender
-            profilePicture: 'https://placehold.co/200x200.png',
+            profilePicture: 'https://placehold.co/200.png',
             verificationStatus: 'unverified',
             phone: '',
             specialty: '',
@@ -97,7 +97,7 @@ export async function getCurrentUser(): Promise<User | null> {
             email: existingPatient.email,
             userType: 'patient',
             gender: 'أنثى', // Mock gender for patients
-            avatar: 'https://placehold.co/200x200.png',
+            avatar: 'https://placehold.co/200.png',
             verificationStatus: 'unverified',
         };
     }
@@ -110,7 +110,7 @@ export async function getCurrentUser(): Promise<User | null> {
             email: userEmail,
             userType: 'patient',
             gender: 'أنثى', // Mock gender for new patients
-            avatar: 'https://placehold.co/200x200.png',
+            avatar: 'https://placehold.co/200.png',
             verificationStatus: 'unverified',
         };
     }

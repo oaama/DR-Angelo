@@ -117,6 +117,7 @@ export default async function DoctorProfilePage({ params }: { params: { id: stri
                 <Image
                   src={doctor.profilePicture}
                   alt={`صورة ${doctor.name}`}
+                  data-ai-hint="profile picture"
                   width={160}
                   height={160}
                   className="mx-auto mb-4 rounded-full border-4 border-primary/30 object-cover"

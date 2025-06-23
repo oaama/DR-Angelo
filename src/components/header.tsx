@@ -26,7 +26,7 @@ export function Header() {
       name: userName!,
       email: userEmail!,
       userType: userType as 'admin' | 'doctor' | 'patient',
-      avatar: 'https://placehold.co/200x200.png'
+      avatar: 'https://placehold.co/200.png'
   } : null;
 
   return (
